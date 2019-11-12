@@ -3,7 +3,7 @@
         <headerTop></headerTop>
         <div class="content">
             <div>
-                <div>
+                <div v-for=" item in 10">
                     <h4>
                         <a href="">SSS_百度百科</a>
                     </h4>
@@ -25,11 +25,17 @@
 
 <script>
     import headerTop from "../components/common/headerTop";
-    import pages from '../components/common/pages'
+    import pages from '../components/common/pages';
+    import Bus from './../../static/js/bus'
 
     export default {
         name: "lists",
-        components: {headerTop,pages}
+        components: {headerTop,pages},
+        mounted(){
+            Bus.$on('newList',function(val){
+                console.log(val);
+            });
+        }
     };
 </script>
 

@@ -15,7 +15,6 @@
 
 <script>
     import search from "./search";
-
     export default {
         name: "headerTOP",
         components: {search},
@@ -46,7 +45,7 @@
             }
         },
         mounted() {
-            // console.log(this.$route.query.val);
+
         }
     };
 </script>
@@ -56,9 +55,8 @@
         width: 100%;
         padding: 0 8%;
         box-sizing: border-box;
-        background: url("./../../../static/imgs/logo_search_page.png") no-repeat calc(7% - 40px) top;
+        background: #f4f4f4 url("./../../../static/imgs/logo_search_page.png") no-repeat calc(7% - 40px) 15px;
         background-size: 40px;
-        background: #f4f4f4;
         padding-top: 15px;
         .search {
             width: 640px;

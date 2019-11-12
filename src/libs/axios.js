@@ -4,7 +4,7 @@ import { router } from '../router/index';
 import { Message } from 'iview';
 import Cookies from 'js-cookie';
 // 统一请求路径前缀
-let base = '/xboot';
+let base = '';
 // 超时设定
 axios.defaults.timeout = 15000;
 
@@ -134,8 +134,8 @@ export const uploadFileRequest = (url, params) => {
 
 /**
  * 无需token验证的请求 避免旧token过期导致请求失败
- * @param {*} url 
- * @param {*} params 
+ * @param {*} url
+ * @param {*} params
  */
 export const getRequestWithNoToken = (url, params) => {
     return axios({

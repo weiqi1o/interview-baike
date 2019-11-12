@@ -1,10 +1,10 @@
 <template>
     <div class="search">
         <input
-               type="search"
-               v-model="val"
-               placeholder="搜索..."
-               @keyup.enter="serach"
+            type="search"
+            v-model="val"
+            placeholder="搜索..."
+            @keyup.enter="serach"
         />
         <button @click="serach">
             <img src="./../../../static/imgs/icon_search.png" alt=""/>
@@ -14,28 +14,40 @@
 </template>
 
 <script>
+    // import Bus from './../../../static/js/bus'
     export default {
         name: "search",
         data() {
             return {
-                val: ""
+                val: "",
             };
         },
         methods: {
+
+            // passValue(val){
+            //     Bus.$emit('newList',val);
+            // },
             serach() {
-                this.axios
-                    .get("http://132.232.33.218:8081/v2/api-docs/v1/questions")
+                this.getRequest("http://132.232.33.218:8081/v1/questions", {data: this.val})
                     .then(response => {
-                        if (response.status == 200) {
-                            // console.log(response);
-                            this.$router.push({path: "/lists", query: {val: this.val}});
+                        if (response.code == 200) {
+                            if(this.$route.query.data){
+                                // this.passValue(response.result)
+
+                            }else{
+                                this.$router.push({
+                                    path: "/lists", query: {data: this.val}
+                                });
+                            }
+
                         }
                     });
+
             }
         },
-        mounted(){
-            if(this.$route.query.val){
-                this.val = this.$route.query.val
+        mounted() {
+            if (this.$route.query.data) {
+                this.val = this.$route.query.data
             }
         }
     };
