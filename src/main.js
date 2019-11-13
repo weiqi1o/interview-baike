@@ -8,7 +8,7 @@ import $ from 'jquery';
 import VueAxios from "vue-axios";
 
 Vue.config.productionTip = false;
-import { getRequest, postRequest, putRequest, deleteRequest, uploadFileRequest } from '@/libs/axios'
+import { getRequest, postRequest, putRequest, patchRequest,deleteRequest, uploadFileRequest } from '@/libs/axios'
 import { setStore, getStore, removeStore } from '@/libs/storage'
 
 Vue.config.productionTip = false;
@@ -17,6 +17,7 @@ Vue.config.productionTip = false;
 Vue.prototype.getRequest = getRequest;
 Vue.prototype.postRequest = postRequest;
 Vue.prototype.putRequest = putRequest;
+Vue.prototype.patchRequest = patchRequest;
 Vue.prototype.deleteRequest = deleteRequest;
 Vue.prototype.uploadFileRequest = uploadFileRequest;
 Vue.prototype.setStore = setStore;
