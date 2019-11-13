@@ -20,18 +20,31 @@
 
     export default {
         name: "pages",
-        props:{
-            lists:''
-        },
-        data(){
-            return{
-                // pageIndex:this.lists,
-                // totalNum:this.pageSize,
-                // showPageSize:this.total,
-
+        props: ['pagesData'],
+        data() {
+            return {
+                pages:{
+                    pageIndex:'',
+                    totalNum:'',
+                    showPageSize:'',
+                }
             }
         },
-        methods:{
+        created() {
+            this.receive()
+        },
+        methods: {
+            //接收数据
+            receive() {
+                this.pages.pageIndex = this.pagesData.pageNum;
+                this.pages.totalNum = this.pagesData.total;
+                this.pages.showPageSize = this.pagesData.pageSize;
+                this.$nextTick(function(){
+                    //启动分页器
+                    this.pages_(this.pages.totalNum,this.pages.showPageSize,this.pages.pageIndex)
+                })
+            },
+            // 请求数据
             getData() {
                 this.axios
                     .get("http://132.232.33.218:8081/v2/api-docs/v1/questions")
@@ -41,33 +54,35 @@
                         }
                     });
             },
+            // 分页器
+            pages_(totalNum,showPageSize,pageIndex){
+                var _this = this;
+                lotusPagination.init({
+                    index: 0,//翻页索引值
+                    totalNum: totalNum,//总数量
+                    showPageSize: showPageSize,//一页显示多少个
+                    maxShowNum: 5,//分页最大显示数量
+                    parentDom: 'lotus-pagination',
+                    leftPageTotal: 'lotus-pagination-total-num',
+                    domItemList: 'lotus-pagination-list-item',
+                    prevBtn: 'lotus-pagination-list-prev',
+                    nextBtn: 'lotus-pagination-list-next',
+                    enSureBtn: 'lotus-pagination-list-ensure',
+                    curNum: 'lotus-pagination-list-cur',
+                    rightPageTotal: 'lotus-pagination-list-total',
+                    hideLeftPageTotal: false,
+                    callback: function (response) {
+                        _this.pageIndex = response + 1;
+                        _this.getData();
+                        $('body,html').animate({
+                            scrollTop: "27px"
+                        }, 200)
+                    }
+                });
+            }
         },
         mounted() {
 
-            var _this = this;
-            console.log(_this.lists)
-            lotusPagination.init({
-                index: 0,//翻页索引值
-                totalNum: 20,//总数量
-                showPageSize: 10,//一页显示多少个
-                maxShowNum: 5,//分页最大显示数量
-                parentDom: 'lotus-pagination',
-                leftPageTotal: 'lotus-pagination-total-num',
-                domItemList: 'lotus-pagination-list-item',
-                prevBtn: 'lotus-pagination-list-prev',
-                nextBtn: 'lotus-pagination-list-next',
-                enSureBtn: 'lotus-pagination-list-ensure',
-                curNum: 'lotus-pagination-list-cur',
-                rightPageTotal: 'lotus-pagination-list-total',
-                hideLeftPageTotal: false,
-                // callback: function (response) {
-                //     _this.pageIndex = response + 1;
-                //     _this.getData();
-                //     $('body,html').animate({
-                //         scrollTop: "27px"
-                //     }, 200)
-                // }
-            });
 
         }
     }

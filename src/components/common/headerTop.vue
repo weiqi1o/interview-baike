@@ -1,5 +1,8 @@
 <template>
     <div class="header">
+        <a href="/">
+            <img src="./../../../static/imgs/logo_search_page.png" alt="">
+        </a>
         <div class="search">
             <search></search>
         </div>
@@ -55,11 +58,19 @@
         width: 100%;
         padding: 0 8%;
         box-sizing: border-box;
-        background: #f4f4f4 url("./../../../static/imgs/logo_search_page.png") no-repeat calc(7% - 40px) 15px;
-        background-size: 40px;
+        background: #f4f4f4 ;
         padding-top: 15px;
+        &>a{
+            vertical-align: middle;
+            margin-right: 15px;
+            &>img{
+                width: 40px;
+            }
+        }
         .search {
             width: 640px;
+            display: inline-block;
+            vertical-align: middle;
         }
         .nav {
             width: 100%;

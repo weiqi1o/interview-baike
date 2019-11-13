@@ -25,6 +25,7 @@
         },
         created(){
             if (this.$route.query.data) {
+                this.val = this.$route.query.data;
                 this.getData();
             }
         },
@@ -60,9 +61,6 @@
             }
         },
         mounted() {
-            if (this.$route.query.data) {
-                this.val = this.$route.query.data
-            }
         }
     };
 </script>

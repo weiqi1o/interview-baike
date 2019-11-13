@@ -12,7 +12,7 @@
                         <span v-for="item in items.labels">{{item.name}}</span>
                     </div>
                 </div>
-                <pages :pageNum = lists ></pages>
+                <pages v-if="lists" :pagesData = lists ></pages>
             </div>
         </div>
     </div>
@@ -35,7 +35,6 @@
             var _this = this;
             Bus.$on('newList',function(val){
                 _this.lists = val;
-                // console.log(_this.lists);
             });
         }
     };
