@@ -81,7 +81,7 @@ export const postRequest = (url, params) => {
             return ret;
         }],
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
             'accessToken': accessToken
         }
     });
@@ -102,7 +102,28 @@ export const putRequest = (url, params) => {
             return ret;
         }],
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken
+        }
+    });
+};
+
+export const patchRequest = (url, params) => {
+    let accessToken = getStore("accessToken");
+    return axios({
+        method: 'patch',
+        url: `${base}${url}`,
+        data: params,
+        transformRequest: [function (data) {
+            let ret = '';
+            for (let it in data) {
+                ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&';
+            }
+            ret = ret.substring(0, ret.length - 1);
+            return ret;
+        }],
+        headers: {
+            'Content-Type': 'application/json',
             'accessToken': accessToken
         }
     });
