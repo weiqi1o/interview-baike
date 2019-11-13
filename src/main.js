@@ -10,7 +10,7 @@ import VueAxios from "vue-axios";
 Vue.config.productionTip = false;
 import { getRequest, postRequest, putRequest, patchRequest,deleteRequest, uploadFileRequest } from '@/libs/axios'
 import { setStore, getStore, removeStore } from '@/libs/storage'
-
+import {login,search} from '@/api/index'
 Vue.config.productionTip = false;
 
 // 挂载全局使用的方法
@@ -23,6 +23,8 @@ Vue.prototype.uploadFileRequest = uploadFileRequest;
 Vue.prototype.setStore = setStore;
 Vue.prototype.getStore = getStore;
 Vue.prototype.removeStore = removeStore;
+Vue.prototype.login = login;
+Vue.prototype.search = search;
 
 Vue.use(VueAxios, axios);
 new Vue({

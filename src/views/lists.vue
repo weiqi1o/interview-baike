@@ -12,7 +12,7 @@
                         <span v-for="item in items.labels">{{item.name}}</span>
                     </div>
                 </div>
-                <pages v-if="lists" :pagesData = lists ></pages>
+                <pages v-show="lists.totalPage>0" :pagesData = lists ></pages>
             </div>
         </div>
     </div>

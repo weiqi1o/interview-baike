@@ -33,18 +33,8 @@
                     $(node).addClass('active')
                 }
             },
-            getData() {
-                this.axios
-                    .get("http://132.232.33.218:8081/v2/api-docs/v1/questions")
-                    .then(response => {
-                        if (response.status == 200) {
-                            this.lists = response.data
-                        }
-                    });
-            },
             choose(node) {
                 this.active(node);
-                this.getData()
             }
         },
         mounted() {

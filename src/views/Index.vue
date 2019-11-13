@@ -1,29 +1,35 @@
 <template>
     <div class="index">
         <div class="header">
-            <a href="">登陆/注册</a>
+            <a href="javascript:;" @click="openLand">登陆/注册</a>
         </div>
         <div class="searchBox">
             <img alt="Vue logo" src="./../../static/imgs/logo_index_zh_CN.png"/>
             <search></search>
             <p>这是一个<span>不追踪</span>你的搜索引擎</p>
         </div>
+        <landing class="landing"></landing>
     </div>
 </template>
 
 <script>
     // @ is an alias to /src
     import search from "./../components/common/search";
+    import landing from "./../components/landing/landing"
 
     export default {
         name: "index",
-        components: {search},
+        components: {search,landing},
         data() {
             return {
                 val: ""
             };
         },
-        methods: {}
+        methods: {
+            openLand(){
+                $('.landing').slideDown('fast')
+            }
+        }
     };
 </script>
 
@@ -62,6 +68,9 @@
                     margin: 0 10px;
                 }
             }
+        }
+        .landing{
+            display: none;
         }
     }
 </style>

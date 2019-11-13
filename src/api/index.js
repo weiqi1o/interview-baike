@@ -27,3 +27,8 @@ export const userInfoEdit = (userId,params) => {
 export const uploadQusetion = (params) => {
     return postRequest('/files/questions', params)
 }
+
+//查询题目
+export const search = (params) => {
+    return getRequest('/v1/questions', params)
+}

@@ -26,7 +26,12 @@
         created(){
             if (this.$route.query.data) {
                 this.val = this.$route.query.data;
-                this.getData();
+                this.search({data: this.val})
+                    .then(response => {
+                        if (response.code == 200) {
+                            this.passValue(response.result);
+                        }
+                    });
             }
         },
         methods: {
@@ -43,22 +48,17 @@
                     });
                 }else{
                     //列表页搜索
-                   this.getData();
+                   this.search({data: this.val})
+                       .then(response => {
+                       if (response.code == 200) {
+                           this.passValue(response.result);
+                       }
+                   });
                 }
 
 
 
             },
-
-            //获取数据
-            getData(){
-                this.getRequest("http://132.232.33.218:8081/v1/questions", {data: this.val})
-                    .then(response => {
-                        if (response.code == 200) {
-                            this.passValue(response.result);
-                        }
-                    });
-            }
         },
         mounted() {
         }
