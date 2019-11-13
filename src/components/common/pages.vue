@@ -20,11 +20,14 @@
 
     export default {
         name: "pages",
+        props:{
+            lists:''
+        },
         data(){
             return{
-                pageIndex:0,
-                totalNum:100,
-                showPageSize:10,
+                // pageIndex:this.lists,
+                // totalNum:this.pageSize,
+                // showPageSize:this.total,
 
             }
         },
@@ -40,11 +43,13 @@
             },
         },
         mounted() {
+
             var _this = this;
+            console.log(_this.lists)
             lotusPagination.init({
                 index: 0,//翻页索引值
-                totalNum: _this.totalNum,//总数量
-                showPageSize: _this.showPageSize,//一页显示多少个
+                totalNum: 20,//总数量
+                showPageSize: 10,//一页显示多少个
                 maxShowNum: 5,//分页最大显示数量
                 parentDom: 'lotus-pagination',
                 leftPageTotal: 'lotus-pagination-total-num',
@@ -55,13 +60,13 @@
                 curNum: 'lotus-pagination-list-cur',
                 rightPageTotal: 'lotus-pagination-list-total',
                 hideLeftPageTotal: false,
-                callback: function (response) {
-                    _this.pageIndex = response + 1;
-                    _this.getData();
-                    $('body,html').animate({
-                        scrollTop: "27px"
-                    }, 200)
-                }
+                // callback: function (response) {
+                //     _this.pageIndex = response + 1;
+                //     _this.getData();
+                //     $('body,html').animate({
+                //         scrollTop: "27px"
+                //     }, 200)
+                // }
             });
 
         }

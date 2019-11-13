@@ -21,9 +21,6 @@ export default {
     };
   },
   methods: {
-    serach() {
-      console.log(this.val);
-    }
   }
 };
 </script>

@@ -3,21 +3,16 @@
         <headerTop></headerTop>
         <div class="content">
             <div>
-                <div v-for=" item in 10">
+                <div v-for=" items in lists.data">
                     <h4>
-                        <a href="">SSS_百度百科</a>
+                        <a href="">{{ items.title}}</a>
                     </h4>
-                    <p>下载手机版必应词典n.特殊溶性物质；物生可溶物质网络病态窦房结综合征(sick sinus syndrome)；世界战线；病窦综合征
-                        词典n.特殊溶性物质；物生可溶物质网络病态窦房结综合征(sick sinus syndrome)；世界战线；病窦综合征
-                        词典n.特殊溶性物质；物生可溶物质网络病态窦房结综合征(sick sinus syndrome)；世界战线；病窦综合征
-                        词典n.特殊溶性物质；物生可溶物质网络病态窦房结综合征(sick sinus syndrome)；世界战线；病窦综合征
-                        词典n.特殊溶性物质；物生可溶物质网络病态窦房结综合征(sick sinus syndrome)；世界战线；病窦综合征
-                        词典n.特殊溶性物质；物生可溶物质网络病态窦房结综合征(sick sinus syndrome)；世界战线；病窦综合征</p>
+                    <p>{{items.description}}</p>
                     <div>
-                        <span>https://baike.baidu.com/item/SSS/1502470</span>
+                        <span v-for="item in items.labels">{{item.name}}</span>
                     </div>
                 </div>
-                <pages></pages>
+                <pages :pageNum = lists ></pages>
             </div>
         </div>
     </div>
@@ -31,9 +26,16 @@
     export default {
         name: "lists",
         components: {headerTop,pages},
+        data(){
+            return{
+                lists:''
+            }
+        },
         mounted(){
+            var _this = this;
             Bus.$on('newList',function(val){
-                console.log(val);
+                _this.lists = val;
+                // console.log(_this.lists);
             });
         }
     };

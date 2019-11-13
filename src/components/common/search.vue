@@ -1,10 +1,10 @@
 <template>
     <div class="search">
         <input
-            type="search"
-            v-model="val"
-            placeholder="搜索..."
-            @keyup.enter="serach"
+                type="search"
+                v-model="val"
+                placeholder="搜索..."
+                @keyup.enter="serach"
         />
         <button @click="serach">
             <img src="./../../../static/imgs/icon_search.png" alt=""/>
@@ -14,7 +14,8 @@
 </template>
 
 <script>
-    // import Bus from './../../../static/js/bus'
+    import Bus from './../../../static/js/bus'
+
     export default {
         name: "search",
         data() {
@@ -22,27 +23,40 @@
                 val: "",
             };
         },
+        created(){
+            if (this.$route.query.data) {
+                this.getData();
+            }
+        },
         methods: {
-
-            // passValue(val){
-            //     Bus.$emit('newList',val);
-            // },
+            //传值给列表组件
+            passValue(val) {
+                Bus.$emit('newList', val);
+            },
+            //搜索
             serach() {
+                if (!this.$route.query.data) {
+                    //首页搜索
+                    this.$router.push({
+                        path: "/lists", query: {data: this.val}
+                    });
+                }else{
+                    //列表页搜索
+                   this.getData();
+                }
+
+
+
+            },
+
+            //获取数据
+            getData(){
                 this.getRequest("http://132.232.33.218:8081/v1/questions", {data: this.val})
                     .then(response => {
                         if (response.code == 200) {
-                            if(this.$route.query.data){
-                                // this.passValue(response.result)
-
-                            }else{
-                                this.$router.push({
-                                    path: "/lists", query: {data: this.val}
-                                });
-                            }
-
+                            this.passValue(response.result);
                         }
                     });
-
             }
         },
         mounted() {
