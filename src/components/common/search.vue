@@ -9,7 +9,6 @@
         <button @click="serach">
             <img src="./../../../static/imgs/icon_search.png" alt=""/>
         </button>
-        {{val.val}}
     </div>
 </template>
 
