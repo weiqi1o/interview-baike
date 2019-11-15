@@ -7,10 +7,10 @@
                     <router-link to="/setting">
                         <Avatar class="Avatar" src="https://i.loli.net/2017/08/21/599a521472424.jpg"/>
                     </router-link>
-                    <div>
+                    <router-link to="/edit" class="edit">
                         <img class="iconB" src="./../../static/imgs/b2.png" alt="">
                         <span>编辑题目</span>
-                    </div>
+                    </router-link>
                 </div>
 
             </div>
@@ -62,13 +62,13 @@
                 }
                 & > div {
 
-                    &>div{
+                    .edit {
                         display: inline-block;
                         vertical-align: middle;
                         border-radius: 8px;
                         padding: 3px 5px;
                         background: #f5f2f0;
-                        padding-right:20px;
+                        padding-right: 20px;
                         text-align: center;
                         margin-left: 15px;
                         cursor: pointer;
@@ -79,6 +79,7 @@
                         }
                         & > span {
                             font-size: 16px;
+                            color: black;
                         }
                     }
 

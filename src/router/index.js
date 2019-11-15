@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Index from "../views/Index";
 import Lists from "../views/lists";
 import setting from "../views/setting";
+import edit from "../views/edit"
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
         path: "/setting",
         name: "setting",
         component: setting
+    },
+    {
+        path: "/edit",
+        name: "edit",
+        component: edit
     }
 ];
 

@@ -4,9 +4,9 @@
             <div>
                 <div class="search">
                     <a href="/">
-                        <img src="./../../static/imgs/logo_search_page.png" alt="" />
+                        <img src="./../../static/imgs/logo_search_page.png" alt=""/>
                     </a>
-                    <search ></search>
+                    <search></search>
                 </div>
                 <div class="demo-avatar">
                     <a v-if="!avatar" href="javascript:;" @click="openLand">登陆/注册</a>
@@ -14,39 +14,39 @@
                         <router-link to="/setting">
                             <Avatar class="Avatar" src="https://i.loli.net/2017/08/21/599a521472424.jpg"/>
                         </router-link>
-                        <div>
+                        <router-link to="/edit" class="edit">
                             <img class="iconB" src="./../../static/imgs/b2.png" alt="">
                             <span>编辑题目</span>
-                        </div>
+                        </router-link>
                     </div>
                 </div>
             </div>
         </div>
         <div class="banner">
             <div>
-            <div>
-                <Avatar size="large" class="Avatar" src="https://i.loli.net/2017/08/21/599a521472424.jpg"/>
                 <div>
-                    <h4>你好你好你好</h4>
+                    <Avatar size="large" class="Avatar" src="https://i.loli.net/2017/08/21/599a521472424.jpg"/>
                     <div>
-                        <span v-for="item in 5">java</span>
+                        <h4>你好你好你好</h4>
+                        <div>
+                            <span v-for="item in 5">java</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div>
                 <div>
-                    <span>6</span>
-                    <span>发布题目</span>
+                    <div>
+                        <span>6</span>
+                        <span>发布题目</span>
+                    </div>
+                    <div>
+                        <span>200</span>
+                        <span>浏览数总数</span>
+                    </div>
+                    <div>
+                        <span>100</span>
+                        <span>点赞总数</span>
+                    </div>
                 </div>
-                <div>
-                    <span>200</span>
-                    <span>浏览数总数</span>
-                </div>
-                <div>
-                    <span>100</span>
-                    <span>点赞总数</span>
-                </div>
-            </div>
             </div>
 
         </div>
@@ -54,21 +54,21 @@
             <Menu class="nav" :theme="theme3" active-name="1">
                 <MenuGroup title="基础信息">
                     <MenuItem name="1">
-                        <Icon type="ios-person" />
+                        <Icon type="ios-person"/>
                         个人信息
                     </MenuItem>
                     <MenuItem name="2">
-                        <Icon type="md-key" />
+                        <Icon type="md-key"/>
                         账号管理
                     </MenuItem>
                 </MenuGroup>
                 <MenuGroup title="内容管理">
                     <MenuItem name="3">
-                        <Icon type="md-document" />
+                        <Icon type="md-document"/>
                         文章管理
                     </MenuItem>
                     <MenuItem name="4">
-                        <Icon type="md-chatbubbles" />
+                        <Icon type="md-chatbubbles"/>
                         评论管理
                     </MenuItem>
                 </MenuGroup>
@@ -87,7 +87,7 @@
 
     export default {
         name: "setting",
-        components: {search,basics},
+        components: {search, basics},
         data() {
             return {
                 avatar: true,
@@ -110,7 +110,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                .search{
+                .search {
                     & > a {
                         vertical-align: middle;
                         margin-right: 15px;
@@ -118,20 +118,19 @@
                             width: 40px;
                         }
                     }
-                    &>div {
+                    & > div {
                         width: 640px;
                         display: inline-block;
                     }
                 }
-                .demo-avatar{
+                .demo-avatar {
                     & > a {
                         font-size: 16px;
                         color: black;
                         cursor: pointer;
                     }
-                    & > div {
-
-                        & > div {
+                    &>div {
+                        .edit {
                             display: inline-block;
                             vertical-align: middle;
                             border-radius: 8px;
@@ -148,6 +147,7 @@
                             }
                             & > span {
                                 font-size: 16px;
+                                color: black;
                             }
                         }
 
@@ -161,7 +161,7 @@
             background: #0092ca;
             width: 100%;
             padding: 30px 0;
-            &>div{
+            & > div {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -219,15 +219,15 @@
             }
 
         }
-        .content{
+        .content {
             width: 1200px;
             margin: 0 auto;
             margin-top: 30px;
-            .nav{
+            .nav {
                 display: inline-block;
             }
-            .item{
-                width:958px;
+            .item {
+                width: 958px;
                 display: inline-block;
                 vertical-align: top;
                 padding: 30px;
