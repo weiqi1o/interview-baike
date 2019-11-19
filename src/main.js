@@ -3,14 +3,22 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import axios from "axios";
-import $ from 'jquery';
+import $ from "jquery";
 
 import VueAxios from "vue-axios";
 
 Vue.config.productionTip = false;
-import { getRequest, postRequest, putRequest, patchRequest,deleteRequest, uploadFileRequest } from '@/libs/axios'
-import { setStore, getStore, removeStore } from '@/libs/storage'
-
+import {
+  getRequest,
+  postRequest,
+  putRequest,
+  patchRequest,
+  deleteRequest,
+  uploadFileRequest
+} from "@/libs/axios";
+import { setStore, getStore, removeStore } from "@/libs/storage";
+import { login, search, regist } from "@/api/index";
+import "./plugins/iview.js";
 Vue.config.productionTip = false;
 
 // 挂载全局使用的方法
@@ -23,7 +31,9 @@ Vue.prototype.uploadFileRequest = uploadFileRequest;
 Vue.prototype.setStore = setStore;
 Vue.prototype.getStore = getStore;
 Vue.prototype.removeStore = removeStore;
-
+Vue.prototype.login = login;
+Vue.prototype.search = search;
+Vue.prototype.regist = regist;
 Vue.use(VueAxios, axios);
 new Vue({
   router,

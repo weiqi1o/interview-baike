@@ -4,19 +4,23 @@ import { getStore, setStore } from './storage';
 import { Message } from 'iview';
 import Cookies from 'js-cookie';
 // 统一请求路径前缀
-let base = '';
+let base = "http://132.232.33.218:8081";
 // 超时设定
 axios.defaults.timeout = 15000;
 
-axios.interceptors.request.use(config => {
+axios.interceptors.request.use(
+  config => {
     return config;
-}, err => {
-    Message.error('请求超时');
+  },
+  err => {
+    Message.error("请求超时");
     return Promise.resolve(err);
-});
+  }
+);
 
 // http response 拦截器
-axios.interceptors.response.use(response => {
+axios.interceptors.response.use(
+  response => {
     const data = response.data;
 
     // 根据返回的code值来做不同的处理(和后端约定)
@@ -48,22 +52,24 @@ axios.interceptors.response.use(response => {
     }
 
     return data;
-}, (err) => {
+  },
+  err => {
     // 返回状态码不为200时候的错误处理
     Message.error(err.toString());
     return Promise.resolve(err);
-});
+  }
+);
 
 export const getRequest = (url, params) => {
-    let accessToken = getStore('accessToken');
-    return axios({
-        method: 'get',
-        url: `${base}${url}`,
-        params: params,
-        headers: {
-            'accessToken': accessToken
-        }
-    });
+  let accessToken = getStore("accessToken");
+  return axios({
+    method: "get",
+    url: `${base}${url}`,
+    params: params,
+    headers: {
+      accessToken: accessToken
+    }
+  });
 };
 
 export const postRequest = (url, params) => {
@@ -76,7 +82,15 @@ export const postRequest = (url, params) => {
             'Content-Type': 'application/json',
             'accessToken': accessToken
         }
-    });
+        ret = ret.substring(0, ret.length - 1);
+        return ret;
+      }
+    ],
+    headers: {
+      "Content-Type": "application/json",
+      accessToken: accessToken
+    }
+  });
 };
 
 export const putRequest = (url, params) => {
@@ -89,7 +103,15 @@ export const putRequest = (url, params) => {
             'Content-Type': 'application/json',
             'accessToken': accessToken
         }
-    });
+        ret = ret.substring(0, ret.length - 1);
+        return ret;
+      }
+    ],
+    headers: {
+      "Content-Type": "application/json",
+      accessToken: accessToken
+    }
+  });
 };
 
 export const patchRequest = (url, params) => {
@@ -102,31 +124,39 @@ export const patchRequest = (url, params) => {
             'Content-Type': 'application/json',
             'accessToken': accessToken
         }
-    });
+        ret = ret.substring(0, ret.length - 1);
+        return ret;
+      }
+    ],
+    headers: {
+      "Content-Type": "application/json",
+      accessToken: accessToken
+    }
+  });
 };
 
 export const deleteRequest = (url, params) => {
-    let accessToken = getStore('accessToken');
-    return axios({
-        method: 'delete',
-        url: `${base}${url}`,
-        params: params,
-        headers: {
-            'accessToken': accessToken
-        }
-    });
+  let accessToken = getStore("accessToken");
+  return axios({
+    method: "delete",
+    url: `${base}${url}`,
+    params: params,
+    headers: {
+      accessToken: accessToken
+    }
+  });
 };
 
 export const uploadFileRequest = (url, params) => {
-    let accessToken = getStore('accessToken');
-    return axios({
-        method: 'post',
-        url: `${base}${url}`,
-        params: params,
-        headers: {
-            'accessToken': accessToken
-        }
-    });
+  let accessToken = getStore("accessToken");
+  return axios({
+    method: "post",
+    url: `${base}${url}`,
+    params: params,
+    headers: {
+      accessToken: accessToken
+    }
+  });
 };
 
 /**
@@ -135,9 +165,9 @@ export const uploadFileRequest = (url, params) => {
  * @param {*} params
  */
 export const getRequestWithNoToken = (url, params) => {
-    return axios({
-        method: 'get',
-        url: `${base}${url}`,
-        params: params
-    });
+  return axios({
+    method: "get",
+    url: `${base}${url}`,
+    params: params
+  });
 };
