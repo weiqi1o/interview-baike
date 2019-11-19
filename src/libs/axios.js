@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getStore, setStore } from './storage';
-import { router } from '../router/index';
+// import { router } from '../router/index';
 import { Message } from 'iview';
 import Cookies from 'js-cookie';
 // 统一请求路径前缀
@@ -25,7 +25,7 @@ axios.interceptors.response.use(response => {
             // 未登录 清除已登录状态
             Cookies.set('userInfo', '');
             setStore('accessToken', '');
-            router.push('/login');
+            // router.push('/login');
             break;
         case 403:
             // 没有权限
@@ -72,14 +72,6 @@ export const postRequest = (url, params) => {
         method: 'post',
         url: `${base}${url}`,
         data: params,
-        transformRequest: [function (data) {
-            let ret = '';
-            for (let it in data) {
-                ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&';
-            }
-            ret = ret.substring(0, ret.length - 1);
-            return ret;
-        }],
         headers: {
             'Content-Type': 'application/json',
             'accessToken': accessToken
@@ -93,14 +85,6 @@ export const putRequest = (url, params) => {
         method: 'put',
         url: `${base}${url}`,
         data: params,
-        transformRequest: [function (data) {
-            let ret = '';
-            for (let it in data) {
-                ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&';
-            }
-            ret = ret.substring(0, ret.length - 1);
-            return ret;
-        }],
         headers: {
             'Content-Type': 'application/json',
             'accessToken': accessToken
@@ -114,14 +98,6 @@ export const patchRequest = (url, params) => {
         method: 'patch',
         url: `${base}${url}`,
         data: params,
-        transformRequest: [function (data) {
-            let ret = '';
-            for (let it in data) {
-                ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&';
-            }
-            ret = ret.substring(0, ret.length - 1);
-            return ret;
-        }],
         headers: {
             'Content-Type': 'application/json',
             'accessToken': accessToken

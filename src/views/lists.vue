@@ -7,7 +7,7 @@
                     <h4>
                         <a href="">{{ items.title}}</a>
                     </h4>
-                    <p>{{items.description}}</p>
+                    <p>{{items.summary}}</p>
                     <div>
                         <span v-for="item in items.labels">{{item.name}}</span>
                     </div>
