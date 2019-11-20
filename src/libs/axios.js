@@ -1,8 +1,8 @@
-import axios from "axios";
-import { getStore, setStore } from "./storage";
-import { router } from "../router/index";
-import { Message } from "iview";
-import Cookies from "js-cookie";
+import axios from 'axios';
+import { getStore, setStore } from './storage';
+// import { router } from '../router/index';
+import { Message } from 'iview';
+import Cookies from 'js-cookie';
 // 统一请求路径前缀
 let base = "http://132.232.33.218:8081";
 // 超时设定
@@ -25,30 +25,30 @@ axios.interceptors.response.use(
 
     // 根据返回的code值来做不同的处理(和后端约定)
     switch (data.code) {
-      case 401:
-        // 未登录 清除已登录状态
-        Cookies.set("userInfo", "");
-        setStore("accessToken", "");
-        router.push("/login");
-        break;
-      case 403:
-        // 没有权限
-        if (data.message !== null) {
-          Message.error(data.message);
-        } else {
-          Message.error("未知错误");
-        }
-        break;
-      case 500:
-        // 错误
-        if (data.message !== null) {
-          Message.error(data.message);
-        } else {
-          Message.error("未知错误");
-        }
-        break;
-      default:
-        return data;
+        case 401:
+            // 未登录 清除已登录状态
+            Cookies.set('userInfo', '');
+            setStore('accessToken', '');
+            // router.push('/login');
+            break;
+        case 403:
+            // 没有权限
+            if (data.message !== null) {
+                Message.error(data.message);
+            } else {
+                Message.error("未知错误");
+            }
+            break;
+        case 500:
+            // 错误
+            if (data.message !== null) {
+                Message.error(data.message);
+            } else {
+                Message.error("未知错误");
+            }
+            break;
+        default:
+            return data;
     }
 
     return data;
@@ -73,17 +73,14 @@ export const getRequest = (url, params) => {
 };
 
 export const postRequest = (url, params) => {
-  let accessToken = getStore("accessToken");
-  return axios({
-    method: "post",
-    url: `${base}${url}`,
-    data: params,
-    transformRequest: [
-      function(data) {
-        let ret = "";
-        for (let it in data) {
-          ret +=
-            encodeURIComponent(it) + "=" + encodeURIComponent(data[it]) + "&";
+    let accessToken = getStore("accessToken");
+    return axios({
+        method: 'post',
+        url: `${base}${url}`,
+        data: params,
+        headers: {
+            'Content-Type': 'application/json',
+            'accessToken': accessToken
         }
         ret = ret.substring(0, ret.length - 1);
         return ret;
@@ -97,17 +94,14 @@ export const postRequest = (url, params) => {
 };
 
 export const putRequest = (url, params) => {
-  let accessToken = getStore("accessToken");
-  return axios({
-    method: "put",
-    url: `${base}${url}`,
-    data: params,
-    transformRequest: [
-      function(data) {
-        let ret = "";
-        for (let it in data) {
-          ret +=
-            encodeURIComponent(it) + "=" + encodeURIComponent(data[it]) + "&";
+    let accessToken = getStore("accessToken");
+    return axios({
+        method: 'put',
+        url: `${base}${url}`,
+        data: params,
+        headers: {
+            'Content-Type': 'application/json',
+            'accessToken': accessToken
         }
         ret = ret.substring(0, ret.length - 1);
         return ret;
@@ -121,17 +115,14 @@ export const putRequest = (url, params) => {
 };
 
 export const patchRequest = (url, params) => {
-  let accessToken = getStore("accessToken");
-  return axios({
-    method: "patch",
-    url: `${base}${url}`,
-    data: params,
-    transformRequest: [
-      function(data) {
-        let ret = "";
-        for (let it in data) {
-          ret +=
-            encodeURIComponent(it) + "=" + encodeURIComponent(data[it]) + "&";
+    let accessToken = getStore("accessToken");
+    return axios({
+        method: 'patch',
+        url: `${base}${url}`,
+        data: params,
+        headers: {
+            'Content-Type': 'application/json',
+            'accessToken': accessToken
         }
         ret = ret.substring(0, ret.length - 1);
         return ret;

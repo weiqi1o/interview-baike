@@ -1,16 +1,19 @@
 <template>
-  <div class="lists">
-    <headerTop></headerTop>
-    <div class="content">
-      <div>
-        <div v-for="items in lists.data">
-          <h4>
-            <a href="">{{ items.title }}</a>
-          </h4>
-          <p>{{ items.description }}</p>
-          <div>
-            <span v-for="item in items.labels">{{ item.name }}</span>
-          </div>
+    <div class="lists">
+        <headerTop></headerTop>
+        <div class="content">
+            <div>
+                <div v-for=" items in lists.data">
+                    <h4>
+                        <a href="">{{ items.title}}</a>
+                    </h4>
+                    <p>{{items.summary}}</p>
+                    <div>
+                        <span v-for="item in items.labels">{{item.name}}</span>
+                    </div>
+                </div>
+                <pages :pageNum = lists ></pages>
+            </div>
         </div>
         <pages v-show="lists.totalPage > 0" :pagesData="lists"></pages>
       </div>
