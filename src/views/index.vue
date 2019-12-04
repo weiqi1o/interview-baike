@@ -7,7 +7,7 @@
                     <router-link to="/setting">
                         <Avatar class="Avatar" src="https://i.loli.net/2017/08/21/599a521472424.jpg"/>
                     </router-link>
-                    <router-link to="/edit" class="edit">
+                    <router-link to="/setEditor" class="edit">
                         <img class="iconB" src="./../../static/imgs/b2.png" alt="">
                         <span>编辑题目</span>
                     </router-link>
