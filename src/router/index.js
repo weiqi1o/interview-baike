@@ -4,6 +4,7 @@ import Index from "../views/index";
 import Lists from "../views/lists";
 import setting from "../views/setting";
 import setEditor from "../views/setEditor"
+import markdown from "../views/markdown"
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
         path: "/setEditor",
         name: "setEditor",
         component: setEditor
+    },
+    {
+        path: "/markdown",
+        name: "markdown",
+        component: markdown
     }
 ];
 

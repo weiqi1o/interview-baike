@@ -21,6 +21,7 @@ import { login, search, regist } from "@/api/index";
 import "./plugins/iview.js";
 Vue.config.productionTip = false;
 
+
 // 挂载全局使用的方法
 Vue.prototype.getRequest = getRequest;
 Vue.prototype.postRequest = postRequest;

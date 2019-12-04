@@ -9,7 +9,7 @@
         <Divider/>
         <div class="content">
             <h2>文章正文</h2>
-            <router-link to="/edit" class="edit">
+            <router-link to="/markdown" class="edit">
                 <img class="iconB" src="./../../static/imgs/b2.png" alt="">
                 <span>写文章</span>
             </router-link>

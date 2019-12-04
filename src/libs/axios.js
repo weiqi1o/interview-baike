@@ -122,6 +122,7 @@ export const deleteRequest = (url, params) => {
         }
     });
 };
+
 export const uploadFileRequest = (url, params) => {
     let accessToken = getStore("accessToken");
     return axios({
