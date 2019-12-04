@@ -2,93 +2,68 @@
     <div class="lists">
         <headerTop></headerTop>
         <div class="content">
-            <div>
-                <div v-for=" items in lists.data">
-                    <h4>
-                        <a href="">{{ items.title}}</a>
-                    </h4>
-                    <p>{{items.summary}}</p>
-                    <div>
-                        <span v-for="item in items.labels">{{item.name}}</span>
+            <List item-layout="vertical">
+                <ListItem v-for="items in lists.data" :key="items.id">
+                    <ListItemMeta :avatar="items.avatar" :title="items.title" :description="items.summary"/>
+                    {{ items.summary}}
+                    <div class="labels">
+                        <Tag  v-for="item in items.labels" checkable color="primary">{{item.name}}</Tag>
                     </div>
-                </div>
-                <pages :pageNum = lists ></pages>
-            </div>
+                    <template slot="action">
+                        <li>
+                            <Icon type="ios-star-outline"/>
+                            123
+                        </li>
+                        <li>
+                            <Icon type="ios-thumbs-up-outline"/>
+                            234
+                        </li>
+                        <li>
+                            <Icon type="ios-chatbubbles-outline"/>
+                            345
+                        </li>
+                    </template>
+                    <template slot="extra">
+                        <img src="https://dev-file.iviewui.com/5wxHCQMUyrauMCGSVEYVxHR5JmvS7DpH/large"
+                             style="width: 280px">
+                    </template>
+                </ListItem>
+                <Page v-if="lists.total>10" class="page" :total="lists.total" />
+            </List>
         </div>
-        <pages v-show="lists.totalPage > 0" :pagesData="lists"></pages>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
-import headerTop from "../components/common/headerTop";
-import pages from "../components/common/pages";
-import Bus from "./../../static/js/bus";
+    import headerTop from "../components/common/headerTop";
+    import pages from "../components/common/pages";
+    import Bus from "./../../static/js/bus";
 
-export default {
-  name: "lists",
-  components: { headerTop, pages },
-  data() {
-    return {
-      lists: ""
+    export default {
+        name: "lists",
+        components: {headerTop, pages},
+        data() {
+            return {
+                lists:''
+            };
+        },
+        mounted() {
+            var _this = this;
+            Bus.$on("newList", function (val) {
+                _this.lists = val;
+            });
+        }
     };
-  },
-  mounted() {
-    var _this = this;
-    Bus.$on("newList", function(val) {
-      _this.lists = val;
-    });
-  }
-};
 </script>
 
 <style scoped lang="less">
-.content {
-  width: 1200px;
-  margin: 0 auto;
-  margin-top: 20px;
-  & > div {
-    width: 800px;
-    & > div {
-      & > h4 {
-        & > a {
-          display: block;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          color: #365bb3;
-          text-decoration: none;
+    .content {
+        width: 1200px;
+        margin: 0 auto;
+        margin-top: 20px;
+        .page{
+            margin-top: 30px;
+            text-align: center;
         }
-        &:visited {
-          color: #600090;
-        }
-        a:hover {
-          text-decoration: underline;
-        }
-      }
-      & > p {
-        margin-top: 7px;
-        margin-bottom: 0;
-        word-wrap: break-word;
-        color: #646464;
-        font-size: 14px;
-        line-height: 22px;
-      }
-      & > div {
-        color: #006d21;
-        font-size: 13px;
-        margin-bottom: 26px;
-        margin-top: 4px;
-        & > span {
-          display: inline-block;
-          max-width: 70%;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          overflow: hidden;
-        }
-      }
     }
-  }
-}
 </style>
