@@ -58,7 +58,7 @@
 
 <style scoped lang="less">
     .content {
-        width: 1200px;
+        width: 90%;
         margin: 0 auto;
         margin-top: 20px;
         .page{

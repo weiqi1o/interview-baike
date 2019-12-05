@@ -57,10 +57,45 @@
             },
             publish() {
                 alert(this.val)
+            },
+            isMobile() {
+                if (navigator.userAgent.match(/Android/i)
+                    || navigator.userAgent.match(/webOS/i)
+                    || navigator.userAgent.match(/iPhone/i)
+                    || navigator.userAgent.match(/iPad/i)
+                    || navigator.userAgent.match(/iPod/i)
+                    || navigator.userAgent.match(/BlackBerry/i)
+                    || navigator.userAgent.match(/Windows Phone/i)
+                ) return true;
+                return false;
             }
+
         },
         mounted() {
-
+            if (this.isMobile()) {
+                this.save = {
+                    save: true,
+                    h1:false,
+                    h3:false,
+                    strong: false,
+                    italic: false,
+                    overline: false,
+                    quote: false,
+                    ul: false,
+                    ol: false,
+                    checked: false,
+                    notChecked: false,
+                    split: false,
+                    theme: false,
+                    exportmd: false,
+                    importmd: false,
+                    table: false,
+                    hr:false,
+                    fullscreen:false
+                };
+                $('.but').css({'right':'30px'});
+                $('.codemirror').css({'overflow':'initial'})
+            }
         },
         beforeMount() {
             var height = document.documentElement.clientHeight || document.body.clientHeight;
@@ -69,7 +104,7 @@
     }
 </script>
 
-<style scoped lang="less">
+<style  lang="less">
     .markdown {
         position: relative;
         .but {
@@ -86,4 +121,9 @@
     }
 
 
+    @media all and  (min-width:481px)  {
+        .but {
+            right: 5px;
+        }
+    }
 </style>

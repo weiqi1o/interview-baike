@@ -1,26 +1,38 @@
 <template>
     <div class="index">
         <div class="header">
-            <div class="demo-avatar">
-                <a v-if="!avatar" href="javascript:;" @click="openLand">登陆/注册</a>
-                <div v-else>
-                    <router-link to="/setting">
-                        <Avatar class="Avatar" src="https://i.loli.net/2017/08/21/599a521472424.jpg"/>
-                    </router-link>
-                    <router-link to="/setEditor" class="edit">
-                        <img class="iconB" src="./../../static/imgs/b2.png" alt="">
-                        <span>编辑题目</span>
-                    </router-link>
+            <Row>
+                <Col :xs="0" :md="18" style="height: 1px"></Col>
+                <Col :xs="24" :md="6">
+                    <div class="demo-avatar">
+                        <a v-if="!avatar" href="javascript:;" @click="openLand">登陆/注册</a>
+                        <div v-else>
+                            <router-link to="/setting">
+                                <Avatar class="Avatar" src="https://i.loli.net/2017/08/21/599a521472424.jpg"/>
+                            </router-link>
+                            <router-link to="/setEditor" class="edit">
+                                <img class="iconB" src="./../../static/imgs/b2.png" alt="">
+                                <span>编辑题目</span>
+                            </router-link>
+                        </div>
+                    </div>
+                </Col>
+            </Row>
+
+        </div>
+        <Row>
+            <Col style="height: 1px" :xs="0" :md="6"></Col>
+            <Col :xs="24" :md="12">
+                <div class="searchBox" >
+                    <img alt="Vue logo" src="./../../static/imgs/logo_index_zh_CN.png"/>
+                    <search></search>
+                    <p>这是一个<span>不追踪</span>你的搜索引擎</p>
+
                 </div>
+            </Col>
+            <Col style="height: 1px" :xs="0" :md="6"></Col>
+        </Row>
 
-            </div>
-
-        </div>
-        <div class="searchBox">
-            <img alt="Vue logo" src="./../../static/imgs/logo_index_zh_CN.png"/>
-            <search></search>
-            <p>这是一个<span>不追踪</span>你的搜索引擎</p>
-        </div>
         <landing class="landing"></landing>
     </div>
 </template>
@@ -50,7 +62,7 @@
 <style lang="less">
     .index {
         .header {
-            width: 90%;
+            max-width: 1200px;
             margin: 0 auto;
             text-align: end;
             padding: 10px 0;
@@ -88,13 +100,10 @@
 
         }
         .searchBox {
-            width: 640px;
-            position: fixed;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            width: 90%;
+            margin: 0 auto;
             & > img {
-                width: 460px;
+                width: 75%;
                 display: block;
                 margin: 0 auto;
                 margin-bottom: 25px;
