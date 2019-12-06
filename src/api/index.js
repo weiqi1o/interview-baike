@@ -18,8 +18,8 @@ export const regist = params => {
 };
 
 // 查询指定用户
-export const userInfo = userId => {
-  return getRequest("/v1/users/${userId}");
+export const userInfo = (userId) => {
+  return getRequest("/v1/users/"+userId);
 };
 
 // 更新指定用户信息

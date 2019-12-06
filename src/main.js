@@ -17,7 +17,7 @@ import {
   uploadFileRequest
 } from "@/libs/axios";
 import { setStore, getStore, removeStore } from "@/libs/storage";
-import { login, search, regist } from "@/api/index";
+import { login, search, regist,userInfo} from "@/api/index";
 import "./plugins/iview.js";
 Vue.config.productionTip = false;
 
@@ -35,6 +35,7 @@ Vue.prototype.removeStore = removeStore;
 Vue.prototype.login = login;
 Vue.prototype.search = search;
 Vue.prototype.regist = regist;
+Vue.prototype.userInfo = userInfo;
 Vue.use(VueAxios, axios);
 new Vue({
   router,
