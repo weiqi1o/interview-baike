@@ -16,18 +16,7 @@
                 </Row>
             </Col>
             <Col :xs="24" :md="12">
-                <div class="demo-avatar">
-                    <a v-if="!avatar" href="javascript:;" @click="openLand">登陆/注册</a>
-                    <div v-else>
-                        <router-link to="/setting">
-                            <Avatar class="Avatar" src="https://i.loli.net/2017/08/21/599a521472424.jpg"/>
-                        </router-link>
-                        <router-link to="/setEditor" class="edit">
-                            <img class="iconB" src="./../../../static/imgs/b2.png" alt="">
-                            <span>编辑题目</span>
-                        </router-link>
-                    </div>
-                </div>
+                <headerL></headerL>
             </Col>
         </Row>
 
@@ -37,10 +26,10 @@
 
 <script>
     import search from "./search";
-
+    import headerL from "./../../components/landing/headerL"
     export default {
         name: "headerTOP",
-        components: {search},
+        components: {search,headerL},
         data() {
             return {
                 lists: "",

@@ -21,6 +21,8 @@ export const getStore = name => {
  * 删除localStorage
  */
 export const removeStore = name => {
+    alert(2)
   if (!name) return;
   window.localStorage.removeItem(name);
+  console.log(name)
 };

@@ -96,7 +96,8 @@
             },
             //存储
             session(token, userId) {
-                this.removeStore();
+                this.removeStore("accessToken");
+                this.removeStore("userId");
                 this. setStore("accessToken",token);
                 this. setStore("userId", userId)
 

@@ -2,9 +2,15 @@
     <div class="demo-avatar">
         <a v-if="!account" href="javascript:;" @click="openLand">登陆/注册</a>
         <div v-else>
-            <router-link to="/setting">
+            <Dropdown>
                 <Avatar class="Avatar" :src="avatar"/>
-            </router-link>
+                <DropdownMenu slot="list">
+                    <DropdownItem>
+                        <router-link to="/setting">个人中心</router-link>
+                    </DropdownItem>
+                    <DropdownItem ><span @click="signOut">退出</span></DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
             <router-link to="/setEditor" class="edit">
                 <img class="iconB" src="./../../../static/imgs/b2.png" alt="">
                 <span>编辑题目</span>
@@ -38,6 +44,13 @@
         methods: {
             openLand() {
                 $(".landing").slideDown("fast");
+            },
+            signOut(){
+                alert(1)
+                this.removeStore("accessToken");
+                this.removeStore("userId");
+                this.account='';
+                this.avatar = ''
             }
         },
         mounted() {
@@ -89,6 +102,9 @@
                 }
             }
 
+        }
+        .ivu-dropdown-menu{
+            text-align: start;
         }
     }
 </style>
