@@ -31,22 +31,24 @@
             }
         },
         created(){
-            var id = this.getStore("userId");
-            if(id){
-                this.userInfo(id).then((res) => {
-                    this.account = res.result.account;
-                    this.avatar = res.result.avatar;
-
-
-                })
-            }
+            this.getUserInfoData();
         },
         methods: {
             openLand() {
                 $(".landing").slideDown("fast");
             },
+            getUserInfoData(){
+                var id = this.getStore("userId");
+                if(id){
+                    this.userInfo(id).then((res) => {
+                        this.account = res.result.account;
+                        this.avatar = res.result.avatar;
+
+
+                    })
+                }
+            },
             signOut(){
-                alert(1)
                 this.removeStore("accessToken");
                 this.removeStore("userId");
                 this.account='';

@@ -28,6 +28,7 @@
 </template>
 
 <script>
+ import Bus from './../../../static/js/bus'
 import register from "./../../components/landing/register";
 export default {
   name: "landing",
@@ -59,6 +60,14 @@ export default {
       this.landing = true;
       this.register = false;
     },
+      //存储
+      session(token, userId) {
+          this.removeStore("accessToken");
+          this.removeStore("userId");
+          this. setStore("accessToken",token);
+          this. setStore("userId", userId)
+
+      },
     //提交登陆
     submit() {
       $(".land input").removeClass("active");
@@ -74,7 +83,18 @@ export default {
         $("#password").focus();
         return;
       }
-      this.login(this.land);
+      this.login(this.land).then((res)=>{
+          if(res.code==200){
+              this.session(res.result.token, res.result.userId);
+              this.$Message.success(res.msg);
+              this.closeLand();
+              this.succ = true;
+              Bus.$emit('succ', this.succ);
+
+          }else{
+              this.$Message.error(res.msg);
+          }
+      });
     }
   }
 };
