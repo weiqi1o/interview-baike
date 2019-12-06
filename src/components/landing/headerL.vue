@@ -1,45 +1,48 @@
 <template>
-    <div class="demo-avatar">
-        <a v-if="!account" href="javascript:;" @click="openLand">登陆/注册</a>
-        <div v-else>
-            <Dropdown>
+    <div class="left">
+        <div class="demo-avatar">
+            <a v-if="!account" href="javascript:;" @click="openLand">登陆/注册</a>
+            <Dropdown v-else>
                 <Avatar class="Avatar" :src="avatar"/>
                 <DropdownMenu slot="list">
                     <DropdownItem>
                         <router-link to="/setting">个人中心</router-link>
                     </DropdownItem>
-                    <DropdownItem ><span @click="signOut">退出</span></DropdownItem>
+                    <DropdownItem><span @click="signOut">退出</span></DropdownItem>
                 </DropdownMenu>
             </Dropdown>
-            <router-link to="/setEditor" class="edit">
+            <router-link v-if="account" to="/setEditor" class="edit">
                 <img class="iconB" src="./../../../static/imgs/b2.png" alt="">
                 <span>编辑题目</span>
             </router-link>
+            <div v-else @click="toEdit('info')" class="edit">
+                <img class="iconB" src="./../../../static/imgs/b2.png" alt="">
+                <span>编辑题目</span>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     import Bus from './../../../static/js/bus'
-
     export default {
         name: "headerL",
         data() {
             return {
                 account: '',
-                avatar: '22'
+                avatar: ''
             }
         },
-        created(){
+        created() {
             this.getUserInfoData();
         },
         methods: {
             openLand() {
                 $(".landing").slideDown("fast");
             },
-            getUserInfoData(){
+            getUserInfoData() {
                 var id = this.getStore("userId");
-                if(id){
+                if (id) {
                     this.userInfo(id).then((res) => {
                         this.account = res.result.account;
                         this.avatar = res.result.avatar;
@@ -48,11 +51,20 @@
                     })
                 }
             },
-            signOut(){
+            signOut() {
                 this.removeStore("accessToken");
                 this.removeStore("userId");
-                this.account='';
+                this.account = '';
                 this.avatar = ''
+            },
+            toEdit(type) {
+                if (!this.account) {
+                    this.$Message[type]({
+                        background: true,
+                        content: '你还没有登录请登录后在编辑文章！'
+                    })
+                }
+                this.openLand()
             }
         },
         mounted() {
@@ -81,32 +93,31 @@
             color: black;
             cursor: pointer;
         }
-        & > div {
+        .edit {
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 8px;
+            padding: 3px 5px;
+            background: #f5f2f0;
+            padding-right: 20px;
+            text-align: center;
+            margin-left: 15px;
+            cursor: pointer;
+            & > img {
 
-            .edit {
-                display: inline-block;
+                width: 35px;
                 vertical-align: middle;
-                border-radius: 8px;
-                padding: 3px 5px;
-                background: #f5f2f0;
-                padding-right: 20px;
-                text-align: center;
-                margin-left: 15px;
-                cursor: pointer;
-                & > img {
-
-                    width: 35px;
-                    vertical-align: middle;
-                }
-                & > span {
-                    font-size: 16px;
-                    color: black;
-                }
             }
-
+            & > span {
+                font-size: 16px;
+                color: black;
+            }
         }
-        .ivu-dropdown-menu{
+        .ivu-dropdown-menu {
             text-align: start;
         }
+    }
+    .left{
+        text-align: end;
     }
 </style>

@@ -21,19 +21,17 @@
             </Col>
             <Col style="height: 1px" :xs="0" :md="6"></Col>
         </Row>
-        <landing class="landing"></landing>
     </div>
 </template>
 
 <script>
     // @ is an alias to /src
     import search from "./../components/common/search";
-    import landing from "./../components/landing/landing";
     import headerL from './../components/landing/headerL'
 
     export default {
         name: "index",
-        components: {search, landing,headerL},
+        components: {search,headerL},
         data() {
             return {
                 val: "",
@@ -74,9 +72,6 @@
                     margin: 0 10px;
                 }
             }
-        }
-        .landing {
-            display: none;
         }
     }
 </style>

@@ -4,8 +4,8 @@
         <div class="banner">
             <Row >
                 <Col :xs="12" :md="12">
-                    <div class="Avatar">
-                        <Avatar size="large" class="Avatar_" src="https://i.loli.net/2017/08/21/599a521472424.jpg"/>
+                    <div class="Avatar" v-if="UserInfoData.result">
+                        <Avatar size="large" class="Avatar_" :src="UserInfoData.result.avatar"/>
                         <div>
                             <h4>你好你好你好</h4>
                             <div>
@@ -37,30 +37,7 @@
             <Menu class="nav" v-show="mode2" mode="vertical" :theme="theme1"  active-name="1">
                 <MenuItem name="1">
                     <Icon type="ios-paper" />
-                    内容管理
-                </MenuItem>
-                <MenuItem name="2">
-                    <Icon type="ios-people"  />
-                    用户管理
-                </MenuItem>
-                <Submenu name="3">
-                    <template slot="title">
-                        <Icon type="ios-stats"  />
-                        统计分析
-                    </template>
-                    <MenuGroup title="使用">
-                        <MenuItem name="3-1">新增和启动</MenuItem>
-                        <MenuItem name="3-2">活跃分析</MenuItem>
-                        <MenuItem name="3-3">时段分析</MenuItem>
-                    </MenuGroup>
-                    <MenuGroup title="留存">
-                        <MenuItem name="3-4">用户留存</MenuItem>
-                        <MenuItem name="3-5">流失用户</MenuItem>
-                    </MenuGroup>
-                </Submenu>
-                <MenuItem name="4">
-                    <Icon type="ios-construct"  class="icon"/>
-                    综合设置
+                    基础信息
                 </MenuItem>
             </Menu>
             <Menu class="nav" v-show="!mode2" mode="horizontal" :theme="theme1"  active-name="1">
@@ -89,7 +66,7 @@
                 </MenuItem>
             </Menu>
             <div class="item">
-                <basics></basics>
+                <basics :UserInfoData="UserInfoData"></basics>
             </div>
         </div>
 
@@ -106,12 +83,29 @@
         components: {search, basics, headerTop},
         data() {
             return {
-                avatar: true,
                 theme1: 'light',
                 mode2:'vertical',
+                UserInfoData:''
             }
         },
+        created(){
+            this.getUserInfoData()
+        },
         methods:{
+            getUserInfoData() {
+                var id = this.getStore("userId");
+                if(!id){
+                    this.$routes.push('/');
+                    $(".landing").slideDown("fast");
+                }else{
+                    this.userInfo(id).then((res) => {
+                        this.UserInfoData = res;
+                        console.log(res)
+
+                    })
+                }
+
+            },
             resize(){
                 var _this = this;
                 if($(window).width()<=480){

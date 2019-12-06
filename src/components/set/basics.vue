@@ -1,11 +1,11 @@
 <template>
-    <div class="basics">
+    <div class="basics"  v-if="UserInfoData.result">
         <Row type="flex" justify="space-between">
             <Col :xs="0" :md="4"><span class="label">当前头像</span></Col>
             <Col :xs="24" :md="20">
                 <div class=" avatar">
-                    <Avatar shape="square" src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="80"/>
-                    <Upload v-show="edit" class="butUpload" action="//jsonplaceholder.typicode.com/posts/">
+                    <Avatar shape="square" :src="UserInfoData.result.avatar" size="80"/>
+                    <Upload v-show="edit" class="butUpload" action="/">
                         <span>上传头像</span>
                     </Upload>
                 </div>
@@ -14,31 +14,31 @@
         <Row type="flex" justify="space-between">
             <Col :xs="0" :md="4"><span class="label">用户名</span></Col>
             <Col :xs="24" :md="20">
-                <p class="item">生生世世生生世世是事实</p>
+                <p class="item">{{UserInfoData.result.account}}</p>
             </Col>
         </Row>
         <Row type="flex" justify="space-between">
-            <Col :xs="0" :md="4"><span class="label">姓名</span></Col>
+            <Col :xs="0" :md="4"><span class="label">昵称</span></Col>
             <Col :xs="24" :md="20">
-                <input class="item input" readonly="readonly" type="text" v-model="editData.name">
+                <input class="item input" readonly="readonly" type="text" v-model="UserInfoData.result.nickName">
             </Col>
         </Row>
         <Row type="flex" justify="space-between">
             <Col :xs="0" :md="4"><span class="label">手机号</span></Col>
             <Col :xs="24" :md="20">
-                <input class="item input" readonly="readonly" type="text" v-model="editData.phone">
+                <input class="item input" readonly="readonly" type="text" v-model="UserInfoData.result.phone">
             </Col>
         </Row>
         <Row type="flex" justify="space-between">
-            <Col :xs="0" :md="4"><span class="label">QQ号</span></Col>
+            <Col :xs="0" :md="4"><span class="label">城市</span></Col>
             <Col :xs="24" :md="20">
-                <input class="item input" readonly="readonly" type="text" v-model="editData.QQ">
+                <input class="item input" readonly="readonly" type="text" v-model="UserInfoData.result.city">
             </Col>
         </Row>
         <Row type="flex" justify="space-between">
             <Col :xs="0" :md="4"><span class="label">邮箱</span></Col>
             <Col :xs="24" :md="20">
-                <input class="item input" readonly="readonly" type="email" v-model="editData.email">
+                <input class="item input" readonly="readonly" type="email" v-model="UserInfoData.result.email">
             </Col>
         </Row>
         <Row type="flex" justify="space-between">
@@ -58,16 +58,10 @@
 <script>
     export default {
         name: "basics",
+        props:['UserInfoData'],
         data() {
             return {
                 edit: '',
-                editData: {
-                    name: "-",
-                    phone: '-',
-                    QQ: '-',
-                    email: '-'
-
-                }
             }
         },
         methods: {

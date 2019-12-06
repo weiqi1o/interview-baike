@@ -36,12 +36,11 @@
 
 <script>
     import headerTop from "../components/common/headerTop";
-    import pages from "../components/common/pages";
     import Bus from "./../../static/js/bus";
 
     export default {
         name: "lists",
-        components: {headerTop, pages},
+        components: {headerTop},
         data() {
             return {
                 lists:''
