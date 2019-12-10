@@ -1,5 +1,5 @@
 <template>
-    <div class="left">
+    <div class="left ">
         <div class="demo-avatar">
             <a v-if="!account" href="javascript:;" @click="openLand">登陆/注册</a>
             <Dropdown v-else>
@@ -11,11 +11,11 @@
                     <DropdownItem><span @click="signOut">退出</span></DropdownItem>
                 </DropdownMenu>
             </Dropdown>
-            <router-link v-if="account" to="/setEditor" class="edit">
+            <router-link v-show="edit"  v-if="account" to="/setEditor" class="edit">
                 <img class="iconB" src="./../../../static/imgs/b2.png" alt="">
                 <span>编辑题目</span>
             </router-link>
-            <div v-else @click="toEdit('info')" class="edit">
+            <div v-show="edit" v-else @click="toEdit('info')" class="edit">
                 <img class="iconB" src="./../../../static/imgs/b2.png" alt="">
                 <span>编辑题目</span>
             </div>
@@ -30,11 +30,17 @@
         data() {
             return {
                 account: '',
-                avatar: ''
+                avatar: '',
+                edit:''
             }
         },
         created() {
             this.getUserInfoData();
+            if(this.$route.path == '/markdown'){
+                this.edit = false
+            }else{
+                this.edit = true
+            }
         },
         methods: {
             openLand() {
@@ -82,6 +88,7 @@
                 }
 
             })
+
         }
     }
 </script>

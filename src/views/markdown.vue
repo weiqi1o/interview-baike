@@ -49,7 +49,7 @@
                 save: {
                     save: true,
                 },
-                modal1: false
+                modal1: false,
             }
         },
         methods: {
@@ -126,9 +126,9 @@
         }
     }
 
-    .edit{
-        display: none !important;
-    }
+    /*.edit{*/
+        /*display: none !important;*/
+    /*}*/
     @media all and  (min-width:481px)  {
         .but {
             right: 5px;
