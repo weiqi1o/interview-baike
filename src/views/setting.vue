@@ -2,36 +2,35 @@
     <div class="setting">
         <headerTop></headerTop>
         <div class="banner">
-            <Row >
-                <Col :xs="12" :md="12">
-                    <div class="Avatar" v-if="UserInfoData.result">
-                        <Avatar size="large" class="Avatar_" :src="UserInfoData.result.avatar"/>
-                        <div>
-                            <h4>你好你好你好</h4>
+                <Row type="flex" justify="space-between">
+                    <Col :xs="12" :md="12">
+                        <div class="Avatar" v-if="UserInfoData.result">
+                            <Avatar size="large" class="Avatar_" :src="UserInfoData.result.avatar"/>
                             <div>
-                                <span v-for="item in 5">java</span>
+                                <h4>你好你好你好</h4>
+                                <div>
+                                    <span v-for="item in 5">java</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </Col>
-                <Col :xs="12" :md="12" >
-                    <div class="data">
-                        <div>
-                            <span>6</span>
-                            <span>发布题目</span>
+                    </Col>
+                    <Col :xs="12" :md="12" >
+                        <div class="data" >
+                            <div>
+                                <span>6</span>
+                                <span>发布题目</span>
+                            </div>
+                            <div>
+                                <span>200</span>
+                                <span>浏览数总数</span>
+                            </div>
+                            <div>
+                                <span>100</span>
+                                <span>点赞总数</span>
+                            </div>
                         </div>
-                        <div>
-                            <span>200</span>
-                            <span>浏览数总数</span>
-                        </div>
-                        <div>
-                            <span>100</span>
-                            <span>点赞总数</span>
-                        </div>
-                    </div>
-                </Col>
-            </Row>
-
+                    </Col>
+                </Row>
         </div>
         <div class="content">
             <Menu class="nav" v-show="mode2" mode="vertical" :theme="theme1"  active-name="1">
@@ -128,12 +127,18 @@
     }
 </script>
 
-<style scoped lang="less">
+<style  lang="less">
     .setting {
         width: 100%;
         .header {
             width: 100%;
             background: #333;
+            .label{
+                &>span{
+                    color: white;
+                }
+
+            }
 
         }
         .banner {
@@ -141,10 +146,7 @@
             width: 100%;
             padding: 30px 0;
             & > div {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 90%;
+                max-width: 1200px;
                 margin: 0 auto;
                 .Avatar {
                     .Avatar_ {
@@ -175,6 +177,7 @@
                     background: #1c4763;
                     padding: 5px 10px;
                     display: inline-block;
+                    float: right;
                     & > div {
                         margin-left: 0;
                         padding: 0 35px;

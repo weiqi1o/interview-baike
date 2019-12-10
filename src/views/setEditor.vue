@@ -1,9 +1,11 @@
 <template>
     <div class="edit">
+        <headerTop></headerTop>
         <h1>编辑文章</h1>
         <Divider/>
         <div class="title">
             <input type="text" placeholder="标题">
+            <input type="text" placeholder="分类">
             <textarea placeholder="描述" rows="5"></textarea>
         </div>
         <Divider/>
@@ -19,9 +21,10 @@
 </template>
 
 <script>
-
+    import headerTop from "../components/common/headerTop";
     export default {
         name: "edit",
+        components:{headerTop},
         data() {
             return {
                 value17: ''
@@ -51,6 +54,9 @@
                 margin-bottom:30px ;
                 font-weight: bold;
                 color: #515a6e;
+            }
+            &>input:nth-of-type(2){
+                font-size: 20px;
             }
             &>textarea{
                 font-size: 20px ;

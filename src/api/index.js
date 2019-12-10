@@ -36,3 +36,7 @@ export const uploadQusetion = params => {
 export const search = params => {
   return getRequest("/v1/questions", params);
 };
+//查询指定题目
+export const getDetails = (questionId,params) => {
+    return getRequest("/v1/questions/"+questionId,params);
+};

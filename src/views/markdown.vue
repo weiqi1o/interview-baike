@@ -1,35 +1,39 @@
 <template>
     <div class="markdown">
-        <div class="but">
-            <Tooltip content="上传生成图片链接" placement="right">
-                <Button class="Button" type="text" size="small" @click="modal1 = true">
-                    <Icon size="18" type="md-images"/>
+        <headerTop></headerTop>
+        <div class="mar">
+            <div class="but">
+                <Tooltip content="上传生成图片链接" placement="right">
+                    <Button class="Button" type="text" size="small" @click="modal1 = true">
+                        <Icon size="18" type="md-images"/>
+                    </Button>
+                </Tooltip>
+                <Button class="Button" type="text" size="small" @click="publish">
+                    <Icon type="md-share-alt"/>
+                    发布文章
                 </Button>
-            </Tooltip>
-            <Button class="Button" type="text" size="small" @click="publish">
-                <Icon type="md-share-alt"/>
-                发布文章
-            </Button>
+            </div>
+            <Modal
+                    v-model="modal1"
+                    title="插入图片链接生成"
+                    @on-ok="ok">
+                <Upload action="/">
+                    <Button icon="ios-cloud-upload-outline">选择图片</Button>
+                </Upload>
+            </Modal>
+            <MarkdownPro class="MarkdownPro" :toolbars="save" autoSave @on-save="handleOnSave" :bordered='bordered' :height="height" v-model="val"/>
         </div>
-        <Modal
-                v-model="modal1"
-                title="插入图片链接生成"
-                @on-ok="ok">
-            <Upload action="/">
-                <Button icon="ios-cloud-upload-outline">选择图片</Button>
-            </Upload>
-        </Modal>
-        <MarkdownPro :toolbars="save" :autoSave='autoSave' @on-save="handleOnSave" :height="height" v-model="val"/>
+
     </div>
 </template>
 
 <script>
     import {MarkdownPro} from 'vue-meditor'
-
+    import headerTop from "../components/common/headerTop";
     export default {
         name: "markdown",
         components: {
-            MarkdownPro
+            MarkdownPro,headerTop
         },
         data() {
             return {
@@ -41,7 +45,7 @@
                     '</template>\n' +
                     '```',
                 height: '',
-                autoSave: true,
+                bordered: false,
                 save: {
                     save: true,
                 },
@@ -99,13 +103,15 @@
         },
         beforeMount() {
             var height = document.documentElement.clientHeight || document.body.clientHeight;
-            this.height = height;
+            this.height = height - 66;
         }
     }
 </script>
 
 <style  lang="less">
-    .markdown {
+    .mar {
+        max-width: 1200px;
+        margin: 0 auto;
         position: relative;
         .but {
             position: absolute;
@@ -120,7 +126,9 @@
         }
     }
 
-
+    .edit{
+        display: none !important;
+    }
     @media all and  (min-width:481px)  {
         .but {
             right: 5px;

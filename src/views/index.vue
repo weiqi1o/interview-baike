@@ -1,13 +1,7 @@
 <template>
     <div class="index">
         <div class="header">
-            <Row>
-                <Col :xs="0" :md="18" style="height: 1px"></Col>
-                <Col :xs="24" :md="6">
-                    <headerL></headerL>
-                </Col>
-            </Row>
-
+            <headerTop></headerTop>
         </div>
         <Row>
             <Col style="height: 1px" :xs="0" :md="6"></Col>
@@ -27,11 +21,11 @@
 <script>
     // @ is an alias to /src
     import search from "./../components/common/search";
-    import headerL from './../components/landing/headerL'
+    import headerTop from './../components/common/headerTop'
 
     export default {
         name: "index",
-        components: {search,headerL},
+        components: {search,headerTop},
         data() {
             return {
                 val: "",
@@ -46,12 +40,8 @@
 <style lang="less">
     .index {
         .header {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: end;
-            padding: 10px 0;
-
-
+            width: 100%;
+            background: #f4f4f4;
         }
         .searchBox {
             width: 90%;

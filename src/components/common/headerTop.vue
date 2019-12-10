@@ -1,35 +1,36 @@
 <template>
     <div class="header">
-        <Row>
-            <Col :xs="0" :md="12">
-                <Row>
-                    <Col :xs="3" :md="2">
-                        <a href="/" class="logo">
-                            <img src="./../../../static/imgs/logo_search_page.png" alt=""/>
-                        </a>
-                    </Col>
-                    <Col :xs="21" :md="22">
-                        <div class="search">
-                            <search></search>
-                        </div>
-                    </Col>
-                </Row>
-            </Col>
-            <Col :xs="24" :md="12">
-                <headerL></headerL>
-            </Col>
-        </Row>
-
+        <div>
+            <Row>
+                <Col :xs="0" :md="12">
+                    <Row>
+                        <Col :xs="3" :md="2">
+                            <a href="/" class="logo">
+                                <img src="./../../../static/imgs/logo_search_page.png" alt=""/>
+                            </a>
+                        </Col>
+                        <Col :xs="21" :md="22">
+                            <div class="label">
+                                <span v-for="item in 6">java</span>
+                            </div>
+                        </Col>
+                    </Row>
+                </Col>
+                <Col :xs="24" :md="12">
+                    <headerL></headerL>
+                </Col>
+            </Row>
+        </div>
 
     </div>
 </template>
 
 <script>
-    import search from "./search";
     import headerL from "./../../components/landing/headerL"
+
     export default {
         name: "headerTOP",
-        components: {search,headerL},
+        components: { headerL},
         data() {
             return {
                 lists: "",
@@ -57,9 +58,13 @@
 <style scoped lang="less">
     .header {
         width: 100%;
-        padding: 15px 2.5%;
+        padding: 10px 0;
         box-sizing: border-box;
         background: #f4f4f4;
+        &>div{
+            max-width: 1200px;
+            margin: 0 auto;
+        }
         .logo {
             vertical-align: middle;
             margin-right: 15px;
@@ -67,10 +72,16 @@
                 width: 40px;
             }
         }
-        .search {
+        .label {
             width: 90%;
             display: inline-block;
             vertical-align: middle;
+            &>span{
+                color: #333333;
+                font-size: 20px;
+                padding: 0 10px;
+                display: inline-block;
+            }
         }
         .nav {
             width: 100%;

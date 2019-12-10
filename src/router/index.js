@@ -5,6 +5,7 @@ import Lists from "../views/lists";
 import setting from "../views/setting";
 import setEditor from "../views/setEditor"
 import markdown from "../views/markdown"
+import listsDetails from "../views/listsDetails"
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes = [
         path: "/markdown",
         name: "markdown",
         component: markdown
+    },
+    {
+        path: "/lists/details",
+        name: "listsDetails",
+        component: listsDetails
     }
 ];
 
