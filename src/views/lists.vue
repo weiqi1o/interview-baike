@@ -33,7 +33,7 @@
                             </router-link>
                             {{ items.summary}}
                             <div class="labels">
-                                <Tag v-for="item in items.labels" checkable color="primary">{{item.name}}</Tag>
+                                <Tag v-for="item in items.labels" color="primary">{{item.name}}</Tag>
                             </div>
                             <template slot="action">
                                 <li>

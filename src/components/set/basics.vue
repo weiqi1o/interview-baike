@@ -58,11 +58,14 @@
 <script>
     export default {
         name: "basics",
-        props:['UserInfoData'],
         data() {
             return {
                 edit: '',
+                UserInfoData:''
             }
+        },
+        created(){
+            this.getUserInfoData()
         },
         methods: {
             editBasics() {
@@ -74,7 +77,20 @@
                 this.edit = false;
                 $(".basics input").attr("readonly", "readonly").removeClass('editIpu');
                 this.editData.name = this.editData.phone = this.editData.QQ = this.editData.email = "-";
-            }
+            },
+            getUserInfoData() {
+                var id = this.getStore("userId");
+                if(!id){
+                    this.$routes.push('/');
+                    $(".landing").slideDown("fast");
+                }else{
+                    this.userInfo(id).then((res) => {
+                        this.UserInfoData = res;
+
+                    })
+                }
+
+            },
         }
     }
 </script>

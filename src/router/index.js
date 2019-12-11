@@ -6,6 +6,8 @@ import setting from "../views/setting";
 import setEditor from "../views/setEditor"
 import markdown from "../views/markdown"
 import listsDetails from "../views/listsDetails"
+import basics from "./../components/set/basics"
+import articles from "./../components/set/articles"
 
 Vue.use(VueRouter);
 
@@ -23,7 +25,19 @@ const routes = [
     {
         path: "/setting",
         name: "setting",
-        component: setting
+        component: setting,
+        children:[
+            {
+                path: "/",
+                name: "basics",
+                component: basics
+            },
+            {
+                path: "/articles",
+                name: "articles",
+                component: articles
+            }
+        ]
     },
     {
         path: "/setEditor",
