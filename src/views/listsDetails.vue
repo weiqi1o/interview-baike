@@ -5,7 +5,7 @@
             <Row type="flex" justify="space-between">
                 <Col span="16">
                     <h1 class="title">{{val.title}}</h1>
-                    <MarkdownPreview theme="oneDark" :initialValue="data" copyCode copyBtnText="复制代码"/>
+                    <MarkdownPreview theme="oneDark" :initialValue="val.content" copyCode copyBtnText="复制代码"/>
                     <div class="rate">
                         <div>
                             <span>收藏</span>|<span>喜欢</span>
@@ -43,13 +43,6 @@
         data() {
             return {
                 val: '',
-                data:'``` javascript\n' +
-                        '<template>\n' +
-                    '    <div class="markdown">\n' +
-                    '        <MarkdownPro :autoSave=\'autoSave\' @on-save="handleOnSave" :height="height" v-model="val"/>\n' +
-                    '    </div>\n' +
-                    '</template>\n' +
-                    '```'
 
             }
         },
