@@ -4,17 +4,24 @@
         <h1>编辑文章</h1>
         <Divider/>
         <div class="title">
-            <input type="text" placeholder="标题">
-            <input type="text" placeholder="分类">
-            <textarea placeholder="描述" rows="5"></textarea>
+            <input type="text" v-model="val.title" placeholder="标题">
+            <Tag v-for="item in val.labels"   :key="item" :name="item" size="large" closable @on-close="handleClose2">{{ item}}</Tag>
+            <Button icon="ios-add" type="dashed"   @click="handleAdd">添加题目标签</Button>
+            <Modal
+                    v-model="modal1"
+                    title="新建题目标签"
+                    @on-ok="ok">
+                <Input v-model="label" placeholder="输入标签名" clearable style="width: 200px" />
+            </Modal>
+            <textarea v-model="val.description" placeholder="描述" rows="5"></textarea>
         </div>
         <Divider/>
         <div class="content">
             <h2>文章正文</h2>
-            <router-link to="/markdown" class="edit">
+            <div @click="to" class="edit">
                 <img class="iconB" src="./../../static/imgs/b2.png" alt="">
                 <span>写文章</span>
-            </router-link>
+            </div>
         </div>
 
     </div>
@@ -27,10 +34,39 @@
         components:{headerTop},
         data() {
             return {
-                value17: ''
+                val:{
+                    title:'',
+                    labels:[],
+                    description:''
+                },
+                modal1: false,
+                label:'',
+
             }
         },
-        methods: {}
+        methods: {
+            handleAdd () {
+                this.modal1= true;
+            },
+            handleClose2 (event, name) {
+                const index = this.val.labels.indexOf(name);
+                this.val.labels.splice(index, 1);
+            },
+            ok () {
+                if (this.label && this.val.labels.indexOf(this.label)<0) {
+                    this.val.labels.push(this.label);
+                }else{
+                    this.$Message.warning('标签为空或已存在');
+                }
+            },
+            to(){
+                if(!this.val.title){
+                    this.$Message.error('题目标题不能为空！');
+                    return;
+                }
+               this.$router.push({path:'/markdown',query:{v:this.val}})
+            }
+        }
     }
 </script>
 
@@ -64,7 +100,8 @@
                 outline: none;
                 width: 100%;
                 color: #515a6e;
-                resize:none
+                resize:none;
+                margin-top: 20px;
             }
 
         }

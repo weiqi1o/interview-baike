@@ -21,7 +21,7 @@
                     <Button icon="ios-cloud-upload-outline">选择图片</Button>
                 </Upload>
             </Modal>
-            <MarkdownPro class="MarkdownPro" :toolbars="save" autoSave @on-save="handleOnSave" :bordered='bordered' :height="height" v-model="val"/>
+            <MarkdownPro class="MarkdownPro" :toolbars="save" autoSave @on-save="handleOnSave" :bordered='bordered' :height="height" v-model="content"/>
         </div>
 
     </div>
@@ -37,7 +37,7 @@
         },
         data() {
             return {
-                val: '``` javascript\n' +
+                content: '``` javascript\n' +
                     '<template>\n' +
                     '    <div class="markdown">\n' +
                     '        <MarkdownPro :autoSave=\'autoSave\' @on-save="handleOnSave" :height="height" v-model="val"/>\n' +
@@ -50,6 +50,7 @@
                     save: true,
                 },
                 modal1: false,
+                val:''
             }
         },
         methods: {
@@ -60,7 +61,15 @@
                 this.$Message.info('Clicked ok');
             },
             publish() {
-                alert(this.val)
+                this.val= {
+                    title:this.$route.query.v.title,
+                    labels:this.$route.query.v.labels,
+                    description:this.$route.query.v.description,
+                    content:this.content
+                };
+                this.addQuestion(this.val).then((res)=>{
+                    console.log(res)
+                })
             },
             isMobile() {
                 if (navigator.userAgent.match(/Android/i)
