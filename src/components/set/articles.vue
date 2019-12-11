@@ -1,7 +1,7 @@
 <template>
     <div>
         <Tabs value="name1" :animated="false">
-            <TabPane  name="name1" label="文章">
+            <TabPane  name="name1" label="记录">
                 <List>
                     <ListItem>
                         <ListItemMeta  title="This is title" description="This is description, this is description." />

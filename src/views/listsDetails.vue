@@ -5,6 +5,7 @@
             <Row type="flex" justify="space-between">
                 <Col span="16">
                     <h1 class="title">{{val.title}}</h1>
+
                     <MarkdownPreview theme="oneDark" :initialValue="val.content" copyCode copyBtnText="复制代码"/>
                     <div class="rate">
                         <div>
@@ -20,8 +21,6 @@
                             <Tooltip class="avatar" v-for="(item,index) in 10" :content="'的撒的第'+index" placement="top-start">
                                 <Avatar size="large" class="hImg" src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
                             </Tooltip>
-
-
                         </Card>
                     </div>
                 </Col>
@@ -73,8 +72,10 @@
     }
     .title{
         font-weight: normal;
-        text-align: center;
+		padding-left: 12px;
+        // text-align: center;
         margin-top: 15px;
+		border-bottom: 1px solid #d9d9d9;
     }
     .rate{
         display: flex;

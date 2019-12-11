@@ -13,11 +13,11 @@
             </Dropdown>
             <router-link v-show="edit"  v-if="account" to="/setEditor" class="edit">
                 <img class="iconB" src="./../../../static/imgs/b2.png" alt="">
-                <span>编辑题目</span>
+                <span>提交题目</span>
             </router-link>
             <div v-show="edit" v-else @click="toEdit('info')" class="edit">
                 <img class="iconB" src="./../../../static/imgs/b2.png" alt="">
-                <span>编辑题目</span>
+                <span>提交题目</span>
             </div>
         </div>
     </div>
