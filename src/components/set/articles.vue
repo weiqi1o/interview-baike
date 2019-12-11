@@ -2,7 +2,6 @@
     <div>
         <Tabs value="name1" :animated="false">
             <TabPane  name="name1" label="文章">
-
                 <List>
                     <ListItem>
                         <ListItemMeta  title="This is title" description="This is description, this is description." />
