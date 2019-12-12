@@ -10,7 +10,7 @@
                 </Tooltip>
                 <Button class="Button" type="text" size="small" @click="publish">
                     <Icon type="md-share-alt"/>
-                    发布文章
+                    提交题目
                 </Button>
             </div>
             <Modal

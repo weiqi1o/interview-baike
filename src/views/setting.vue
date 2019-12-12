@@ -9,7 +9,7 @@
                 </MenuItem>
                 <MenuItem name="articles" to="/articles">
                     <Icon type="ios-bookmarks-outline"/>
-                    文章管理
+                    题目管理
 
                 </MenuItem>
             </Menu>
@@ -18,7 +18,7 @@
                     基础信息
                 </MenuItem>
                 <MenuItem name="articles" to="/articles">
-                    文章管理
+                    题目管理
                 </MenuItem>
             </Menu>
             <div class="item">

@@ -11,7 +11,7 @@
                         </Col>
                         <Col :xs="21" :md="22">
                             <div class="label">
-                                <span v-for="item in 6">java</span>
+                                <span v-for="item in 6">Java</span>
                             </div>
                         </Col>
                     </Row>

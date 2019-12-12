@@ -1,26 +1,26 @@
 <template>
     <div class="edit">
         <headerTop></headerTop>
-        <h1>编辑文章</h1>
-        <Divider/>
         <div class="title">
-            <input type="text" v-model="val.title" placeholder="标题">
+            <input type="text" v-model="val.title" placeholder="添加标题">
+			<Divider/>
             <Tag v-for="item in val.labels"   :key="item" :name="item" size="large" closable @on-close="handleClose2">{{ item}}</Tag>
-            <Button icon="ios-add" type="dashed"   @click="handleAdd">添加题目标签</Button>
+            <Button icon="ios-add" type="dashed"   @click="handleAdd">添加标签</Button>
             <Modal
                     v-model="modal1"
-                    title="新建题目标签"
+                    title="搜索标签"
                     @on-ok="ok">
                 <Input v-model="label" placeholder="输入标签名" clearable style="width: 200px" />
             </Modal>
-            <textarea v-model="val.description" placeholder="描述" rows="5"></textarea>
+			<Divider/>
+            <textarea v-model="val.description" placeholder="描述 支持markdown (可选)" rows="5"></textarea>
         </div>
         <Divider/>
         <div class="content">
-            <h2>文章正文</h2>
+            <h2>答案</h2>
             <div @click="to" class="edit">
                 <img class="iconB" src="./../../static/imgs/b2.png" alt="">
-                <span>写文章</span>
+                <span>写答案</span>
             </div>
         </div>
 
