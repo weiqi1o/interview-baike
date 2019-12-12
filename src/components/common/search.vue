@@ -37,7 +37,7 @@ export default {
   },
   methods: {
       handleSearch2 (value) {
-          this.getsimilar({title:value}).then((res)=>{
+          this.getQuestionSimilar({title:value}).then((res)=>{
               if(res.code==200 && this.val !='' ){
                   this.data2=[];
                   res.result.forEach((v)=>{
