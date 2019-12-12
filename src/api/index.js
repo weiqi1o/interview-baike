@@ -55,3 +55,7 @@ export const getLabels = params => {
 export const getDetails = (questionId,params) => {
     return getRequest("/v1/questions/"+questionId,params);
 };
+//查询指定题目
+export const getsimilar = (params) => {
+    return getRequest("/v1/questions/similar",params);
+};

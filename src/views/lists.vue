@@ -26,8 +26,8 @@
         <div class="content">
             <Row type="flex" justify="space-between" >
                 <Col span="16">
-                    <List item-layout="vertical">
-                        <ListItem v-for="items in lists.data" :key="items.id">
+                    <List item-layout="vertical" v-if="lists.data">
+                        <ListItem  v-for="items in lists.data" :key="items.id">
                             <router-link :to="{name:'listsDetails',query:{id:items.id}}">
                                 <ListItemMeta :avatar="items.avatar" :title="items.title" :description="items.summary"/>
                             </router-link>
@@ -56,6 +56,15 @@
                         </ListItem>
                         <Page v-if="lists.total>10" class="page" :total="lists.total"/>
                     </List>
+                    <div v-else class="null">
+                        <Icon size="50" color="#e5e5e5" type="ios-folder-open" />
+                        <p>暂无该类型题目</p>
+                        <router-link to="/setEditor" class="edit">
+                            <img class="iconB" src="./../../static/imgs/b2.png" alt="">
+                            <span>贡献题目</span>
+                        </router-link>
+                    </div>
+
                 </Col>
                 <Col span="7">
                     <div class="card">
@@ -122,5 +131,37 @@
         width: 90%;
         display: inline-block;
         vertical-align: middle;
+    }
+    .null{
+        margin: 100px 0;
+        text-align: center;
+        &>p{
+            font-size: 20px;
+            color: #999999;
+            margin-top: 5px;
+        }
+        .edit {
+            display: block;
+            width: 120px;
+            border-radius: 20px;
+            padding: 5px 2px;
+            background: #333333;
+            padding-right: 10px;
+            text-align: center;
+            margin: 25px auto;
+            cursor: pointer;
+            color: white;
+
+            & > img {
+
+                width: 20px;
+                vertical-align: middle;
+            }
+            & > span {
+                font-size:16px;
+                color: white;
+                vertical-align: middle;
+            }
+        }
     }
 </style>

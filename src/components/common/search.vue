@@ -1,11 +1,18 @@
 <template>
   <div class="search">
-    <input
-      type="search"
-      v-model="val"
-      placeholder="搜索..."
-      @keyup.enter="serach"
-    />
+    <!--<input-->
+      <!--type="search"-->
+      <!--v-model="val"-->
+      <!--placeholder="搜索..."-->
+      <!--@keyup.enter="serach"-->
+    <!--/>-->
+    <AutoComplete
+            v-model="val"
+            @on-search="handleSearch2"
+            placeholder="搜索..."
+            style="width:100%">
+      <Option v-for="item in data2" :value="item" :key="item">{{ item }}</Option>
+    </AutoComplete>
     <button @click="serach">
       <img src="./../../../static/imgs/icon_search.png" alt="" />
     </button>
@@ -19,7 +26,8 @@ export default {
   name: "search",
   data() {
     return {
-      val: ""
+      val: "",
+      data2: []
     };
   },
   created() {
@@ -33,6 +41,22 @@ export default {
     }
   },
   methods: {
+      handleSearch2 (value) {
+          this.getsimilar({title:value}).then((res)=>{
+              if(res.code==200 && this.val !='' ){
+                  this.data2=[];
+                  res.result.forEach((v)=>{
+                      this.data2.push(v.title)
+                  })
+              }
+
+          })
+          this.search({ data: this.val }).then(response => {
+              if (response.code == 200) {
+                  this.passValue(response.result);
+              }
+          })
+      },
     //传值给列表组件
     passValue(val) {
       Bus.$emit("newList", val);
@@ -59,23 +83,26 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style  lang="less">
 .search {
   width: 100%;
   position: relative;
-  & > input {
+  box-shadow: 1px 1px 6px 0 rgba(119, 119, 119, 0.5);
+  border-radius: 25px;
+   input {
     width: 100%;
-    height: 45px;
+     height: 45px;
     font-size: 18px;
-    box-shadow: 1px 1px 6px 0 rgba(119, 119, 119, 0.5);
     border: 0;
+     border-radius: 25px;
     border: none;
-    border-radius: 25px !important;
-    padding-left: 20px;
-    padding-right: 60px;
-    box-sizing: border-box;
     outline: none;
+     text-indent: 1em;
+     &:focus{
+       box-shadow: none;
+     }
   }
+
   & > button {
     width: 65px;
     height: 45px;
