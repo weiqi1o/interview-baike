@@ -1,16 +1,16 @@
 <template>
     <div class="header">
         <div>
-            <Row>
+            <Row type="flex" align="middle">
                 <Col :xs="0" :md="12">
-                    <Row>
+                    <Row type="flex" align="middle">
                         <Col :xs="3" :md="2">
                             <a href="/" class="logo">
                                 <img src="./../../../static/imgs/logo_search_page.png" alt=""/>
                             </a>
                         </Col>
-                        <Col :xs="21" :md="22">
-                            <div class="label">
+                        <Col :xs="21" :md="22" >
+                            <div class="label" >
                                 <span v-for="item in 6">Java</span>
                             </div>
                         </Col>

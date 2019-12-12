@@ -1,11 +1,6 @@
 <template>
   <div class="search">
-    <!--<input-->
-      <!--type="search"-->
-      <!--v-model="val"-->
-      <!--placeholder="搜索..."-->
-      <!--@keyup.enter="serach"-->
-    <!--/>-->
+    <!--<input v-model="val"@keyup.enter="serach"/>-->
     <AutoComplete
             v-model="val"
             @on-search="handleSearch2"
@@ -79,7 +74,14 @@ export default {
       }
     }
   },
-  mounted() {}
+  mounted() {
+      var _this = this;
+      $('.search input,body').keydown(function(){
+          if (event.keyCode == 13 && _this.val !='') {
+              _this.serach()
+          }
+      })
+  }
 };
 </script>
 
