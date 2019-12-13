@@ -67,6 +67,7 @@
                 this.labels.forEach((v) => {
                     if(v.name.toLowerCase() == $.trim(this.labelVal)){
                         newLab=false
+                        this.$Message.error('该标签已存在！');
                     }
                     return newLab
                 });
