@@ -1,34 +1,39 @@
 <template>
     <div>
         <Tabs value="name1" :animated="false">
-            <TabPane  name="name1" label="记录">
+            <TabPane :label="label"  name="name1">
                 <List>
-                    <ListItem>
-                        <ListItemMeta  title="This is title" description="This is description, this is description." />
+                    <ListItem >
+                        <ListItemMeta  title="This is title" description="change description" />
                         <div class="labels">
-                            <Tag  color="primary">未审核</Tag>
-                            <Tag  color="warning">审核中</Tag>
-                            <Tag  color="success">审核通过</Tag>
-                            <Tag  color="error">审核失败</Tag>
+							<Button @click="isLook = true">查看</Button>
+							<Modal v-model="isLook" fullscreen title="这是标题">
+								<MarkdownPreview theme="oneDark" :initialValue="record.content"/>
+							</Modal>
                         </div>
                         <template slot="action">
-                            <li>
-                                <a href="">编辑</a>
-                            </li>
+						   <Button type="success">通过</Button>
+						    <Button type="error">退回</Button>
                         </template>
                     </ListItem>
                 </List>
             </TabPane>
-            <TabPane :label="label"  name="name2">标签二的内容</TabPane>
+            <TabPane label="我的提交"  name="name2">标签二的内容</TabPane>
         </Tabs>
     </div>
 </template>
 
 <script>
+	import {MarkdownPreview} from 'vue-meditor'
     export default {
         name: "articles",
+		components: {
+		    MarkdownPreview
+		},
         data(){
             return{
+				record:{id:2,content:"## hello \n this is test"},
+				isLook: false,
                 label: (h) => {
                     return h('div', [
                         h('span', '审核中'),
@@ -40,7 +45,10 @@
                     ])
                 }
             }
-        }
+        },
+		created() {
+
+		},
     }
 </script>
 
