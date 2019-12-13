@@ -1,6 +1,6 @@
 <template>
     <div class="basics"  v-if="UserInfoData.result">
-        <Row type="flex" justify="space-between">
+        <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">当前头像</span></Col>
             <Col :xs="24" :md="20">
                 <div class=" avatar">
@@ -11,37 +11,37 @@
                 </div>
             </Col>
         </Row>
-        <Row type="flex" justify="space-between">
+        <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">用户名</span></Col>
             <Col :xs="24" :md="20">
                 <p class="item">{{UserInfoData.result.account}}</p>
             </Col>
         </Row>
-        <Row type="flex" justify="space-between">
+        <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">昵称</span></Col>
             <Col :xs="24" :md="20">
                 <input class="item input" readonly="readonly" type="text" v-model="UserInfoData.result.nickName">
             </Col>
         </Row>
-        <Row type="flex" justify="space-between">
+        <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">手机号</span></Col>
             <Col :xs="24" :md="20">
                 <input class="item input" readonly="readonly" type="text" v-model="UserInfoData.result.phone">
             </Col>
         </Row>
-        <Row type="flex" justify="space-between">
+        <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">城市</span></Col>
             <Col :xs="24" :md="20">
                 <input class="item input" readonly="readonly" type="text" v-model="UserInfoData.result.city">
             </Col>
         </Row>
-        <Row type="flex" justify="space-between">
+        <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">邮箱</span></Col>
             <Col :xs="24" :md="20">
                 <input class="item input" readonly="readonly" type="email" v-model="UserInfoData.result.email">
             </Col>
         </Row>
-        <Row type="flex" justify="space-between">
+        <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label"></span></Col>
             <Col :xs="24" :md="20">
                 <div class="item">

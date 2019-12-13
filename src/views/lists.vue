@@ -59,10 +59,10 @@
                     <div v-else class="null">
                         <Icon size="50" color="#e5e5e5" type="ios-folder-open" />
                         <p>暂无该类型题目</p>
-                        <router-link to="/setEditor" class="edit">
+                        <div @click="toEdit('info')" class="edit">
                             <img class="iconB" src="./../../static/imgs/b2.png" alt="">
                             <span>贡献题目</span>
-                        </router-link>
+                        </div>
                     </div>
 
                 </Col>
@@ -93,12 +93,26 @@
                 lists: ''
             };
         },
+        methods:{
+            toEdit(type) {
+                if (!this.getStore("userId")) {
+                    this.$Message[type]({
+                        background: true,
+                        content: '你还没有登录请登录后在编辑文章！'
+                    });
+                    $(".landing").slideDown("fast");
+                }else{
+                    this.$router.push({path:'/markdown'})
+                }
+
+            }
+        },
         mounted() {
             var _this = this;
             Bus.$on("newList", function (val) {
                 _this.lists = val;
             });
-        }
+        },
     };
 </script>
 

@@ -64,7 +64,7 @@
             //添加自定义标签
             addLabel(){
                 var newLab = true;
-                thislabels.forEach((v) => {
+                this.labels.forEach((v) => {
                     if(v.name.toLowerCase() == $.trim(this.labelVal)){
                         newLab=false
                     }
@@ -72,8 +72,16 @@
                 });
                 if(newLab){
                     this.addLabels({name:$.trim(this.labelVal)}).then((res)=>{
-                        this.Labels();
-                        this.labelVal =''
+                       this.labels.push({
+                           checked:true,
+                           name:$.trim(this.labelVal),
+                           id:res.result.id
+                       });
+                        this.storageLabels.push({
+                                checked:true,
+                                name:$.trim(this.labelVal),
+                                id:res.result.id
+                            })
                     })
                 }
             },

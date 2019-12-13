@@ -52,8 +52,6 @@
                     this.userInfo(id).then((res) => {
                         this.account = res.result.account;
                         this.avatar = res.result.avatar;
-
-
                     })
                 }
             },
