@@ -117,7 +117,6 @@
                 $('.but').css({'right':'30px'});
                 $('.codemirror').css({'overflow':'initial'})
             };
-            console.log(this.$refs)
         },
         beforeMount() {
             var height = document.documentElement.clientHeight || document.body.clientHeight;

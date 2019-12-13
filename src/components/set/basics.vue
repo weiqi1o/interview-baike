@@ -32,13 +32,13 @@
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">城市</span></Col>
             <Col :xs="24" :md="20">
-                <input class="item input" readonly="readonly" type="text" v-model="UserInfoData.result.city">
+                <input class="item input" readonly="readonly" placeholder="-" type="text" v-model="UserInfoData.result.city">
             </Col>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">邮箱</span></Col>
             <Col :xs="24" :md="20">
-                <input class="item input" readonly="readonly" type="email" v-model="UserInfoData.result.email">
+                <input class="item input" readonly="readonly" type="email" placeholder="-" v-model="UserInfoData.result.email">
             </Col>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
@@ -71,12 +71,12 @@
             editBasics() {
                 this.edit = true;
                 $(".basics input").removeAttr('readonly').addClass('editIpu');
-                this.editData.name = this.editData.phone = this.editData.QQ = this.editData.email = "";
+                // this.editData.name = this.editData.phone = this.editData.QQ = this.editData.email = "";
             },
             cancelBasics() {
                 this.edit = false;
                 $(".basics input").attr("readonly", "readonly").removeClass('editIpu');
-                this.editData.name = this.editData.phone = this.editData.QQ = this.editData.email = "-";
+                // this.editData.name = this.editData.phone = this.editData.QQ = this.editData.email = "-";
             },
             getUserInfoData() {
                 var id = this.getStore("userId");
