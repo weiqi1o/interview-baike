@@ -32,6 +32,8 @@ export const uploadQusetion = params => {
 	return postRequest("/files/questions", params);
 };
 
+// ======================题目==========================
+
 //查询题目
 export const search = params => {
 	return getRequest("/v1/questions", params);
@@ -47,15 +49,40 @@ export const addQuestion = (params) => {
 	return postRequest("/v1/questions/", params);
 };
 
-// 查询所有标签
-export const getLabels = params => {
-	return getRequest("/v1/labels", params);
-};
 //查询指定题目
 export const getDetails = (questionId,params) => {
     return getRequest("/v1/questions/"+questionId,params);
 };
-//查询指定题目
-export const getsimilar = (params) => {
+//查询相似题目
+export const getQuestionSimilar = (params) => {
     return getRequest("/v1/questions/similar",params);
+};
+
+// ======================标签==========================
+
+// 查询所有标签
+export const getLabels = params => {
+	return getRequest("/v1/labels", params);
+};
+
+// 新增标签
+export const addLabels = params => {
+	return postRequest("/v1/labels", params);
+};
+
+// ======================审核==========================
+
+// 获取待审核列表
+export const getCheckRecord = params => {
+	return getRequest("/q/records", params);
+};
+
+// 审核移交给别人
+export const transferOthers = (recordId,params) => {
+	return postRequest("/q/records/"+recordId, params);
+};
+
+// 审核操作
+export const checkOps = (recordId,params) => {
+	return patchRequest("/q/records/"+recordId, params);
 };

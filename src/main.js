@@ -17,7 +17,7 @@ import {
   uploadFileRequest
 } from "@/libs/axios";
 import { setStore, getStore, removeStore } from "@/libs/storage";
-import { login, search, regist,userInfo,getDetails,addQuestion,getsimilar} from "@/api/index";
+import { login, search, regist,userInfo,getDetails,addQuestion,getQuestionSimilar} from "@/api/index";
 import "./plugins/iview.js";
 Vue.config.productionTip = false;
 
@@ -38,7 +38,7 @@ Vue.prototype.regist = regist;
 Vue.prototype.userInfo = userInfo;
 Vue.prototype.getDetails = getDetails;
 Vue.prototype.addQuestion = addQuestion;
-Vue.prototype.getsimilar = getsimilar;
+Vue.prototype.getQuestionSimilar = getQuestionSimilar;
 
 Vue.use(VueAxios, axios);
 new Vue({
