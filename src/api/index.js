@@ -55,7 +55,11 @@ export const getLabels = params => {
 export const getDetails = (questionId,params) => {
     return getRequest("/v1/questions/"+questionId,params);
 };
-//查询指定题目
+//查询相关题目
 export const getsimilar = (params) => {
     return getRequest("/v1/questions/similar",params);
+};
+//添加标签
+export const addLabels = (params) => {
+    return postRequest("/v1/labels", params);
 };

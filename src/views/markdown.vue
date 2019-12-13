@@ -1,6 +1,7 @@
 <template>
     <div class="markdown">
         <headerTop></headerTop>
+        <setEditor ref="data" @titleData="getTitle"></setEditor>
         <div class="mar">
             <div class="but">
                 <Tooltip content="上传生成图片链接" placement="right">
@@ -30,10 +31,11 @@
 <script>
     import {MarkdownPro} from 'vue-meditor'
     import headerTop from "../components/common/headerTop";
+    import setEditor from '../views/setEditor'
     export default {
         name: "markdown",
         components: {
-            MarkdownPro,headerTop
+            MarkdownPro,headerTop,setEditor
         },
         data() {
             return {
@@ -61,15 +63,18 @@
                 this.$Message.info('Clicked ok');
             },
             publish() {
-                this.val= {
-                    title:this.$route.query.v.title,
-                    labels:this.$route.query.v.labels,
-                    description:this.$route.query.v.description,
-                    content:this.content
-                };
-                this.addQuestion(this.val).then((res)=>{
-                    console.log(res)
-                })
+                this.$refs.data.to()
+                console.log(this.$refs.data)
+
+                // this.val= {
+                //     title:this.$route.query.v.title,
+                //     labels:this.$route.query.v.labels,
+                //     description:this.$route.query.v.description,
+                //     content:this.content
+                // };
+                // this.addQuestion(this.val).then((res)=>{
+                //     console.log(res)
+                // })
             },
             isMobile() {
                 if (navigator.userAgent.match(/Android/i)
@@ -81,6 +86,9 @@
                     || navigator.userAgent.match(/Windows Phone/i)
                 ) return true;
                 return false;
+            },
+            getTitle(data){
+                console.log(data)
             }
 
         },
@@ -108,7 +116,8 @@
                 };
                 $('.but').css({'right':'30px'});
                 $('.codemirror').css({'overflow':'initial'})
-            }
+            };
+            console.log(this.$refs)
         },
         beforeMount() {
             var height = document.documentElement.clientHeight || document.body.clientHeight;

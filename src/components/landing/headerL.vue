@@ -11,7 +11,7 @@
                     <DropdownItem><span @click="signOut">退出</span></DropdownItem>
                 </DropdownMenu>
             </Dropdown>
-            <router-link v-show="edit"  v-if="account" to="/setEditor" class="edit">
+            <router-link v-show="edit"  v-if="account" to="/markdown" class="edit">
                 <img class="iconB" src="./../../../static/imgs/b2.png" alt="">
                 <span>提交题目</span>
             </router-link>

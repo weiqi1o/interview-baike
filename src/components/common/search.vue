@@ -4,6 +4,7 @@
     <AutoComplete
             v-model="val"
             @on-search="handleSearch2"
+            @on-select = 'serach'
             placeholder="搜索..."
             style="width:100%">
       <Option v-for="item in data2" :value="item" :key="item">{{ item }}</Option>
@@ -37,6 +38,7 @@ export default {
   },
   methods: {
       handleSearch2 (value) {
+          var _this = this;
           this.getsimilar({title:value}).then((res)=>{
               if(res.code==200 && this.val !='' ){
                   this.data2=[];
@@ -46,9 +48,9 @@ export default {
               }
 
           })
-          this.search({ data: this.val }).then(response => {
-              if (response.code == 200) {
-                  this.passValue(response.result);
+          $('.search input').keydown(function(){
+              if (event.keyCode == 13) {
+                  _this.serach()
               }
           })
       },
@@ -66,6 +68,7 @@ export default {
         });
       } else {
         //列表页搜索
+
         this.search({ data: this.val }).then(response => {
           if (response.code == 200) {
             this.passValue(response.result);
@@ -75,12 +78,7 @@ export default {
     }
   },
   mounted() {
-      var _this = this;
-      $('.search input,body').keydown(function(){
-          if (event.keyCode == 13 && _this.val !='') {
-              _this.serach()
-          }
-      })
+
   }
 };
 </script>

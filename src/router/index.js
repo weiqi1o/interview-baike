@@ -3,7 +3,6 @@ import VueRouter from "vue-router";
 import Index from "../views/index";
 import Lists from "../views/lists";
 import setting from "../views/setting";
-import setEditor from "../views/setEditor"
 import markdown from "../views/markdown"
 import listsDetails from "../views/listsDetails"
 import basics from "./../components/set/basics"
@@ -38,11 +37,6 @@ const routes = [
                 component: articles
             }
         ]
-    },
-    {
-        path: "/setEditor",
-        name: "setEditor",
-        component: setEditor
     },
     {
         path: "/markdown",

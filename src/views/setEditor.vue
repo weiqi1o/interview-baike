@@ -1,27 +1,24 @@
 <template>
     <div class="edit">
-        <headerTop></headerTop>
         <div class="title">
-            <input type="text" v-model="val.title" placeholder="添加标题">
-			<Divider/>
-            <Tag v-for="item in val.labels"   :key="item" :name="item" size="large" closable @on-close="handleClose2">{{ item}}</Tag>
-            <Button icon="ios-add" type="dashed"   @click="handleAdd">添加标签</Button>
+            <input type="text" v-model="title" placeholder="添加标题">
+            <Tag v-for="item in checkedLabels" v-if="checkedLabels" :key="item.id" :name="item.id" size="large" closable @on-close="handleClose2">{{ item.name}}
+            </Tag>
+            <Button type="dashed" @click="handleAdd">选择标签</Button>
             <Modal
                     v-model="modal1"
-                    title="搜索标签"
+                    title="选择标签"
                     @on-ok="ok">
-                <Input v-model="label" placeholder="输入标签名" clearable style="width: 200px" />
+                <Tag v-for="item in labels" :key="item.id" :name="item.id" size="large" checkable color="primary" @on-change="labChecked" :checked="item.checked">{{ item.name}}
+                </Tag>
+                <div>
+                    <Input v-model="labelVal" placeholder="自定义标签" clearable style="width: 200px"/>
+                    <Button class="but" type="primary" @click="addLabel">添加</Button>
+                </div>
+
             </Modal>
-			<Divider/>
-            <textarea v-model="val.description" placeholder="描述 支持markdown (可选)" rows="5"></textarea>
-        </div>
-        <Divider/>
-        <div class="content">
-            <h2>答案</h2>
-            <div @click="to" class="edit">
-                <img class="iconB" src="./../../static/imgs/b2.png" alt="">
-                <span>写答案</span>
-            </div>
+            <Divider/>
+            <textarea v-model="description" placeholder="描述 支持markdown (可选)" rows="3"></textarea>
         </div>
 
     </div>
@@ -29,42 +26,118 @@
 
 <script>
     import headerTop from "../components/common/headerTop";
+
     export default {
         name: "edit",
-        components:{headerTop},
+        components: {headerTop},
         data() {
             return {
-                val:{
-                    title:'',
-                    labels:[],
-                    description:''
-                },
+                title: '',
+                labels: [],
+                description: '',
                 modal1: false,
-                label:'',
+                labelVal: '',
+                checkedLabels:[],
+                checkedLabelsId:[],
+                storageLabels:''
 
             }
         },
+        created() {
+            this.Labels()
+        },
         methods: {
-            handleAdd () {
-                this.modal1= true;
+            //获取标签
+            Labels() {
+                this.getLabels().then((res) => {
+                    var data = res.result;
+                    this.$nextTick(()=>{
+                        data.forEach((v)=>{
+                            v.checked = false
+                        });
+                        this.labels = data
+                    })
+                });
+
+
             },
-            handleClose2 (event, name) {
-                const index = this.val.labels.indexOf(name);
-                this.val.labels.splice(index, 1);
-            },
-            ok () {
-                if (this.label && this.val.labels.indexOf(this.label)<0) {
-                    this.val.labels.push(this.label);
-                }else{
-                    this.$Message.warning('标签为空或已存在');
+            //添加自定义标签
+            addLabel(){
+                var newLab = true;
+                thislabels.forEach((v) => {
+                    if(v.name.toLowerCase() == $.trim(this.labelVal)){
+                        newLab=false
+                    }
+                    return newLab
+                });
+                if(newLab){
+                    this.addLabels({name:$.trim(this.labelVal)}).then((res)=>{
+                        this.Labels();
+                        this.labelVal =''
+                    })
                 }
             },
-            to(){
-                if(!this.val.title){
+            //打开添加标签
+            handleAdd() {
+                this.modal1 = true;
+            },
+            //标签初始化选择
+            initCheck(name){
+                this.labels.forEach((v)=>{
+                    if(v.id == name){
+                        v.checked = !v.checked
+                    }
+                });
+            },
+            //删除已选择标签
+            handleClose2(event, name) {
+                var rlab = '';
+                this.checkedLabels.forEach((v)=>{
+                    if(v.id == name){
+                        rlab =  v;
+                    }
+                });
+                this.initCheck(name);
+                this.checkedLabelsId.splice( this.checkedLabelsId.indexOf(name), 1)
+                const index = this.checkedLabels.indexOf(rlab);
+                this.checkedLabels.splice(index, 1);
+
+            },
+            //确认标签选择
+            ok() {
+                this.checkedLabels = this.storageLabels
+            },
+            to() {
+                if (!this.title) {
                     this.$Message.error('题目标题不能为空！');
                     return;
                 }
-               this.$router.push({path:'/markdown',query:{v:this.val}})
+                this.$emit('titleData',{
+                    title:this.title,
+                    labels:this.checkedLabels,
+                    description:this.description
+                })
+            },
+            //选择标签
+            labChecked(checked, name) {
+                if(checked){
+                    this.checkedLabelsId.push(name);
+                    this.initCheck(name);
+                }else{
+                    this.checkedLabelsId.splice(this.checkedLabelsId.indexOf(name), 1);
+                    this.initCheck(name);
+                    return;
+                }
+                this.storageLabels = [];
+                this.labels.forEach((v)=>{
+                    var vi = v;
+                    this.checkedLabelsId.forEach((h)=>{
+                        if(vi.id == h){
+                            this.storageLabels.push(vi)
+                        }
+                    })
+
+                })
             }
         }
     }
@@ -72,41 +145,45 @@
 
 <style lang="less">
     .edit {
+
+        margin: 0 auto;
         & > h1 {
-            width: 70%;
+            max-width: 1200px;
             margin: 0 auto;
             font-weight: normal;
             margin-top: 20px;
             font-size: 25px;
         }
         .title {
-            width: 70%;
-            margin: 0 auto;
-            &>input {
-                font-size: 32px;
-                border: none;
+            max-width: 1200px;
+            margin: 15px auto;
+            & > input {
+                font-size: 25px;
+                border: 1px solid #d8d8d8;
                 outline: none;
                 width: 100%;
-                margin-bottom:30px ;
-                font-weight: bold;
+                height: 50px;
+                text-indent: 1em;
+                margin-bottom: 15px;
                 color: #515a6e;
+                border-radius: 6px;
             }
-            &>input:nth-of-type(2){
+            & > input:nth-of-type(2) {
                 font-size: 20px;
             }
-            &>textarea{
-                font-size: 20px ;
+            & > textarea {
+                font-size: 20px;
                 border: none;
                 outline: none;
                 width: 100%;
                 color: #515a6e;
-                resize:none;
+                resize: none;
                 margin-top: 20px;
             }
 
         }
-        .content{
-            width: 70%;
+        .content {
+            max-width: 1200px;
             margin: 0 auto;
             .edit {
                 display: block;
@@ -126,13 +203,16 @@
                     vertical-align: middle;
                 }
                 & > span {
-                    font-size:25px;
+                    font-size: 25px;
                     color: white;
                     vertical-align: middle;
                 }
             }
         }
 
+    }
+    .but{
+        margin-left: 15px;
     }
 
 </style>
