@@ -52,7 +52,8 @@
                     save: true,
                 },
                 modal1: false,
-                val:''
+                val:'',
+                title:''
             }
         },
         methods: {
@@ -63,18 +64,17 @@
                 this.$Message.info('Clicked ok');
             },
             publish() {
-                this.$refs.data.to()
-                console.log(this.$refs.data)
-
-                // this.val= {
-                //     title:this.$route.query.v.title,
-                //     labels:this.$route.query.v.labels,
-                //     description:this.$route.query.v.description,
-                //     content:this.content
-                // };
-                // this.addQuestion(this.val).then((res)=>{
-                //     console.log(res)
-                // })
+                this.$refs.data.to();
+                this.val= {
+                    title:this.title.title,
+                    labels:this.title.labels,
+                    description:this.title.description,
+                    content:this.content
+                };
+                this.addQuestion(this.val).then((res)=>{
+                    console.log(res)
+                    this.$Message.success(res.msg);
+                })
             },
             isMobile() {
                 if (navigator.userAgent.match(/Android/i)
@@ -88,7 +88,7 @@
                 return false;
             },
             getTitle(data){
-                console.log(data)
+                this.title = data
             }
 
         },

@@ -20,25 +20,25 @@
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">昵称</span></Col>
             <Col :xs="24" :md="20">
-                <input class="item input" readonly="readonly" type="text" v-model="UserInfoData.result.nickName">
+                <input class="item input" placeholder="--" readonly="readonly" type="text" v-model="UserInfoData.result.nickName">
             </Col>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">手机号</span></Col>
             <Col :xs="24" :md="20">
-                <input class="item input" readonly="readonly" type="text" v-model="UserInfoData.result.phone">
+                <input class="item input" placeholder="--" readonly="readonly" type="text" v-model="UserInfoData.result.phone">
             </Col>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">城市</span></Col>
             <Col :xs="24" :md="20">
-                <input class="item input" readonly="readonly" placeholder="-" type="text" v-model="UserInfoData.result.city">
+                <input class="item input" readonly="readonly" placeholder="--" type="text" v-model="UserInfoData.result.city">
             </Col>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">邮箱</span></Col>
             <Col :xs="24" :md="20">
-                <input class="item input" readonly="readonly" type="email" placeholder="-" v-model="UserInfoData.result.email">
+                <input class="item input" readonly="readonly" type="email" placeholder="--" v-model="UserInfoData.result.email">
             </Col>
         </Row>
         <Row type="flex" justify="space-between" align="middle">

@@ -67,13 +67,13 @@
             addLabel() {
                 var newLab = true;
                 this.labels.forEach((v) => {
-                    if (v.name.toLowerCase() == $.trim(this.labelVal)) {
+                    if (v.name.toLowerCase() == $.trim(this.labelVal) && $.trim(this.labelVal)) {
                         newLab = false
                         this.$Message.error('该标签已存在！');
                     }
                     return newLab
                 });
-                if (newLab) {
+                if (newLab && $.trim(this.labelVal)) {
                     this.addLabels({name: $.trim(this.labelVal)}).then((res) => {
                         this.labels.push({
                             checked: true,
