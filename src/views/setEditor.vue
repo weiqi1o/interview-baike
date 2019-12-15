@@ -18,7 +18,7 @@
 
             </Modal>
             <Divider/>
-            <textarea v-model="description" placeholder="描述 支持markdown (可选)" rows="3"></textarea>
+            <textarea v-model="description" placeholder="题目描述 支持markdown" rows="3"></textarea>
         </div>
 
     </div>

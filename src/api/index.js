@@ -58,6 +58,11 @@ export const getQuestionSimilar = (params) => {
     return getRequest("/v1/questions/similar",params);
 };
 
+//题目总数
+export const countQuestionNum = (params) => {
+    return getRequest("/v1/questions/count",params);
+};
+
 // ======================标签==========================
 
 // 查询所有标签

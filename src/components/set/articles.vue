@@ -3,7 +3,7 @@
         <Tabs value="name1" :animated="false">
             <TabPane :label="label"  name="name1">
                 <List>
-                    <ListItem v-for="items in lists.data" :key="items.id">
+                    <ListItem v-for="items in lists" :key="items.id">
                         <ListItemMeta  :title="items.title" :description="items.changeDesc" />
                         <div class="labels">
 							<Button @click="isLook = true">查看</Button>
@@ -49,7 +49,12 @@
             }
         },
 		created() {
-
+			this.getCheckRecord('').then((res) => {
+				if (res.code == 200) {
+					this.lists = res.result
+				}
+		
+			})
 		},
     }
 </script>
