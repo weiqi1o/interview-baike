@@ -11,7 +11,8 @@
                 </Tooltip>
                 <Button class="Button" type="text" size="small" @click="publish">
                     <Icon type="md-share-alt"/>
-                    提交题目
+                    <span v-if="!supplementId">提交题目</span>
+                    <span v-else>提交答案</span>
                 </Button>
             </div>
             <Modal
@@ -22,7 +23,8 @@
                     <Button icon="ios-cloud-upload-outline">选择图片</Button>
                 </Upload>
             </Modal>
-            <MarkdownPro class="MarkdownPro" :toolbars="save" autoSave @on-save="handleOnSave" :bordered='bordered' :height="height" v-model="content"/>
+            <MarkdownPro class="MarkdownPro" :toolbars="save" autoSave @on-save="handleOnSave" :bordered='bordered'
+                         :height="height" v-model="content"/>
         </div>
 
     </div>
@@ -32,29 +34,28 @@
     import {MarkdownPro} from 'vue-meditor'
     import headerTop from "../components/common/headerTop";
     import setEditor from '../views/setEditor'
+
     export default {
         name: "markdown",
         components: {
-            MarkdownPro,headerTop,setEditor
+            MarkdownPro, headerTop, setEditor
         },
         data() {
             return {
-                content: '``` javascript\n' +
-                    '<template>\n' +
-                    '    <div class="markdown">\n' +
-                    '        <MarkdownPro :autoSave=\'autoSave\' @on-save="handleOnSave" :height="height" v-model="val"/>\n' +
-                    '    </div>\n' +
-                    '</template>\n' +
-                    '```',
+                content: '',
                 height: '',
                 bordered: false,
                 save: {
                     save: true,
                 },
                 modal1: false,
-                val:'',
-                title:''
+                val: '',
+                title: '',
+                supplementId: ''
             }
+        },
+        created() {
+            this.supplementId = this.$route.query.supplement;
         },
         methods: {
             handleOnSave({value, theme}) {
@@ -65,17 +66,26 @@
             },
             publish() {
                 this.$refs.data.to();
-                this.val= {
-                    title:this.title.title,
-                    labels:this.title.labels,
-                    description:this.title.description,
-                    content:this.content
-                };
-                this.addQuestion(this.val).then((res)=>{
-                    if(res.code==200){
+                var data = {
+                        title: this.title.title,
+                        labels: this.title.labels,
+                        description: this.title.description,
+                        content: this.content
+                    },
+                    supplement = {
+                        id: this.supplementId,
+                        content: this.content
+                    };
+                this.val = !this.supplementId ? data : supplement;
+                !this.supplementId ? this.submitAddQuestion(this.val): alert('提交更改');console.log(supplement)
+
+            },
+            submitAddQuestion(data) {
+                this.addQuestion(data).then((res) => {
+                    if (res.code == 200) {
                         this.$Message.success(res.msg);
-                    }else{
-                        this.$Message.error(res.msg);
+                    } else {
+                        // this.$Message.error(res.msg);
                     }
 
                 })
@@ -91,7 +101,7 @@
                 ) return true;
                 return false;
             },
-            getTitle(data){
+            getTitle(data) {
                 this.title = data
             }
 
@@ -100,8 +110,8 @@
             if (this.isMobile()) {
                 this.save = {
                     save: true,
-                    h1:false,
-                    h3:false,
+                    h1: false,
+                    h3: false,
                     strong: false,
                     italic: false,
                     overline: false,
@@ -115,12 +125,13 @@
                     exportmd: false,
                     importmd: false,
                     table: false,
-                    hr:false,
-                    fullscreen:false
+                    hr: false,
+                    fullscreen: false
                 };
-                $('.but').css({'right':'30px'});
-                $('.codemirror').css({'overflow':'initial'})
-            };
+                $('.but').css({'right': '30px'});
+                $('.codemirror').css({'overflow': 'initial'})
+            }
+            ;
         },
         beforeMount() {
             var height = document.documentElement.clientHeight || document.body.clientHeight;
@@ -129,7 +140,7 @@
     }
 </script>
 
-<style  lang="less">
+<style lang="less">
     .mar {
         max-width: 1200px;
         margin: 0 auto;
@@ -148,9 +159,9 @@
     }
 
     /*.edit{*/
-        /*display: none !important;*/
+    /*display: none !important;*/
     /*}*/
-    @media all and  (min-width:481px)  {
+    @media all and  (min-width: 481px) {
         .but {
             right: 5px;
         }

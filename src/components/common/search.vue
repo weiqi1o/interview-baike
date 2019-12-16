@@ -47,7 +47,7 @@
                         })
                     }
 
-                })
+                });
                 $('.search input').keydown(function () {
                     if (event.keyCode == 13) {
                         _this.serach()
@@ -61,7 +61,6 @@
             //搜索
             serach(value) {
                 if (!this.$route.query.data) {
-                    console.log(value)
                     var data = value?value:this.val
                     //首页搜索
                     this.$router.push({

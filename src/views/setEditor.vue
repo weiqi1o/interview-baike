@@ -1,15 +1,21 @@
 <template>
     <div class="edit">
         <div class="title">
-            <input type="text" v-model="title" placeholder="添加标题">
-            <Tag v-for="item in checkedLabels" v-if="checkedLabels" :key="item.id" :name="item.id" size="large" closable
-                 @on-close="handleClose2">{{ item.name}}
+            <input type="text" v-if="!supplementId" v-model="title" placeholder="添加标题">
+            <input type="text" v-else v-model="supplementVal.title" readonly class="supplementTitle">
+            <div v-if="!supplementId">
+                <Tag v-for="item in checkedLabels" v-if="checkedLabels" :key="item.id" :name="item.id" size="large"
+                     closable
+                     @on-close="handleClose2">{{ item.name}}
+                </Tag>
+            </div>
+            <Tag v-else v-for="item in supplementVal.labels" :key="item.id" :name="item.id" color="primary" size="large">{{ item.name}}
             </Tag>
-            <Button type="dashed" @click="handleAdd">选择标签</Button>
-            <Modal
-                    v-model="modal1"
-                    title="选择标签"
-                    @on-ok="ok">
+            <Button v-show="!supplementId" type="dashed" @click="handleAdd">选择标签</Button>
+            <Modal v-show="!supplementId"
+                   v-model="modal1"
+                   title="选择标签"
+                   @on-ok="ok">
                 <Tag v-for="item in labels" :key="item.id" :name="item.id" size="large" checkable color="primary"
                      @on-change="labChecked" :checked="item.checked">{{ item.name}}
                 </Tag>
@@ -20,7 +26,8 @@
 
             </Modal>
             <Divider/>
-            <textarea v-model="description" placeholder="题目描述 支持markdown" rows="3"></textarea>
+            <textarea v-if="!supplementId" v-model="description" placeholder="题目描述 支持markdown" rows="3"></textarea>
+            <textarea v-else v-model="supplementDescription" placeholder="问题休要补充原因理由" rows="3"></textarea>
         </div>
 
     </div>
@@ -41,12 +48,23 @@
                 labelVal: '',
                 checkedLabels: [],
                 checkedLabelsId: [],
-                storageLabels: []
+                storageLabels: [],
+                supplementId: '',
+                supplementVal:'',
+                supplementDescription:''
 
             }
         },
         created() {
-            this.Labels()
+            this.supplementId = this.$route.query.supplement;
+            if(this.supplementId){
+                this.getDetails(this.supplementId, '').then((res) => {
+                    if (res.code == 200) {
+                        this.supplementVal = res.result
+                    }
+
+                })
+            }
         },
         methods: {
             //获取标签
@@ -119,14 +137,15 @@
                 this.checkedLabels = this.storageLabels
             },
             to() {
-                if (!this.title) {
+                if (!this.title && !this.supplementId ) {
                     this.$Message.error('题目标题不能为空！');
                     return;
                 }
                 this.$emit('titleData', {
                     title: this.title,
                     labels: this.checkedLabels,
-                    description: this.description
+                    description: this.description,
+                    supplementDescription:this.supplementDescription,
                 })
             },
             //选择标签
@@ -225,6 +244,11 @@
 
     .but {
         margin-left: 15px;
+    }
+
+    .supplementTitle {
+        border: none !important;
+        text-indent: 0 !important;
     }
 
 </style>

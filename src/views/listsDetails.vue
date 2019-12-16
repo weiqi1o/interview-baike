@@ -11,7 +11,7 @@
                         <div>
                             <span>收藏</span>|<span>喜欢</span>
                         </div>
-                        <a href="">提交更好的答案</a>
+                        <router-link :to="{path:'/markdown',query:{supplement:val.id}}">提交更好的答案</router-link>
                     </div>
                 </Col>
                 <Col span="7">
@@ -41,7 +41,7 @@
         },
         data() {
             return {
-                val: '',
+                val: ''
 
             }
         },
@@ -49,6 +49,7 @@
             this.getDetails(this.$route.query.id, '').then((res) => {
                 if (res.code == 200) {
                     this.val = res.result
+                    console.log(res)
                 }
 
             })
