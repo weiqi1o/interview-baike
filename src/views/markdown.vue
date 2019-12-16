@@ -72,8 +72,12 @@
                     content:this.content
                 };
                 this.addQuestion(this.val).then((res)=>{
-                    console.log(res)
-                    this.$Message.success(res.msg);
+                    if(res.code==200){
+                        this.$Message.success(res.msg);
+                    }else{
+                        this.$Message.error(res.msg);
+                    }
+
                 })
             },
             isMobile() {

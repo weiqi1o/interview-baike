@@ -59,12 +59,14 @@
                 Bus.$emit("newList", val);
             },
             //搜索
-            serach() {
+            serach(value) {
                 if (!this.$route.query.data) {
+                    console.log(value)
+                    var data = value?value:this.val
                     //首页搜索
                     this.$router.push({
                         path: "/lists",
-                        query: {data: this.val}
+                        query: {data: data}
                     });
                 } else {
                     //列表页搜索
