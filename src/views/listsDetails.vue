@@ -52,7 +52,10 @@
                     console.log(res)
                 }
 
-            })
+            });
+            this.$router.afterEach((to, from, next) => {
+                window.scrollTo(0, 0);
+            });
         },
         methods: {},
 
