@@ -27,7 +27,7 @@
             </Modal>
             <Divider/>
             <textarea v-if="!supplementId" v-model="description" placeholder="题目描述 支持markdown" rows="3"></textarea>
-            <textarea v-else v-model="supplementDescription" placeholder="问题休要补充原因理由" rows="3"></textarea>
+            <textarea v-else v-model="supplementDescription" placeholder="变更内容或原因" rows="3"></textarea>
         </div>
 
     </div>

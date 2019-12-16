@@ -10,8 +10,11 @@
                 <MenuItem name="articles" to="/articles">
                     <Icon type="ios-bookmarks-outline"/>
                     题目管理
-
                 </MenuItem>
+				<MenuItem name="scoreRecords" to="/scoreRecords">
+				    <Icon type="ios-bookmarks-outline"/>
+				    分值记录
+				</MenuItem>
             </Menu>
             <Menu class="nav" :active-name="active" v-show="!mode2" mode="horizontal" :theme="theme1" >
                 <MenuItem name="basics" to="/setting">
@@ -20,6 +23,9 @@
                 <MenuItem name="articles" to="/articles">
                     题目管理
                 </MenuItem>
+				<MenuItem name="scoreRecords" to="/scoreRecords">
+				    分值记录
+				</MenuItem>
             </Menu>
             <div class="item">
                 <router-view/>
