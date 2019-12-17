@@ -92,3 +92,8 @@ export const checkOps = (recordId,params) => {
 	return patchRequest("/q/records/"+recordId, params);
 };
 
+// 获取待审核列表
+export const getFame = () => {
+    return getRequest("/fame/record/me");
+};
+

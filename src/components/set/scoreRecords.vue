@@ -3,25 +3,27 @@
         <Tabs value="name1" :animated="false">
             <TabPane :label="label"  name="name1">
                 <List>
-                    <ListItem class="ListItem" v-for="(items,index) in 7" :key="index">
-                        <span>2019-12-11 <br> 15:30:30</span>
+                    <ListItem class="ListItem" v-for="(item,index) in data.data" :key="index">
+                        <span>{{item.createTime.split(' ')[0]}} <br>{{item.createTime.split(' ')[1]}} </span>
                         <div>
-                            <h2>恭喜获得4点声望</h2>
-                            <p>提交的***问题成功通过</p>
+                            <h2>恭喜获得{{item.val}}点声望</h2>
+                            <p>{{item.reason}}</p>
                         </div>
                     </ListItem>
                 </List>
+                <Page v-if="Number(data.total)>10" class="Page" :total="Number(data.total)" show-elevator />
             </TabPane>
              <TabPane label="币值"  name="name2">
                  <List>
-                     <ListItem class="ListItem" v-for="(items,index) in 7" :key="index">
-                         <span>2050-01-01 <br> 00:00:00</span>
+                     <ListItem class="ListItem" v-for="(item,index) in data.data" :key="index">
+                         <span>{{item.createTime.split(' ')[0]}} <br>{{item.createTime.split(' ')[1]}} </span>
                          <div>
-                             <h2>恭喜获得4分</h2>
-                             <p>提交的***问题成功通过</p>
+                             <h2>恭喜获得{{item.val}}币</h2>
+                             <p>{{item.reason}}</p>
                          </div>
                      </ListItem>
                  </List>
+                 <Page v-if="Number(data.total)>10" class="Page" :total="Number(data.total)" show-elevator />
              </TabPane>
         </Tabs>
 		<!-- 传入lists中第几个，动态设置模态框中内容 -->
@@ -52,17 +54,20 @@
                             }
                         })
                     ])
-                }
+                },
+                data:''
             }
         },
 		created() {
-			this.getCheckRecord('').then((res) => {
+			this.getFame().then((res) => {
 				if (res.code == 200) {
-					this.lists = res.result
+				    this.data = res.result
 				}
 
 			})
 		},
+        methods:{
+        }
     }
 </script>
 
@@ -87,6 +92,9 @@
                 line-height: 22px;
             }
         }
+    }
+    .Page{
+        margin-top: 20px;
     }
 
 </style>
