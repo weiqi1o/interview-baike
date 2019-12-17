@@ -10,7 +10,7 @@
 			<div class="searchBox">
 				<img alt="Vue logo" src="./../../static/imgs/logo_index_zh_CN.png" />
 				<search></search>
-				<p>本站共收录了<span>{{count}}</span>道题目</p><a> 贡献题目</a>
+				<p>本站共收录了<span>{{count}}</span>道题目</p><router-link tag="a" to="/markdown">贡献题目</router-link>
 			</div>
 			</Col>
 			<Col style="height: 1px" :xs="0" :md="6">
@@ -41,11 +41,11 @@
 				if (res.code == 200) {
 					this.count = res.result
 				}
-		
+
 			})
 		},
 		methods: {},
-		
+
 	};
 </script>
 

@@ -64,7 +64,8 @@
                     }
 
                 })
-            }
+            };
+            this. Labels()
         },
         methods: {
             //获取标签
