@@ -20,32 +20,33 @@
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">昵称</span></Col>
             <Col :xs="24" :md="20">
-                <input class="item input" placeholder="--" readonly="readonly" type="text" v-model="UserInfoData.result.nickName">
+                <input class="item input" placeholder="--" readonly="readonly" type="text" v-model="val.nickName">
             </Col>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">手机号</span></Col>
             <Col :xs="24" :md="20">
-                <input class="item input" placeholder="--" readonly="readonly" type="text" v-model="UserInfoData.result.phone">
+                <input class="item input" placeholder="--" readonly="readonly" type="text" v-model="val.phone">
             </Col>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">城市</span></Col>
             <Col :xs="24" :md="20">
-                <input class="item input" readonly="readonly" placeholder="--" type="text" v-model="UserInfoData.result.city">
+                <input class="item input" readonly="readonly" placeholder="--" type="text" v-model="val.city">
             </Col>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">邮箱</span></Col>
             <Col :xs="24" :md="20">
-                <input class="item input" readonly="readonly" type="email" placeholder="--" v-model="UserInfoData.result.email">
+                <input class="item input" readonly="readonly" type="email" placeholder="--" v-model="val.email">
             </Col>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label"></span></Col>
             <Col :xs="24" :md="20">
                 <div class="item">
-                    <button @click="editBasics">编辑</button>
+                    <button v-if="edit" @click="submit">保存</button>
+                    <button v-else @click="editBasics">编辑</button>
                     <button v-show="edit" @click="cancelBasics">取消</button>
                 </div>
 
@@ -61,7 +62,13 @@
         data() {
             return {
                 edit: '',
-                UserInfoData:''
+                UserInfoData:'',
+                val:{
+                    nickName:'',
+                    phone:'',
+                    city:'',
+                    email:''
+                }
             }
         },
         created(){
@@ -71,26 +78,34 @@
             editBasics() {
                 this.edit = true;
                 $(".basics input").removeAttr('readonly').addClass('editIpu');
-                // this.editData.name = this.editData.phone = this.editData.QQ = this.editData.email = "";
             },
             cancelBasics() {
                 this.edit = false;
                 $(".basics input").attr("readonly", "readonly").removeClass('editIpu');
-                // this.editData.name = this.editData.phone = this.editData.QQ = this.editData.email = "-";
             },
             getUserInfoData() {
                 var id = this.getStore("userId");
-                if(!id){
-                    this.$routes.push('/');
-                    $(".landing").slideDown("fast");
-                }else{
-                    this.userInfo(id).then((res) => {
-                        this.UserInfoData = res;
+                this.userInfo(id).then((res) => {
+                    this.UserInfoData = res;
+                    this.val = {
+                        nickName:this.UserInfoData.result.nickName,
+                        phone:this.UserInfoData.result.phone,
+                        city:this.UserInfoData.result.city,
+                        email:this.UserInfoData.result.email
+                    }
 
-                    })
-                }
+                })
 
             },
+            submit(){
+                this.userInfoEdit(this.getStore("userId"),this.val).then((res)=>{
+                    if(res.code==200){
+                        this.$Message.success(res.msg);
+                    }else{
+                        this.$Message.error(res.msg);
+                    }
+                })
+            }
         }
     }
 </script>
