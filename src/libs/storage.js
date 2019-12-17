@@ -23,5 +23,4 @@ export const getStore = name => {
 export const removeStore = name => {
   if (!name) return;
   window.localStorage.removeItem(name);
-  console.log(name)
 };

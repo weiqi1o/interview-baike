@@ -6,9 +6,9 @@
                 <Avatar class="Avatar" :src="avatar"/>
                 <DropdownMenu slot="list">
                     <DropdownItem>
-                        <router-link to="/setting">个人中心</router-link>
+                        <router-link class="ItemL" to="/setting">个人中心</router-link>
                     </DropdownItem>
-                    <DropdownItem><span @click="signOut">退出</span></DropdownItem>
+                    <DropdownItem><span class="ItemL" @click="signOut">退出</span></DropdownItem>
                 </DropdownMenu>
             </Dropdown>
             <router-link v-show="edit"  v-if="account" to="/markdown" class="edit">
@@ -41,6 +41,8 @@
             }else{
                 this.edit = true
             }
+
+
         },
         methods: {
             openLand() {
@@ -59,7 +61,8 @@
                 this.removeStore("accessToken");
                 this.removeStore("userId");
                 this.account = '';
-                this.avatar = ''
+                this.avatar = '';
+                this.$route.path != '/' ? this.$router.push({path:'/'}) : '';
             },
             toEdit(type) {
                 if (!this.account) {
@@ -124,5 +127,13 @@
     }
     .left{
         text-align: end;
+    }
+    .ItemL{
+        width: 100%;
+        display: block;
+        padding: 7px 16px;
+    }
+    .ivu-dropdown-item{
+      padding: 0;
     }
 </style>

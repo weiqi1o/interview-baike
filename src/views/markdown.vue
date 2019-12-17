@@ -55,7 +55,12 @@
             }
         },
         created() {
+            if(!this.getStore("userId")){
+                this.$router.push({path:'/'});
+                this.$Message.error('你还未登录请登录！');
+            }
             this.supplementId = this.$route.query.supplement;
+
         },
         methods: {
             handleOnSave({value, theme}) {

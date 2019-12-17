@@ -51,7 +51,11 @@
             }
         },
         created() {
-            this.active = this.$route.name
+            if(!this.getStore("userId")){
+                this.$router.push({path:'/'});
+                this.$Message.error('你还未登录请登录！');
+            }
+            this.active = this.$route.name;
         },
         methods: {
 
