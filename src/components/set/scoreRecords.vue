@@ -3,19 +3,26 @@
         <Tabs value="name1" :animated="false">
             <TabPane :label="label"  name="name1">
                 <List>
-                    <ListItem v-for="items in lists" :key="items.id">
-                        <ListItemMeta  :title="items.title" :description="items.changeDesc" />
-                        <div class="labels">
-							<Button @click="isLook = true">查看</Button>
+                    <ListItem class="ListItem" v-for="(items,index) in 7" :key="index">
+                        <span>2019-12-11 <br> 15:30:30</span>
+                        <div>
+                            <h2>恭喜获得4点声望</h2>
+                            <p>提交的***问题成功通过</p>
                         </div>
-                        <template slot="action">
-						   <Button type="success">通过</Button>
-						    <Button type="error">退回</Button>
-                        </template>
                     </ListItem>
                 </List>
             </TabPane>
-            <!-- <TabPane label="我的提交"  name="name2">标签二的内容</TabPane> -->
+             <TabPane label="币值"  name="name2">
+                 <List>
+                     <ListItem class="ListItem" v-for="(items,index) in 7" :key="index">
+                         <span>2050-01-01 <br> 00:00:00</span>
+                         <div>
+                             <h2>恭喜获得4分</h2>
+                             <p>提交的***问题成功通过</p>
+                         </div>
+                     </ListItem>
+                 </List>
+             </TabPane>
         </Tabs>
 		<!-- 传入lists中第几个，动态设置模态框中内容 -->
 		<Modal v-model="isLook" fullscreen title="这是标题">
@@ -38,7 +45,7 @@
 				isLook: false,
                 label: (h) => {
                     return h('div', [
-                        h('span', '审核中'),
+                        h('span', '声望值'),
                         h('Badge', {
                             props: {
                                 count: 3
@@ -53,12 +60,33 @@
 				if (res.code == 200) {
 					this.lists = res.result
 				}
-		
+
 			})
 		},
     }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+    .ListItem{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &>div{
+            width: 80%;
+            &>h2{
+                font-weight: 500;
+                margin-bottom: 4px;
+                color: #04c518;
+                font-size: 14px;
+                line-height: 22px;
+            }
+            &>p{
+                color: rgba(0,0,0,.45);
+                font-size: 14px;
+                line-height: 22px;
+            }
+        }
+    }
 
 </style>

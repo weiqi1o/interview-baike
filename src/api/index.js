@@ -46,7 +46,7 @@ export const questionDetail = (questionId) => {
 
 // 添加题目
 export const addQuestion = (params) => {
-	return postRequest("/v1/questions/", params);
+	return postRequest("/v1/questions", params);
 };
 
 //查询指定题目

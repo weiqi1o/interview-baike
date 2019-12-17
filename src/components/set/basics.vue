@@ -3,9 +3,9 @@
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">当前头像</span></Col>
             <Col :xs="24" :md="20">
-                <div class=" avatar">
-                    <Avatar shape="square" :src="UserInfoData.result.avatar" size="80"/>
-                    <Upload v-show="edit" class="butUpload" action="/">
+                <div class=" avatar item" >
+                    <Avatar shape="square" :src="val.avatar" size="80"/>
+                    <Upload v-show="edit" :before-upload="handleUpload" class="butUpload" action="">
                         <span>上传头像</span>
                     </Upload>
                 </div>
@@ -67,7 +67,8 @@
                     nickName:'',
                     phone:'',
                     city:'',
-                    email:''
+                    email:'',
+                    avatar: null,
                 }
             }
         },
@@ -75,6 +76,11 @@
             this.getUserInfoData()
         },
         methods: {
+            handleUpload (file) {
+                // this.val.avatar = file;
+                console.log(file)
+                return false;
+            },
             editBasics() {
                 this.edit = true;
                 $(".basics input").removeAttr('readonly').addClass('editIpu');
@@ -91,7 +97,8 @@
                         nickName:this.UserInfoData.result.nickName,
                         phone:this.UserInfoData.result.phone,
                         city:this.UserInfoData.result.city,
-                        email:this.UserInfoData.result.email
+                        email:this.UserInfoData.result.email,
+                        avatar:this.UserInfoData.result.avatar
                     }
 
                 })
@@ -101,6 +108,7 @@
                 this.userInfoEdit(this.getStore("userId"),this.val).then((res)=>{
                     if(res.code==200){
                         this.$Message.success(res.msg);
+                        this.edit = false;
                     }else{
                         this.$Message.error(res.msg);
                     }
@@ -136,6 +144,7 @@
                     z-index: 5;
                     background: rgba(0, 0, 0, 0.6);
                     cursor: pointer;
+                    width: 80px;
                     span {
                         display: block;
                         width: 80px;

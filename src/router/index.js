@@ -7,6 +7,7 @@ import markdown from "../views/markdown"
 import listsDetails from "../views/listsDetails"
 import basics from "./../components/set/basics"
 import articles from "./../components/set/articles"
+import scoreRecords from "./../components/set/scoreRecords"
 
 Vue.use(VueRouter);
 
@@ -35,6 +36,11 @@ const routes = [
                 path: "/articles",
                 name: "articles",
                 component: articles
+            },
+            {
+                path: "/scoreRecords",
+                name: "scoreRecords",
+                component: scoreRecords
             }
         ]
     },
