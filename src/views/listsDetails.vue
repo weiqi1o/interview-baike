@@ -18,10 +18,17 @@
                     <div class="card">
                         <Card >
                             <p slot="title">贡献者</p>
-                            <Tooltip class="avatar" v-for="(item,index) in 10" :content="'的撒的第'+index" placement="top-start">
-                                <Avatar size="large" class="hImg" src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                            <Tooltip class="avatar" v-for="(item,index) in val.contributor" :content="item.nickName" placement="top-start">
+                                <Avatar size="large" class="hImg" :src="item.avatar" />
                             </Tooltip>
                         </Card>
+						<br>
+						<Card >
+						    <p slot="title">修改统计</p>
+						    <p>
+								共修改了{{val.modifyNum}}次，最后修改于{{val.updateTime}}
+							</p>
+						</Card>
                     </div>
                 </Col>
             </Row>
@@ -98,7 +105,7 @@
         }
     }
     .avatar{
-        display: inline-block;
+        display: inline-block;s
         width: 20%;
         .hImg{
             display: block;
