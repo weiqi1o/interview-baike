@@ -109,6 +109,8 @@
                     if(res.code==200){
                         this.$Message.success(res.msg);
                         this.edit = false;
+                        this.edit = false;
+                        $(".basics input").attr("readonly", "readonly").removeClass('editIpu');
                     }else{
                         this.$Message.error(res.msg);
                     }
