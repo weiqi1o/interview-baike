@@ -64,7 +64,8 @@
             },
             confirm () {
                 this.$Modal.confirm({
-                    title: '亲，你准备放弃加入志愿者么？',
+                    title: '是否放弃加入志愿者',
+                    content:'<p>亲，你准备放弃加入志愿者么？</p>',
                     onCancel: () => {
                         this.Volunteers = true
                     }

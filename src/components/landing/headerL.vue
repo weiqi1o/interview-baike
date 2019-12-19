@@ -11,34 +11,35 @@
                     <DropdownItem><span class="ItemL" @click="signOut">退出</span></DropdownItem>
                 </DropdownMenu>
             </Dropdown>
- <!--           <router-link v-show="edit"  v-if="account" to="/markdown" class="edit">
+            <router-link v-show="edit" v-if="account" to="/markdown" class="edit">
                 <img class="iconB" src="./../../../static/imgs/b2.png" alt="">
                 <span>提交题目</span>
             </router-link>
             <div v-show="edit" v-else @click="toEdit('info')" class="edit">
                 <img class="iconB" src="./../../../static/imgs/b2.png" alt="">
                 <span>提交题目</span>
-            </div> -->
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     import Bus from './../../../static/js/bus'
+
     export default {
         name: "headerL",
         data() {
             return {
                 account: '',
                 avatar: '',
-                edit:''
+                edit: ''
             }
         },
         created() {
             this.getUserInfoData();
-            if(this.$route.path == '/markdown'){
+            if (this.$route.path == '/markdown') {
                 this.edit = false
-            }else{
+            } else {
                 this.edit = true
             }
 
@@ -62,7 +63,7 @@
                 this.removeStore("userId");
                 this.account = '';
                 this.avatar = '';
-                this.$route.path != '/' ? this.$router.push({path:'/'}) : '';
+                this.$route.path != '/' ? this.$router.push({path: '/'}) : '';
             },
             toEdit(type) {
                 if (!this.account) {
@@ -125,15 +126,18 @@
             text-align: start;
         }
     }
-    .left{
+
+    .left {
         text-align: end;
     }
-    .ItemL{
+
+    .ItemL {
         width: 100%;
         display: block;
         padding: 7px 16px;
     }
-    .ivu-dropdown-item{
-      padding: 0;
+
+    .ivu-dropdown-item {
+        padding: 0;
     }
 </style>

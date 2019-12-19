@@ -55,7 +55,7 @@
                 show: true,
                 succ: '',
                 data2: [],
-                modal2: true,
+                modal2: false,
                 modal_loading: false,
                 join:false
             };
