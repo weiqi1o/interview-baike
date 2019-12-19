@@ -96,4 +96,8 @@ export const checkOps = (recordId,params) => {
 export const getFame = () => {
     return getRequest("/fame/record/me");
 };
+// 加入志愿者
+export const joinVolunteers = (params) => {
+    return postRequest("/volunteers",params);
+};
 

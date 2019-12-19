@@ -9,16 +9,32 @@ import VueAxios from "vue-axios";
 
 Vue.config.productionTip = false;
 import {
-  getRequest,
-  postRequest,
-  putRequest,
-  patchRequest,
-  deleteRequest,
-  uploadFileRequest
+    getRequest,
+    postRequest,
+    putRequest,
+    patchRequest,
+    deleteRequest,
+    uploadFileRequest
 } from "@/libs/axios";
-import { setStore, getStore, removeStore } from "@/libs/storage";
-import { login, search, regist,userInfo,getDetails,addQuestion,getQuestionSimilar,getLabels,addLabels,countQuestionNum,getCheckRecord,userInfoEdit,getFame} from "@/api/index";
+import {setStore, getStore, removeStore} from "@/libs/storage";
+import {
+    login,
+    search,
+    regist,
+    userInfo,
+    getDetails,
+    addQuestion,
+    getQuestionSimilar,
+    getLabels,
+    addLabels,
+    countQuestionNum,
+    getCheckRecord,
+    userInfoEdit,
+    getFame,
+    joinVolunteers
+} from "@/api/index";
 import "./plugins/iview.js";
+
 Vue.config.productionTip = false;
 
 
@@ -45,16 +61,14 @@ Vue.prototype.countQuestionNum = countQuestionNum;
 Vue.prototype.getCheckRecord = getCheckRecord;
 Vue.prototype.userInfoEdit = userInfoEdit;
 Vue.prototype.getFame = getFame;
-
-
-
+Vue.prototype.joinVolunteers = joinVolunteers;
 
 
 Vue.use(VueAxios, axios);
 
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount("#app");

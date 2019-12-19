@@ -28,12 +28,13 @@
 		name: "index",
 		components: {
 			search,
-			headerTop
+			headerTop,
 		},
 		data() {
 			return {
 				val: "",
-				count: 0
+				count: 0,
+                join:true
 			};
 		},
 		created() {

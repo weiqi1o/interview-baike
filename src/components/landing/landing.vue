@@ -4,18 +4,16 @@
       <div class="landBox" v-show="landing">
         <p>用户名密码登录</p>
         <span>{{ msg }}</span>
-        <input
-          type="text"
-          id="account"
-          v-model="land.account"
-          placeholder="输入账号"
-        />
-        <input
-          type="password"
-          id="password"
-          v-model="land.password"
-          placeholder="输入密码"
-        />
+        <div class="account">
+          <AutoComplete
+                  id="accountR"
+                  v-model="land.account"
+                  @on-search="handleInput"
+                  placeholder="输入账号邮箱">
+            <Option v-for="item in data2" :value="item" :key="item">{{ item }}</Option>
+          </AutoComplete>
+        </div>
+        <Input id="password" v-model="land.password" type="password" password placeholder="输入密码" />
         <button @click="submit">登录</button>
         <div>
           <a href="javascript:;" @click="ChangeRegister">立即注册</a>
@@ -41,10 +39,18 @@ export default {
       },
       msg: "",
       landing: true,
-      register: false
+      register: false,
+      data2:[]
     };
   },
   methods: {
+      handleInput (value) {
+          this.data2 = !value || value.indexOf('@') >= 0 ? [] : [
+              value + '@qq.com',
+              value + '@sina.com',
+              value + '@163.com'
+          ];
+      },
     getRegister(val) {
       this.register = val;
       this.landing = !val;
@@ -71,16 +77,18 @@ export default {
     //提交登陆
     submit() {
       $(".land input").removeClass("active");
-      if (this.land.account == "" || this.land.account.length < 5) {
-        this.msg = "账号不规范";
-        $("#account").addClass("active");
-        $("#account").focus();
+        this.msg = "";
+        var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+      if (!reg.test(this.land.account)) {
+        this.msg = "账号不是一个邮箱地址";
+        $("#account input").addClass("active");
+        $("#account input").focus();
         return;
       }
       if (this.land.password == "" || this.land.password.length < 6) {
         this.msg = "密码不规范";
-        $("#password").addClass("active");
-        $("#password").focus();
+        $("#password input").addClass("active");
+        $("#password input").focus();
         return;
       }
       this.login(this.land).then((res)=>{
@@ -100,7 +108,7 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 .land {
   position: fixed;
   top: 0;
@@ -131,20 +139,18 @@ export default {
         margin-top: 5px;
         display: block;
       }
-      & > input {
+      input {
         width: 100%;
         height: 35px;
         margin-bottom: 15px;
-        text-indent: 1em;
-        outline: none;
+       border-radius: 0;
       }
       .active {
-        border: none;
-        border: 1px solid #409eff;
+        border-color: #d00000;
       }
       & > button {
         width: 100%;
-        height: 45px;
+        height: 40px;
         background: #33a9fa;
         outline: none;
         border: none;
