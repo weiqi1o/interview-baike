@@ -92,9 +92,14 @@ export const checkOps = (recordId,params) => {
 	return patchRequest("/q/records/"+recordId, params);
 };
 
-// 获取待审核列表
+// 获取声望值
 export const getFame = () => {
     return getRequest("/fame/record/me");
+};
+
+// 获取币值
+export const getCoin = () => {
+    return getRequest("/coin/record/me");
 };
 // 加入志愿者
 export const joinVolunteers = (params) => {

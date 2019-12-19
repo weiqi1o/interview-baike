@@ -31,7 +31,8 @@ import {
     getCheckRecord,
     userInfoEdit,
     getFame,
-    joinVolunteers
+    joinVolunteers,
+    getCoin
 } from "@/api/index";
 import "./plugins/iview.js";
 
@@ -62,6 +63,7 @@ Vue.prototype.getCheckRecord = getCheckRecord;
 Vue.prototype.userInfoEdit = userInfoEdit;
 Vue.prototype.getFame = getFame;
 Vue.prototype.joinVolunteers = joinVolunteers;
+Vue.prototype.getCoin = getCoin;
 
 
 Vue.use(VueAxios, axios);
