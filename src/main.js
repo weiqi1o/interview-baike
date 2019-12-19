@@ -32,7 +32,8 @@ import {
     userInfoEdit,
     getFame,
     joinVolunteers,
-    getCoin
+    getCoin,
+    myVolunteersLabels
 } from "@/api/index";
 import "./plugins/iview.js";
 
@@ -64,6 +65,7 @@ Vue.prototype.userInfoEdit = userInfoEdit;
 Vue.prototype.getFame = getFame;
 Vue.prototype.joinVolunteers = joinVolunteers;
 Vue.prototype.getCoin = getCoin;
+Vue.prototype.myVolunteersLabels = myVolunteersLabels;
 
 
 Vue.use(VueAxios, axios);

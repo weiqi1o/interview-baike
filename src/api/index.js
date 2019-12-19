@@ -105,4 +105,8 @@ export const getCoin = () => {
 export const joinVolunteers = (params) => {
     return postRequest("/volunteers",params);
 };
+// 获取我的志愿者标签
+export const myVolunteersLabels = () => {
+    return getRequest("/volunteers/me");
+};
 

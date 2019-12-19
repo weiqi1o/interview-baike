@@ -137,18 +137,6 @@
             ok() {
                 this.checkedLabels = this.storageLabels
             },
-            to() {
-                if (!this.title && !this.supplementId ) {
-                    this.$Message.error('题目标题不能为空！');
-                    return;
-                }
-                this.$emit('titleData', {
-                    title: this.title,
-                    labels: this.checkedLabels,
-                    description: this.description,
-                    supplementDescription:this.supplementDescription,
-                })
-            },
             //选择标签
             labChecked(checked, name) {
                 if (checked) {
@@ -169,7 +157,19 @@
                     })
 
                 })
-            }
+            },
+            to() {
+                if (!this.title && !this.supplementId ) {
+                    this.$Message.error('题目标题不能为空！');
+                    return;
+                }
+                this.$emit('titleData', {
+                    title: this.title,
+                    labels: this.checkedLabels,
+                    description: this.description,
+                    supplementDescription:this.supplementDescription,
+                })
+            },
         }
     }
 </script>

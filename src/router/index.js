@@ -8,7 +8,7 @@ import listsDetails from "../views/listsDetails"
 import basics from "./../components/set/basics"
 import articles from "./../components/set/articles"
 import scoreRecords from "./../components/set/scoreRecords"
-import volunteers from "./../components/volunteers/setVolunteers"
+import volunteers from "./../components/set/volunteers"
 
 Vue.use(VueRouter);
 
@@ -42,6 +42,11 @@ const routes = [
                 path: "/scoreRecords",
                 name: "scoreRecords",
                 component: scoreRecords
+            },
+            {
+                path: "/volunteers",
+                name: "volunteers",
+                component: volunteers
             }
         ]
     },
@@ -54,11 +59,6 @@ const routes = [
         path: "/lists/details",
         name: "listsDetails",
         component: listsDetails
-    },
-    {
-        path: "/volunteers",
-        name: "volunteers",
-        component: volunteers
     }
 ];
 

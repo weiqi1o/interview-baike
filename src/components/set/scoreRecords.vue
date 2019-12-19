@@ -11,7 +11,7 @@
                         </div>
                     </ListItem>
                 </List>
-                <Page v-if="Number(fameRecords.total)>10" class="Page" :total="Number(fameRecords.total)" show-elevator />
+                <Page  v-if="Number(fameRecords.total)>6" class="Page" :total="Number(fameRecords.total)"  :page-size='6'  show-elevator />
             </TabPane>
              <TabPane label="币值"  name="name2">
                  <List>
@@ -23,7 +23,7 @@
                          </div>
                      </ListItem>
                  </List>
-                 <Page v-if="Number(coinRecords.total)>10" class="Page" :total="Number(coinRecords.total)" show-elevator />
+                 <Page  :page-size='6'  v-if="Number(coinRecords.total)>6" class="Page" :total="Number(coinRecords.total)" show-elevator />
              </TabPane>
         </Tabs>
     </div>
@@ -50,7 +50,7 @@
 				}
 
 			})
-			
+
 			this.getCoin().then((res) => {
 				if (res.code == 200) {
 				    this.coinRecords = res.result

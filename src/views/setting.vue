@@ -15,6 +15,10 @@
 				    <Icon type="ios-bookmarks-outline"/>
 				    分值记录
 				</MenuItem>
+                <MenuItem name="volunteers" to="/volunteers">
+                    <Icon type="ios-contacts" />
+                    志愿者
+                </MenuItem>
             </Menu>
             <Menu class="nav" :active-name="active" v-show="!mode2" mode="horizontal" :theme="theme1" >
                 <MenuItem name="basics" to="/setting">
@@ -25,6 +29,9 @@
                 </MenuItem>
 				<MenuItem name="scoreRecords" to="/scoreRecords">
 				    分值记录
+				</MenuItem>
+                <MenuItem name="volunteers" to="/volunteers">
+				    志愿者
 				</MenuItem>
             </Menu>
             <div class="item">
