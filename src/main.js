@@ -17,7 +17,7 @@ import {
   uploadFileRequest
 } from "@/libs/axios";
 import { setStore, getStore, removeStore } from "@/libs/storage";
-import { login, search, regist,userInfo,getDetails,addQuestion,getQuestionSimilar,getLabels,addLabels,countQuestionNum,getCheckRecord,userInfoEdit,getFame} from "@/api/index";
+import { login, search, regist,userInfo,getDetails,addQuestion,getQuestionSimilar,getLabels,addLabels,countQuestionNum,getCheckRecord,userInfoEdit,getFame,getCoin} from "@/api/index";
 import "./plugins/iview.js";
 Vue.config.productionTip = false;
 
@@ -45,6 +45,8 @@ Vue.prototype.countQuestionNum = countQuestionNum;
 Vue.prototype.getCheckRecord = getCheckRecord;
 Vue.prototype.userInfoEdit = userInfoEdit;
 Vue.prototype.getFame = getFame;
+Vue.prototype.getCoin = getCoin;
+
 
 
 

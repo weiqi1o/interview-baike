@@ -1,9 +1,9 @@
 <template>
     <div>
         <Tabs value="name1" :animated="false">
-            <TabPane :label="label"  name="name1">
+            <TabPane label="声望值"  name="name1">
                 <List>
-                    <ListItem class="ListItem" v-for="(item,index) in data.data" :key="index">
+                    <ListItem class="ListItem" v-for="(item,index) in fameRecords.data" :key="index">
                         <span>{{item.createTime.split(' ')[0]}} <br>{{item.createTime.split(' ')[1]}} </span>
                         <div>
                             <h2>恭喜获得{{item.val}}点声望</h2>
@@ -11,11 +11,11 @@
                         </div>
                     </ListItem>
                 </List>
-                <Page v-if="Number(data.total)>10" class="Page" :total="Number(data.total)" show-elevator />
+                <Page v-if="Number(fameRecords.total)>10" class="Page" :total="Number(fameRecords.total)" show-elevator />
             </TabPane>
              <TabPane label="币值"  name="name2">
                  <List>
-                     <ListItem class="ListItem" v-for="(item,index) in data.data" :key="index">
+                     <ListItem class="ListItem" v-for="(item,index) in coinRecords.data" :key="index">
                          <span>{{item.createTime.split(' ')[0]}} <br>{{item.createTime.split(' ')[1]}} </span>
                          <div>
                              <h2>恭喜获得{{item.val}}币</h2>
@@ -23,13 +23,9 @@
                          </div>
                      </ListItem>
                  </List>
-                 <Page v-if="Number(data.total)>10" class="Page" :total="Number(data.total)" show-elevator />
+                 <Page v-if="Number(coinRecords.total)>10" class="Page" :total="Number(coinRecords.total)" show-elevator />
              </TabPane>
         </Tabs>
-		<!-- 传入lists中第几个，动态设置模态框中内容 -->
-		<Modal v-model="isLook" fullscreen title="这是标题">
-			<MarkdownPreview theme="oneDark" :initialValue="record.content"/>
-		</Modal>
     </div>
 </template>
 
@@ -43,25 +39,21 @@
         data(){
             return{
 				lists:'',
-				record:{id:2,content:"## hello \n this is test"},
-				isLook: false,
-                label: (h) => {
-                    return h('div', [
-                        h('span', '声望值'),
-                        h('Badge', {
-                            props: {
-                                count: 3
-                            }
-                        })
-                    ])
-                },
-                data:''
+                fameRecords:'',
+				coinRecords:''
             }
         },
 		created() {
 			this.getFame().then((res) => {
 				if (res.code == 200) {
-				    this.data = res.result
+				    this.fameRecords = res.result
+				}
+
+			})
+			
+			this.getCoin().then((res) => {
+				if (res.code == 200) {
+				    this.coinRecords = res.result
 				}
 
 			})
