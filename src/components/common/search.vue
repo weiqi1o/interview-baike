@@ -4,12 +4,12 @@
         <AutoComplete
                 v-model="val"
                 @on-search="handleSearch2"
-                @on-select='serach'
+                @on-select='serach_'
                 placeholder="搜索..."
                 style="width:100%">
             <Option v-for="item in data2" :value="item" :key="item">{{ item }}</Option>
         </AutoComplete>
-        <button @click="serach">
+        <button @click="serach_">
             <img src="./../../../static/imgs/icon_search.png" alt=""/>
         </button>
     </div>
@@ -50,7 +50,7 @@
                 });
                 $('.search input').keydown(function () {
                     if (event.keyCode == 13) {
-                        _this.serach()
+                        _this.serach_()
                     }
                 })
             },
@@ -59,18 +59,19 @@
                 Bus.$emit("newList", val);
             },
             //搜索
-            serach(value) {
+            serach_(value) {
+                if(!this.val) return;
                 if (!this.$route.query.data) {
-                    var data = value?value:this.val
+                    var data = typeof(value)=='string'?value:this.val
                     //首页搜索
                     this.$router.push({
                         path: "/lists",
                         query: {data: data}
                     });
-                } else {
+                }else {
                     //列表页搜索
-
-                    this.search({data: this.val}).then(response => {
+                    var data = typeof(value)=='string'?value:this.val
+                    this.search({data:data}).then(response => {
                         if (response.code == 200) {
                             this.passValue(response.result);
                         }
