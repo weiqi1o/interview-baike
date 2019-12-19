@@ -101,12 +101,20 @@ export const getFame = () => {
 export const getCoin = () => {
     return getRequest("/coin/record/me");
 };
+
+// ======================志愿者==========================
+
 // 加入志愿者
 export const joinVolunteers = (params) => {
     return postRequest("/volunteers",params);
 };
+
 // 获取我的志愿者标签
 export const myVolunteersLabels = () => {
     return getRequest("/volunteers/me");
 };
 
+// 获取我的志愿者标签
+export const removeVolunteersLabels = (params) => {
+    return deleteRequest("/volunteers/me",params);
+};
