@@ -10,7 +10,15 @@
 			<div class="searchBox">
 				<img alt="Vue logo" src="./../../static/imgs/logo_index_zh_CN.png" />
 				<search></search>
-				<p>本站共收录了<span>{{count}}</span>道题目</p><router-link tag="a" to="/markdown">贡献题目</router-link>
+				<p>本站共收录了<span>{{count}}</span>道题目</p>
+				
+				           <router-link  v-if="current" to="/markdown">
+				               贡献题目
+				            </router-link>
+				            <div  v-else @click="toEdit('info')">
+				                <a>贡献题目</a>
+				            </div>
+				
 			</div>
 			</Col>
 			<Col style="height: 1px" :xs="0" :md="6">
@@ -34,7 +42,8 @@
 			return {
 				val: "",
 				count: 0,
-                join:true
+                join:true,
+				current: ''
 			};
 		},
 		created() {
@@ -43,9 +52,25 @@
 					this.count = res.result
 				}
 
-			})
+			}),
+
+			this.current = this.getStore("userId");
 		},
-		methods: {},
+		methods: {
+			openLand() {
+			    $(".landing").slideDown("fast");
+			},
+			toEdit(type) {
+			    if (!this.account) {
+			        this.$Message[type]({
+			            background: true,
+			            content: '请先登录！'
+			        })
+			    }
+			    this.openLand();
+			}
+			
+		},
 
 	};
 </script>
