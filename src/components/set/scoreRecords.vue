@@ -11,7 +11,7 @@
                         </div>
                     </ListItem>
                 </List>
-                <Page  v-if="Number(fameRecords.total)>Number(fameRecords.pageSize)" class="Page" :total="Number(fameRecords.total)"  :page-size="Number(fameRecords.pageSize)"  show-elevator />
+                <Page  v-if="Number(fameRecords.total)>Number(fameRecords.pageSize)" class="Page" @on-change="changeFamePage" :total="Number(fameRecords.total)"  :page-size="Number(fameRecords.pageSize)"  show-elevator />
             </TabPane>
              <TabPane label="币值"  name="name2">
                  <List>
@@ -23,7 +23,7 @@
                          </div>
                      </ListItem>
                  </List>
-                 <Page  :page-size="Number(fameRecords.pageSize)"  v-if="Number(coinRecords.total)> Number(fameRecords.pageSize)" class="Page" :total="Number(coinRecords.total)" show-elevator />
+                 <Page  :page-size="Number(fameRecords.pageSize)"  v-if="Number(coinRecords.total)> Number(fameRecords.pageSize)"  @on-change="changeCoinPage" class="Page" :total="Number(coinRecords.total)" show-elevator />
              </TabPane>
         </Tabs>
     </div>
@@ -59,6 +59,22 @@
 			})
 		},
         methods:{
+			changeFamePage(pageNumber){
+				this.getFame({current:pageNumber}).then((res) => {
+					if (res.code == 200) {
+					    this.fameRecords = res.result
+					}
+				
+				})
+			},
+			changeCoinPage(pageNumber){
+				this.getCoin({current:pageNumber}).then((res) => {
+					if (res.code == 200) {
+					    this.coinRecords = res.result
+					}
+				
+				})
+			}
         }
     }
 </script>
