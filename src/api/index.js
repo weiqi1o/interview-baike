@@ -93,13 +93,13 @@ export const checkOps = (recordId,params) => {
 };
 
 // 获取声望值
-export const getFame = () => {
-    return getRequest("/fame/record/me");
+export const getFame = (params) => {
+    return getRequest("/fame/record/me", params);
 };
 
 // 获取币值
-export const getCoin = () => {
-    return getRequest("/coin/record/me");
+export const getCoin = (params) => {
+    return getRequest("/coin/record/me", params);
 };
 
 // ======================志愿者==========================
