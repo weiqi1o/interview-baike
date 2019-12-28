@@ -8,12 +8,16 @@
 					<div class="postinfo">
 						<p><span>阅读数:{{val.viewNum}}</span><span>|</span><span>点赞数:{{val.likeNum}}</span><span>|</span><span>创建于:{{val.createTime}}</span></p>
 					</div>
-                    <MarkdownPreview theme="oneDark" :initialValue="val.description + '<br><br>  ---答案--- \n <br><br>' +val.content" copyCode copyBtnText="复制代码"/>
-                    <div class="rate">
+                    <MarkdownPreview  v-if="val.description == null" theme="oneDark" :initialValue="val.content" copyCode copyBtnText="复制代码"/>
+                    <MarkdownPreview  v-else theme="oneDark" :initialValue="val.description + '<br><br>  ---下面答案--- \n' +val.content" copyCode copyBtnText="复制代码"/>
+					<div class="rate">
                         <div>
                             <span>收藏</span>|<span>喜欢</span>
                         </div>
-                        <router-link :to="{path:'/markdown',query:{supplement:val.id}}">提交更好的答案</router-link>
+                        <router-link  v-if="current"  :to="{path:'/markdown',query:{supplement:val.id}}">提交更好的答案</router-link>
+						<div  v-else @click="toEdit('info')">
+						    <a>提交更好的答案</a>
+						</div>
                     </div>
                 </Col>
                 <Col span="7">
@@ -50,11 +54,12 @@
         },
         data() {
             return {
-                val: ''
-
+                val: '',
+				current: ''
             }
         },
         created() {
+			this.current = this.getStore("userId");
             this.getDetails(this.$route.query.id, '').then((res) => {
                 if (res.code == 200) {
                     this.val = res.result
@@ -65,7 +70,20 @@
                 window.scrollTo(0, 0);
             });
         },
-        methods: {},
+        methods: {
+			openLand() {
+			    $(".landing").slideDown("fast");
+			},
+			toEdit(type) {
+			    if (!this.account) {
+			        this.$Message[type]({
+			            background: true,
+			            content: '请先登录！'
+			        })
+			    }
+			    this.openLand();
+			}
+		},
 
     }
 </script>

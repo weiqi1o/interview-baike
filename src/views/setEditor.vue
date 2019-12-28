@@ -8,10 +8,11 @@
                      closable
                      @on-close="handleClose2">{{ item.name}}
                 </Tag>
+				<Button v-show="!supplementId" type="dashed" @click="handleAdd">选择标签</Button>
             </div>
             <Tag v-else v-for="item in supplementVal.labels" :key="item.id" :name="item.id" color="primary" size="large">{{ item.name}}
             </Tag>
-            <Button v-show="!supplementId" type="dashed" @click="handleAdd">选择标签</Button>
+            <!-- <Button v-show="!supplementId" type="dashed" @click="handleAdd">选择标签</Button> -->
             <Modal v-show="!supplementId"
                    v-model="modal1"
                    title="选择标签"
@@ -19,10 +20,10 @@
                 <Tag v-for="item in labels" :key="item.id" :name="item.id" size="large" checkable color="primary"
                      @on-change="labChecked" :checked="item.checked">{{ item.name}}
                 </Tag>
-                <div>
+ <!--               <div>
                     <Input v-model="labelVal" placeholder="自定义标签" clearable style="width: 200px"/>
                     <Button class="but" type="primary" @click="addLabel">添加</Button>
-                </div>
+                </div> -->
 
             </Modal>
             <Divider/>
@@ -209,7 +210,7 @@
                 width: 100%;
                 color: #515a6e;
                 resize: none;
-                margin-top: 20px;
+                // margin-top: 20px;
             }
 
         }

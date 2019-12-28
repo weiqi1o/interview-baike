@@ -82,6 +82,11 @@ export const getCheckRecord = params => {
 	return getRequest("/q/records", params);
 };
 
+// 获取指定审核
+export const getQRecord = id => {
+	return getRequest("/q/records/"+id);
+};
+
 // 审核移交给别人
 export const transferOthers = (recordId,params) => {
 	return postRequest("/q/records/"+recordId, params);

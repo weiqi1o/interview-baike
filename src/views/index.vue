@@ -10,15 +10,17 @@
 			<div class="searchBox">
 				<img alt="Vue logo" src="./../../static/imgs/logo_index_zh_CN.png" />
 				<search></search>
-				<p>本站共收录了<span>{{count}}</span>道题目</p>
-				
-				           <router-link  v-if="current" to="/markdown">
-				               贡献题目
-				            </router-link>
-				            <div  v-else @click="toEdit('info')">
-				                <a>贡献题目</a>
-				            </div>
-				
+				<div style="text-align: center;">
+					<p>本站共收录了<span>{{count}}</span>道题目</p>
+					
+					<router-link v-if="current" to="/markdown">
+						贡献题目
+					</router-link>
+					<div v-else @click="toEdit('info')">
+						<a>贡献题目</a>
+					</div>
+				</div>
+
 			</div>
 			</Col>
 			<Col style="height: 1px" :xs="0" :md="6">
@@ -42,34 +44,34 @@
 			return {
 				val: "",
 				count: 0,
-                join:true,
+				join: true,
 				current: ''
 			};
 		},
 		created() {
 			this.countQuestionNum('').then((res) => {
-				if (res.code == 200) {
-					this.count = res.result
-				}
+					if (res.code == 200) {
+						this.count = res.result
+					}
 
-			}),
+				}),
 
-			this.current = this.getStore("userId");
+				this.current = this.getStore("userId");
 		},
 		methods: {
 			openLand() {
-			    $(".landing").slideDown("fast");
+				$(".landing").slideDown("fast");
 			},
 			toEdit(type) {
-			    if (!this.account) {
-			        this.$Message[type]({
-			            background: true,
-			            content: '请先登录！'
-			        })
-			    }
-			    this.openLand();
+				if (!this.account) {
+					this.$Message[type]({
+						background: true,
+						content: '请先登录！'
+					})
+				}
+				this.openLand();
 			}
-			
+
 		},
 
 	};
@@ -92,18 +94,20 @@
 				margin: 0 auto;
 				margin-bottom: 25px;
 			}
-
-			&>p {
-				margin-top: 20px;
-				color: #9b9b9b;
-				font-size: 16px;
-				font-weight: 400;
-
-				&>span {
-					color: #177cb0;
-					margin: 0 10px;
+			&>div{
+				&>p {
+					margin-top: 20px;
+					color: #9b9b9b;
+					font-size: 16px;
+					font-weight: 400;
+				
+					&>span {
+						color: #177cb0;
+						margin: 0 10px;
+					}
 				}
 			}
+			
 		}
 	}
 </style>

@@ -9,7 +9,7 @@ import basics from "./../components/set/basics"
 import articles from "./../components/set/articles"
 import scoreRecords from "./../components/set/scoreRecords"
 import volunteers from "./../components/set/volunteers"
-
+import checkContent from "./../components/set/checkContent"
 Vue.use(VueRouter);
 
 const routes = [
@@ -38,6 +38,11 @@ const routes = [
                 name: "articles",
                 component: articles
             },
+			{
+			    path: "/checkContent",
+			    name: "checkContent",
+			    component: checkContent
+			},
             {
                 path: "/scoreRecords",
                 name: "scoreRecords",

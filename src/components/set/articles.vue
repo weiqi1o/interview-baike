@@ -6,26 +6,28 @@
                     <ListItem v-for="items in lists" :key="items.id">
                         <ListItemMeta  :title="items.title" :description="items.changeDesc" />
                         <div class="labels">
-							<Button @click="isLook = true">查看</Button>
+							<router-link :to="{path:'/setting/checkContent',query:{id:items.id}}">
+								查看
+							</router-link>
                         </div>
                         <template slot="action">
-						   <Button type="success">通过</Button>
-						    <Button type="error">退回</Button>
+						   <Button @click="changeState(items.id,PASS)" type="success">通过</Button>
+						    <Button @click="isLook=true" type="error">退回</Button>
                         </template>
                     </ListItem>
                 </List>
             </TabPane>
             <!-- <TabPane label="我的提交"  name="name2">标签二的内容</TabPane> -->
         </Tabs>
-		<!-- 传入lists中第几个，动态设置模态框中内容 -->
-		<Modal v-model="isLook" fullscreen title="这是标题">
-			<MarkdownPreview theme="oneDark" :initialValue="record.content"/>
+		<Modal v-model="isLook"  title="退回理由" @on-ok="ok">
+			<textarea v-model="reason" placeholder="退回理由" rows="3" style="width: 100%;"></textarea>
 		</Modal>
     </div>
 </template>
 
 <script>
 	import {MarkdownPreview} from 'vue-meditor'
+	import {Modal} from 'view-design';
     export default {
         name: "articles",
 		components: {
@@ -34,8 +36,7 @@
         data(){
             return{
 				lists:'',
-				record:{id:2,content:"## hello \n this is test"},
-				isLook: false,
+				isLook:false,
                 label: (h) => {
                     return h('div', [
                         h('span', '审核中'),
@@ -56,6 +57,14 @@
 		
 			})
 		},
+		methods:{
+			changeState(id,state){
+				
+			},
+			ok(){
+				
+			}
+		}
     }
 </script>
 
