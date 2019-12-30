@@ -63,6 +63,12 @@ export const countQuestionNum = (params) => {
     return getRequest("/v1/questions/count",params);
 };
 
+//热门题目
+export const listQuestionWeekPopular = () => {
+    return getRequest("/v1/popular/week/questions");
+};
+
+
 // ======================标签==========================
 
 // 查询所有标签

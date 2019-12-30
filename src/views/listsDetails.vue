@@ -14,8 +14,7 @@
                         <div>
                             <span>收藏</span>|<span>喜欢</span>
                         </div>
-                        <router-link  v-if="current"  :to="{path:'/markdown',query:{supplement:val.id}}">提交更好的答案</router-link>
-						<div  v-else @click="toEdit('info')">
+						<div @click="submitAnswer(val.id)">
 						    <a>提交更好的答案</a>
 						</div>
                     </div>
@@ -54,12 +53,10 @@
         },
         data() {
             return {
-                val: '',
-				current: ''
+                val: ''
             }
         },
         created() {
-			this.current = this.getStore("userId");
             this.getDetails(this.$route.query.id, '').then((res) => {
                 if (res.code == 200) {
                     this.val = res.result
@@ -74,14 +71,18 @@
 			openLand() {
 			    $(".landing").slideDown("fast");
 			},
-			toEdit(type) {
-			    if (!this.account) {
-			        this.$Message[type]({
+			submitAnswer(id) {
+				const user = this.getStore("userId");
+			    if (user == null || user == undefined) {
+			        this.$Message['info']({
 			            background: true,
 			            content: '请先登录！'
 			        })
-			    }
-			    this.openLand();
+					this.openLand();
+			    }else{
+					this.$router.push({path:'/markdown',query:{supplement:id}});
+				}
+			    
 			}
 		},
 
