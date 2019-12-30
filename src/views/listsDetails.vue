@@ -9,10 +9,12 @@
 						<p><span>阅读数:{{val.viewNum}}</span><span>|</span><span>点赞数:{{val.likeNum}}</span><span>|</span><span>创建于:{{val.createTime}}</span></p>
 					</div>
                     <MarkdownPreview  v-if="val.description == null" theme="oneDark" :initialValue="val.content" copyCode copyBtnText="复制代码"/>
-                    <MarkdownPreview  v-else theme="oneDark" :initialValue="val.description + '<br><br>  ---下面答案--- \n' +val.content" copyCode copyBtnText="复制代码"/>
+                    <MarkdownPreview  v-else theme="oneDark" :initialValue="val.description + '<br><br>  ---下面答案--- \n<br><br>' +val.content" copyCode copyBtnText="复制代码"/>
+					<br>
 					<div class="rate">
                         <div>
-                            <span>收藏</span>|<span>喜欢</span>
+                           <Button v-if="val.liked == true"  type="error"  shape="circle" icon="md-thumbs-up">已赞</Button>
+						   <Button v-else  shape="circle" icon="md-thumbs-up" @click="like()">有用</Button>
                         </div>
 						<div @click="submitAnswer(val.id)">
 						    <a>提交更好的答案</a>
@@ -43,9 +45,10 @@
 </template>
 
 <script>
-    import headerTop from './../components/common/headerTop'
-    import {MarkdownPreview} from 'vue-meditor'
-
+    import headerTop from './../components/common/headerTop';
+    import {MarkdownPreview} from 'vue-meditor';
+	import {likeQuestion} from "@/api/index";
+	
     export default {
         name: "listsDetails",
         components: {
@@ -83,6 +86,13 @@
 					this.$router.push({path:'/markdown',query:{supplement:id}});
 				}
 			    
+			},
+			like(){
+				likeQuestion(this.$route.query.id).then((res) => {
+					if (res.code == 200) {
+					    this.$Message.info("点赞成功");
+					}
+				});
 			}
 		},
 

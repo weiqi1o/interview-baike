@@ -63,6 +63,11 @@ export const countQuestionNum = (params) => {
     return getRequest("/v1/questions/count",params);
 };
 
+//题目点赞
+export const likeQuestion = (questionId) => {
+    return postRequest("/questions/"+questionId+"/like");
+};
+
 //热门题目
 export const listQuestionWeekPopular = () => {
     return getRequest("/v1/popular/week/questions");
