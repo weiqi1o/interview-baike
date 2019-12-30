@@ -2,7 +2,7 @@
     <div class="basics"  v-if="UserInfoData.result">
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">当前头像</span></Col>
-            <Col :xs="24" :md="20">
+            <Col :xs="24" :md="20"  style="padding-left: 1em;">
                 <div class=" avatar item" >
                     <Avatar shape="square" :src="val.avatar" size="80"/>
                     <Upload v-show="edit" :before-upload="handleUpload" class="butUpload" action="">
@@ -13,10 +13,23 @@
         </Row>
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">用户名</span></Col>
-            <Col :xs="24" :md="20">
+            <Col :xs="24" :md="20" style="padding-left: 1em;">
                 <p class="item">{{UserInfoData.result.account}}</p>
             </Col>
         </Row>
+		<Row type="flex" justify="space-between" align="middle">
+		    <Col :xs="0" :md="4"><span class="label">声望值</span></Col>
+		    <Col :xs="24" :md="20" style="padding-left: 1em;">
+		        <p class="item">{{UserInfoData.result.fameVal}}</p>
+		    </Col>
+		</Row>
+<!-- 		<Row type="flex" justify="space-between" align="middle">
+		    <Col :xs="0" :md="4"><span class="label">币值</span></Col>
+		    <Col :xs="24" :md="20" style="padding-left: 1em;">
+		        <p class="item">{{UserInfoData.result.coin}}</p>
+		    </Col>
+		</Row> -->
+		
         <Row type="flex" justify="space-between" align="middle">
             <Col :xs="0" :md="4"><span class="label">昵称</span></Col>
             <Col :xs="24" :md="20">
