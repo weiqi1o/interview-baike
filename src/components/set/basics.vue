@@ -18,7 +18,15 @@
             </Col>
         </Row>
 		<Row type="flex" justify="space-between" align="middle">
-		    <Col :xs="0" :md="4"><span class="label">声望值</span></Col>
+		    <Col :xs="0" :md="4">
+		
+				<span class="label">
+					声望值
+					<Tooltip max-width="400"  content="多多参与贡献,获得声望">
+					      <Icon type="ios-information-circle-outline" size="18" />
+					  </Tooltip>
+				</span>
+			</Col>
 		    <Col :xs="24" :md="20" style="padding-left: 1em;">
 		        <p class="item">{{UserInfoData.result.fameVal}}</p>
 		    </Col>

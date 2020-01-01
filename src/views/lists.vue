@@ -63,33 +63,33 @@
 				<Col span="7">
 				<div class="card">
 					<Card>
-					        <p slot="title">
-					            <Icon type="ios-flame-outline"></Icon>
-					            热门题目
-					        </p>
-	<!-- 				        <a href="#" slot="extra" @click.prevent="changeLimit">
+						<p slot="title">
+							<Icon type="ios-flame-outline"></Icon>
+							热门题目
+						</p>
+						<!-- 				        <a href="#" slot="extra" @click.prevent="changeLimit">
 					            <Icon type="ios-loop-strong"></Icon>
 					            Change
 					        </a> -->
-					        <ul>
-					            <li v-for="item in hotList" style="list-style: none;margin-bottom: 5px;">
-					                <a :href="'#lists/details?id='+item.id" target="_blank">{{ item.title }}</a>
-					                <span style="float: right;">
-					                    <Icon type="ios-eye"></Icon>
-					                    {{ item.rate }}
-					                </span>
-					            </li>
-					        </ul>
-					    </Card>
-						<br>
-						<Card>
-						        <p slot="title">
-						            <Icon type="ios-bug-outline"></Icon>
-						            反馈
-						        </p>
-						       
-						       <img width="208" height="208" src="" />
-						    </Card>
+						<ul>
+							<li v-for="item in hotList" style="list-style: none;margin-bottom: 5px;">
+								<a :href="'#lists/details?id='+item.id" target="_blank">{{ item.title }}</a>
+								<span style="float: right;">
+									<Icon type="ios-eye"></Icon>
+									{{ item.rate }}
+								</span>
+							</li>
+						</ul>
+					</Card>
+					<br>
+					<Card>
+						<p slot="title">
+							<Icon type="ios-bug-outline"></Icon>
+							反馈
+						</p>
+
+						<img width="208" height="208" src="./../../static/imgs/feedback.png" />
+					</Card>
 				</div>
 				</Col>
 			</Row>
@@ -102,7 +102,9 @@
 	import headerL from "../components/landing/headerL";
 	import search from "../components/common/search";
 	import Bus from "./../../static/js/bus";
-	import {listQuestionWeekPopular} from "@/api/index";
+	import {
+		listQuestionWeekPopular
+	} from "@/api/index";
 	export default {
 		name: "lists",
 		components: {

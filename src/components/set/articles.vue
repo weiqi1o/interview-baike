@@ -50,12 +50,7 @@
 				isLook: false,
 				label: (h) => {
 					return h('div', [
-						h('span', '审核中'),
-						h('Badge', {
-							props: {
-								count: 3
-							}
-						})
+						h('span', '审核中')
 					])
 				}
 			}
@@ -64,6 +59,16 @@
 			this.getCheckRecord('').then((res) => {
 				if (res.code == 200) {
 					this.lists = res.result
+					this.label= (h) => {
+					return h('div', [
+						h('span', '审核中'),
+						h('Badge', {
+							props: {
+								count: res.result.length
+							}
+						})
+					])
+				}
 				}
 
 			})
@@ -82,6 +87,7 @@
 				}).then((res) => {
 					if (res.code == 200) {
 						//message提示
+						this.$Message.info("操作成功")
 					}
 				})
 			},

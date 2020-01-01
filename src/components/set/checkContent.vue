@@ -1,13 +1,26 @@
 <template>
     <div class="MarkdownPreview">
+        <headerTop></headerTop>
         <div class="content">
             <Row type="flex" justify="space-between">
                 <Col span="16">
                     <h1 class="title">{{val.title}}</h1>
-                    <MarkdownPreview theme="oneDark" :initialValue="val.content" copyCode copyBtnText="复制代码"/>
+                    <MarkdownPreview  theme="oneDark" :initialValue="val.content" copyCode copyBtnText="复制代码"/>
                 </Col>
                 <Col span="7">
-                  
+                    <div class="card">
+                        <Card >
+                            <p slot="title">贡献者</p>
+                            
+                        </Card>
+						<br>
+						<Card >
+						    <p slot="title">修改统计</p>
+						    <p>
+								共修改了
+							</p>
+						</Card>
+                    </div>
                 </Col>
             </Row>
         </div>

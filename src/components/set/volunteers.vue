@@ -3,6 +3,10 @@
 		<Tabs value="name1" :animated="false">
 			<TabPane label="志愿标签" name="name1">
 				<Button type="dashed" @click="handleAdd">添加标签</Button>
+				  <Tooltip max-width="200"  content="成为志愿者为大家贡献一份力量,同时你也能获得声望!">
+				        <Icon style="margin-left: 5px; text-align: center; vertical-align: middle;" type="ios-information-circle-outline" size="24" />
+				    </Tooltip>
+				
 				<Modal v-model="modal1" title="选择标签" @on-ok="ok">
 					<Tag v-for="item in labels" :key="item.id" :name="item.id" size="large" checkable color="primary" @on-change="labChecked"
 					 :checked="item.checked">{{ item.name}}
