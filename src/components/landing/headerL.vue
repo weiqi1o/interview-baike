@@ -4,9 +4,9 @@
 			<a v-if="!account" href="javascript:;" @click="openLand">登陆/注册</a>
 			<Dropdown v-else>
 				<Badge v-if="noticeCount != 0" :count="noticeCount">
-					<Avatar class="Avatar" :src="avatar" />
+					<Avatar class="Avatar" :icon="avatar == '' ? 'ios-person' : ''" :src="avatar" />
 				</Badge>
-				<Avatar v-else class="Avatar" :src="avatar" />
+				<Avatar v-else class="Avatar" :icon="avatar == '' ? 'ios-person' : ''" :src="avatar" />
 				<DropdownMenu slot="list">
 					<DropdownItem>
 						<router-link class="ItemL" to="/setting">个人中心</router-link>
@@ -49,7 +49,10 @@
 
 			this.getCheckRecord('').then((res) => {
 					if (res.code == 200) {
-						this.noticeCount = res.result.length;
+						if (res.result != null){
+							this.noticeCount = res.result.length;
+						}
+						
 					}
 			})
 
@@ -63,7 +66,7 @@
 				if (id) {
 					this.userInfo(id).then((res) => {
 						this.account = res.result.account;
-						this.avatar = res.result.avatar;
+						this.avatar = res.result.avatar
 					})
 				}
 			},

@@ -12,9 +12,9 @@
 				<search></search>
 				<div style="text-align: center;">
 					<p>本站共收录了<span>{{count}}</span>道题目</p>
-					<div @click="submitQuestion()">
-						<a>贡献题目</a>
-					</div>
+					<!-- <div > -->
+						<a @click="submitQuestion()">贡献题目</a>
+					<!-- </div> -->
 				</div>
 
 			</div>

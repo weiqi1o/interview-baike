@@ -27,6 +27,11 @@ export const userInfoEdit = (userId, params) => {
 	return patchRequest("/v1/users/" + userId, params);
 };
 
+// 用户排行
+export const userRank = () => {
+	return getRequest("/v1/users/rank");
+};
+
 // 问题答案文件上传
 export const uploadQusetion = params => {
 	return postRequest("/files/questions", params);
@@ -86,6 +91,11 @@ export const addLabels = params => {
 	return postRequest("/v1/labels", params);
 };
 
+
+// 查询志愿者标签
+export const getVolunteersLabels = () => {
+	return getRequest("/volunteers/count");
+};
 // ======================审核==========================
 
 // 获取待审核列表

@@ -9,66 +9,64 @@ import basics from "./../components/set/basics"
 import articles from "./../components/set/articles"
 import scoreRecords from "./../components/set/scoreRecords"
 import volunteers from "./../components/set/volunteers"
-import checkContent from "./../components/set/checkContent"
+import checkContent from "../views/checkContent"
 Vue.use(VueRouter);
 
-const routes = [
-    {
-        path: "/",
-        name: "index",
-        component: Index
-    },
-    {
-        path: "/lists",
-        name: "lists",
-        component: Lists
-    },
-    {
-        path: "/setting",
-        name: "setting",
-        component: setting,
-        children:[
-            {
-                path: "/",
-                name: "basics",
-                component: basics
-            },
-            {
-                path: "/articles",
-                name: "articles",
-                component: articles
-            },
-			{
-			    path: "/checkContent",
-			    name: "checkContent",
-			    component: checkContent
+const routes = [{
+		path: "/",
+		name: "index",
+		component: Index
+	},
+	{
+		path: "/lists",
+		name: "lists",
+		component: Lists
+	},
+	{
+		path: "/setting",
+		name: "setting",
+		component: setting,
+		children: [{
+				path: "/",
+				name: "basics",
+				component: basics
 			},
-            {
-                path: "/scoreRecords",
-                name: "scoreRecords",
-                component: scoreRecords
-            },
-            {
-                path: "/volunteers",
-                name: "volunteers",
-                component: volunteers
-            }
-        ]
-    },
-    {
-        path: "/markdown",
-        name: "markdown",
-        component: markdown
-    },
-    {
-        path: "/lists/details",
-        name: "listsDetails",
-        component: listsDetails
-    }
+			{
+				path: "/articles",
+				name: "articles",
+				component: articles
+			},
+			{
+				path: "/scoreRecords",
+				name: "scoreRecords",
+				component: scoreRecords
+			},
+			{
+				path: "/volunteers",
+				name: "volunteers",
+				component: volunteers
+			}
+		]
+	},
+	{
+		path: "/markdown",
+		name: "markdown",
+		component: markdown
+	},
+	{
+		path: "/lists/details",
+		name: "listsDetails",
+		component: listsDetails
+	},
+	{
+		path: "/checkContent",
+		name: "checkContent",
+		component: checkContent
+	}
 ];
 
 const router = new VueRouter({
-    routes
+	routes
 });
 
 export default router;

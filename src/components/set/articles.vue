@@ -6,7 +6,7 @@
 					<ListItem v-for="items in lists" :key="items.id">
 						<ListItemMeta :title="items.title" :description="items.changeDesc" />
 						<div class="labels">
-							<router-link :to="{path:'/setting/checkContent',query:{id:items.id}}" target="_blank">
+							<router-link :to="{path:'/checkContent',query:{id:items.id}}" target="_blank">
 								查看
 							</router-link>
 						</div>
@@ -36,7 +36,9 @@
 	import {
 		Modal
 	} from 'view-design';
-	import checkOps from "@/api/index";
+	import {
+		checkOps
+	} from "@/api/index";
 	export default {
 		name: "articles",
 		components: {
@@ -59,16 +61,16 @@
 			this.getCheckRecord('').then((res) => {
 				if (res.code == 200) {
 					this.lists = res.result
-					this.label= (h) => {
-					return h('div', [
-						h('span', '审核中'),
-						h('Badge', {
-							props: {
-								count: res.result.length
-							}
-						})
-					])
-				}
+					this.label = (h) => {
+						return h('div', [
+							h('span', '审核中'),
+							h('Badge', {
+								props: {
+									count: res.result == null || res.result == undefined ? 0 : res.result.length
+								}
+							})
+						])
+					}
 				}
 
 			})
@@ -88,6 +90,8 @@
 					if (res.code == 200) {
 						//message提示
 						this.$Message.info("操作成功")
+					} else {
+						this.$Message.error(res.msg);
 					}
 				})
 			},

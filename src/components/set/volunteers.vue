@@ -3,14 +3,17 @@
 		<Tabs value="name1" :animated="false">
 			<TabPane label="志愿标签" name="name1">
 				<Button type="dashed" @click="handleAdd">添加标签</Button>
-				  <Tooltip max-width="200"  content="成为志愿者为大家贡献一份力量,同时你也能获得声望!">
-				        <Icon style="margin-left: 5px; text-align: center; vertical-align: middle;" type="ios-information-circle-outline" size="24" />
-				    </Tooltip>
-				
+				<Tooltip max-width="200" content="成为志愿者为大家贡献一份力量,同时你也能获得声望!">
+					<Icon style="margin-left: 5px; text-align: center; vertical-align: middle;" type="ios-information-circle-outline"
+					 size="24" />
+				</Tooltip>
+
 				<Modal v-model="modal1" title="选择标签" @on-ok="ok">
+
 					<Tag v-for="item in labels" :key="item.id" :name="item.id" size="large" checkable color="primary" @on-change="labChecked"
-					 :checked="item.checked">{{ item.name}}
+					 :checked="item.checked">{{ item.name}} +{{item.count}}
 					</Tag>
+
 				</Modal>
 				<List>
 					<ListItem v-for="items in myLabels" :key="items.id">
@@ -28,7 +31,14 @@
 </template>
 
 <script>
-	import {Message} from 'view-design';
+	import {
+		Message
+	} from 'view-design';
+
+	import {
+		getVolunteersLabels
+	} from "@/api/index";
+
 	export default {
 		name: "volunteers",
 		data() {
@@ -47,15 +57,26 @@
 		},
 		methods: {
 			exitLabel(id) {
-				this.removeVolunteersLabels({labelId:id}).then((res)=>{
-					if (res.code == 200) {
-						Message.success("退出成功");
+				this.$Modal.confirm({
+					title: '是否放弃加入志愿者',
+					content: '<p>亲，你准备放弃加入志愿者么？</p>',
+					onOk: () => {
+						this.removeVolunteersLabels({
+							labelId: id
+						}).then((res) => {
+							if (res.code == 200) {
+								Message.success("退出成功");
+								window.location.reload()
+							}
+						});
+						
 					}
 				});
+
 			},
 			//获取标签
 			Labels() {
-				this.getLabels().then((res) => {
+				getVolunteersLabels().then((res) => {
 					var data = res.result;
 					this.$nextTick(() => {
 						data.forEach((v) => {
@@ -89,13 +110,14 @@
 			},
 			//确认标签选择
 			ok() {
-				if (this.storageLabels == undefined || this.storageLabels.length <= 0){
+				if (this.storageLabels == undefined || this.storageLabels.length <= 0) {
 					Message.warning("最少选择一个");
 					return;
 				}
 				this.joinVolunteers(this.storageLabels).then((res) => {
 					if (res.code == 200) {
 						Message.success("加入成功");
+						this.$router.go(0);
 					}
 				});
 			},

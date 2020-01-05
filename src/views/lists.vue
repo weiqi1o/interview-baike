@@ -84,6 +84,18 @@
 					<br>
 					<Card>
 						<p slot="title">
+							<Icon type="ios-flame-outline"></Icon>
+							贡献排行榜
+						</p>
+						<List>
+							<ListItem v-for="(item,index) in rankList">
+								<ListItemMeta :avatar="item.avatar" :title="item.nickName" :description="item.fameVal"/>
+							</ListItem>
+						</List>
+					</Card>
+					<br>
+					<Card>
+						<p slot="title">
 							<Icon type="ios-bug-outline"></Icon>
 							反馈
 						</p>
@@ -103,7 +115,8 @@
 	import search from "../components/common/search";
 	import Bus from "./../../static/js/bus";
 	import {
-		listQuestionWeekPopular
+		listQuestionWeekPopular,
+		userRank
 	} from "@/api/index";
 	export default {
 		name: "lists",
@@ -114,7 +127,8 @@
 		data() {
 			return {
 				lists: [],
-				hotList: []
+				hotList: [],
+				rankList: []
 			};
 		},
 		created() {
@@ -122,6 +136,11 @@
 			listQuestionWeekPopular().then((res) => {
 				if (res.code == 200) {
 					this.hotList = res.result
+				}
+			});
+			userRank().then((res) => {
+				if (res.code == 200) {
+					this.rankList = res.result
 				}
 			});
 		},
@@ -146,7 +165,7 @@
 			Bus.$on("newList", function(val) {
 				_this.lists = val;
 			});
-		},
+		}
 	};
 </script>
 
