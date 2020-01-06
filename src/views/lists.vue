@@ -63,33 +63,45 @@
 				<Col span="7">
 				<div class="card">
 					<Card>
-					        <p slot="title">
-					            <Icon type="ios-flame-outline"></Icon>
-					            热门题目
-					        </p>
-					        <a href="#" slot="extra" @click.prevent="changeLimit">
+						<p slot="title">
+							<Icon type="ios-flame-outline"></Icon>
+							热门题目
+						</p>
+						<!-- 				        <a href="#" slot="extra" @click.prevent="changeLimit">
 					            <Icon type="ios-loop-strong"></Icon>
 					            Change
-					        </a>
-					        <ul>
-					            <li v-for="item in movieList">
-					                <a :href="item.url" target="_blank">{{ item.name }}</a>
-					                <span>
-					                    <Icon type="ios-star" v-for="n in 4" :key="n"></Icon><Icon type="ios-star" v-if="item.rate >= 9.5"></Icon><Icon type="ios-star-half" v-else></Icon>
-					                    {{ item.rate }}
-					                </span>
-					            </li>
-					        </ul>
-					    </Card>
-						<br>
-						<Card>
-						        <p slot="title">
-						            <Icon type="ios-bug-outline"></Icon>
-						            反馈
-						        </p>
-						       
-						       <img width="208" height="208" src="https://img01.sogoucdn.com/v2/thumb?t=2&url=http%3A%2F%2Fmp.weixin.qq.com%2Frr%3Fsrc%3D3%26timestamp%3D1576675762%26ver%3D1%26signature%3DOKxG62Ad7epip3v4oLow7wihdBBpkw5DD1cGcCOiuYuxjpgt3b8PP2EHNESoE7xf*8wmgHZQFA70EFdon*ekZQoV93JpeBxyFCY2JPxqYJY%3D&appid=200580" />
-						    </Card>
+					        </a> -->
+						<ul>
+							<li v-for="item in hotList" style="list-style: none;margin-bottom: 5px;">
+								<a :href="'#lists/details?id='+item.id" target="_blank">{{ item.title }}</a>
+								<span style="float: right;">
+									<Icon type="ios-eye"></Icon>
+									{{ item.rate }}
+								</span>
+							</li>
+						</ul>
+					</Card>
+					<br>
+					<Card>
+						<p slot="title">
+							<Icon type="ios-flame-outline"></Icon>
+							贡献排行榜
+						</p>
+						<List>
+							<ListItem v-for="(item,index) in rankList">
+								<ListItemMeta :avatar="item.avatar" :title="item.nickName" :description="item.fameVal"/>
+							</ListItem>
+						</List>
+					</Card>
+					<br>
+					<Card>
+						<p slot="title">
+							<Icon type="ios-bug-outline"></Icon>
+							反馈
+						</p>
+
+						<img width="208" height="208" src="./../../static/imgs/feedback.png" />
+					</Card>
 				</div>
 				</Col>
 			</Row>
@@ -102,7 +114,10 @@
 	import headerL from "../components/landing/headerL";
 	import search from "../components/common/search";
 	import Bus from "./../../static/js/bus";
-
+	import {
+		listQuestionWeekPopular,
+		userRank
+	} from "@/api/index";
 	export default {
 		name: "lists",
 		components: {
@@ -111,39 +126,23 @@
 		},
 		data() {
 			return {
-				lists: '',
-				movieList: [{
-						name: 'The Shawshank Redemption',
-						url: 'https://movie.douban.com/subject/1292052/',
-						rate: 9.6
-					},
-					{
-						name: 'Leon:The Professional',
-						url: 'https://movie.douban.com/subject/1295644/',
-						rate: 9.4
-					},
-					{
-						name: 'Farewell to My Concubine',
-						url: 'https://movie.douban.com/subject/1291546/',
-						rate: 9.5
-					},
-					{
-						name: 'Forrest Gump',
-						url: 'https://movie.douban.com/subject/1292720/',
-						rate: 9.4
-					},
-					{
-						name: 'Life Is Beautiful',
-						url: 'https://movie.douban.com/subject/1292063/',
-						rate: 9.5
-					},
-					{
-						name: 'Spirited Away',
-						url: 'https://movie.douban.com/subject/1291561/',
-						rate: 9.2
-					}
-				]
+				lists: [],
+				hotList: [],
+				rankList: []
 			};
+		},
+		created() {
+			console.info("created")
+			listQuestionWeekPopular().then((res) => {
+				if (res.code == 200) {
+					this.hotList = res.result
+				}
+			});
+			userRank().then((res) => {
+				if (res.code == 200) {
+					this.rankList = res.result
+				}
+			});
 		},
 		methods: {
 			toEdit(type) {
@@ -166,7 +165,7 @@
 			Bus.$on("newList", function(val) {
 				_this.lists = val;
 			});
-		},
+		}
 	};
 </script>
 

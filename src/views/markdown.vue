@@ -90,7 +90,7 @@
                     if (res.code == 200) {
                         this.$Message.success(res.msg);
                     } else {
-                        // this.$Message.error(res.msg);
+                        this.$Message.error(res.msg);
                     }
 
                 })
@@ -107,7 +107,7 @@
                 return false;
             },
             getTitle(data) {
-                this.title = data
+                this.title = data;
             }
 
         },

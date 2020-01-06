@@ -48,7 +48,10 @@ export default {
           this.data2 = !value || value.indexOf('@') >= 0 ? [] : [
               value + '@qq.com',
               value + '@sina.com',
-              value + '@163.com'
+			  value + '@gmail.com',
+			  value + '@outlook.com',
+              value + '@163.com',
+			  value + '@126.com',
           ];
       },
     getRegister(val) {

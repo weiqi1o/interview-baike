@@ -34,7 +34,8 @@ import {
     joinVolunteers,
     getCoin,
     myVolunteersLabels,
-	removeVolunteersLabels
+	removeVolunteersLabels,
+	getQRecord
 } from "@/api/index";
 import "./plugins/iview.js";
 
@@ -68,6 +69,7 @@ Vue.prototype.joinVolunteers = joinVolunteers;
 Vue.prototype.getCoin = getCoin;
 Vue.prototype.myVolunteersLabels = myVolunteersLabels;
 Vue.prototype.removeVolunteersLabels=removeVolunteersLabels;
+Vue.prototype.getQRecord=getQRecord;
 
 Vue.use(VueAxios, axios);
 

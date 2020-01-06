@@ -27,6 +27,11 @@ export const userInfoEdit = (userId, params) => {
 	return patchRequest("/v1/users/" + userId, params);
 };
 
+// 用户排行
+export const userRank = () => {
+	return getRequest("/v1/users/rank");
+};
+
 // 问题答案文件上传
 export const uploadQusetion = params => {
 	return postRequest("/files/questions", params);
@@ -63,6 +68,17 @@ export const countQuestionNum = (params) => {
     return getRequest("/v1/questions/count",params);
 };
 
+//题目点赞
+export const likeQuestion = (questionId) => {
+    return postRequest("/questions/"+questionId+"/like");
+};
+
+//热门题目
+export const listQuestionWeekPopular = () => {
+    return getRequest("/v1/popular/week/questions");
+};
+
+
 // ======================标签==========================
 
 // 查询所有标签
@@ -75,11 +91,21 @@ export const addLabels = params => {
 	return postRequest("/v1/labels", params);
 };
 
+
+// 查询志愿者标签
+export const getVolunteersLabels = () => {
+	return getRequest("/volunteers/count");
+};
 // ======================审核==========================
 
 // 获取待审核列表
 export const getCheckRecord = params => {
 	return getRequest("/q/records", params);
+};
+
+// 获取指定审核
+export const getQRecord = id => {
+	return getRequest("/q/records/"+id);
 };
 
 // 审核移交给别人
@@ -93,13 +119,13 @@ export const checkOps = (recordId,params) => {
 };
 
 // 获取声望值
-export const getFame = () => {
-    return getRequest("/fame/record/me");
+export const getFame = (params) => {
+    return getRequest("/fame/record/me", params);
 };
 
 // 获取币值
-export const getCoin = () => {
-    return getRequest("/coin/record/me");
+export const getCoin = (params) => {
+    return getRequest("/coin/record/me", params);
 };
 
 // ======================志愿者==========================

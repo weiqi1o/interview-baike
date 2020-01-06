@@ -10,9 +10,9 @@
                             </a>
                         </Col>
                         <Col :xs="21" :md="22" >
-                            <div class="label" >
+                          <!--  <div class="label" >
                                 <span v-for="item in 6">Java</span>
-                            </div>
+                            </div> -->
                         </Col>
                     </Row>
                 </Col>

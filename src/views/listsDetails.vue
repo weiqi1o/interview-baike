@@ -4,14 +4,21 @@
         <div class="content">
             <Row type="flex" justify="space-between">
                 <Col span="16">
-                    <h1 class="title">{{val.title}}</h1>
-
-                    <MarkdownPreview theme="oneDark" :initialValue="val.content" copyCode copyBtnText="复制代码"/>
-                    <div class="rate">
+                    <h1 class="title" style="color: #262626;font-weight: 600;">{{val.title}}</h1>
+					<div class="postinfo">
+						<p><span>阅读数:{{val.viewNum}}</span><span>|</span><span>点赞数:{{val.likeNum}}</span><span>|</span><span>创建于:{{val.createTime}}</span></p>
+					</div>
+                    <MarkdownPreview  v-if="val.description == null" theme="oneDark" :initialValue="val.content" copyCode copyBtnText="复制代码"/>
+                    <MarkdownPreview  v-else theme="oneDark" :initialValue="val.description + '<br><br>  ---下面答案--- <br>\n' +val.content" copyCode copyBtnText="复制代码"/>
+					<br>
+					<div class="rate">
                         <div>
-                            <span>收藏</span>|<span>喜欢</span>
+                           <Button v-if="val.liked == true"  type="error"  shape="circle" icon="md-thumbs-up">已赞</Button>
+						   <Button v-else  shape="circle" icon="md-thumbs-up" @click="like()">有用</Button>
                         </div>
-                        <router-link :to="{path:'/markdown',query:{supplement:val.id}}">提交更好的答案</router-link>
+						<div @click="submitAnswer(val.id)">
+						    <a>提交更好的答案</a>
+						</div>
                     </div>
                 </Col>
                 <Col span="7">
@@ -38,9 +45,10 @@
 </template>
 
 <script>
-    import headerTop from './../components/common/headerTop'
-    import {MarkdownPreview} from 'vue-meditor'
-
+    import headerTop from './../components/common/headerTop';
+    import {MarkdownPreview} from 'vue-meditor';
+	import {likeQuestion} from "@/api/index";
+	
     export default {
         name: "listsDetails",
         components: {
@@ -49,14 +57,12 @@
         data() {
             return {
                 val: ''
-
             }
         },
         created() {
             this.getDetails(this.$route.query.id, '').then((res) => {
                 if (res.code == 200) {
                     this.val = res.result
-                    console.log(res)
                 }
 
             });
@@ -64,7 +70,31 @@
                 window.scrollTo(0, 0);
             });
         },
-        methods: {},
+        methods: {
+			openLand() {
+			    $(".landing").slideDown("fast");
+			},
+			submitAnswer(id) {
+				const user = this.getStore("userId");
+			    if (user == null || user == undefined) {
+			        this.$Message['info']({
+			            background: true,
+			            content: '请先登录！'
+			        })
+					this.openLand();
+			    }else{
+					this.$router.push({path:'/markdown',query:{supplement:id}});
+				}
+			    
+			},
+			like(){
+				likeQuestion(this.$route.query.id).then((res) => {
+					if (res.code == 200) {
+					    this.$Message.info("点赞成功");
+					}
+				});
+			}
+		},
 
     }
 </script>
@@ -84,10 +114,16 @@
     .title{
         font-weight: normal;
 		padding-left: 12px;
-        // text-align: center;
-        margin-top: 15px;
-		border-bottom: 1px solid #d9d9d9;
+        margin: 15px 0;
     }
+	.postinfo{
+		padding-left: 12px;
+		&>p{
+			&>span{
+				margin-right:5px;
+			}
+		}
+	}
     .rate{
         display: flex;
         justify-content: space-between;

@@ -7,7 +7,7 @@
                     <Icon type="ios-paper"/>
                     基础信息
                 </MenuItem>
-                <MenuItem name="articles" to="/articles">
+                <MenuItem v-if="isVolunteer" name="articles" to="/articles">
                     <Icon type="ios-bookmarks-outline"/>
                     题目管理
                 </MenuItem>
@@ -24,7 +24,7 @@
                 <MenuItem name="basics" to="/setting">
                     基础信息
                 </MenuItem>
-                <MenuItem name="articles" to="/articles">
+                <MenuItem v-if="isVolunteer" name="articles" to="/articles">
                     题目管理
                 </MenuItem>
 				<MenuItem name="scoreRecords" to="/scoreRecords">
@@ -54,7 +54,8 @@
             return {
                 theme1: 'light',
                 mode2: 'vertical',
-                active:"setting"
+                active:"setting",
+				isVolunteer: false
             }
         },
         created() {
@@ -63,6 +64,13 @@
                 this.$Message.error('你还未登录请登录！');
             }
             this.active = this.$route.name;
+			
+			this.myVolunteersLabels().then((res) => {
+				if (res.code == 200) {
+					const arr = res.result;
+					this.isVolunteer = arr != [] && arr.length != 0
+				}
+			});
         },
         methods: {
 
