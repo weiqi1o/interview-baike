@@ -12,6 +12,7 @@ import {
 export const login = params => {
 	return postRequest("/users/login", params);
 };
+
 // 注册
 export const regist = params => {
 	return postRequest("/users/register", params);
@@ -54,10 +55,16 @@ export const addQuestion = (params) => {
 	return postRequest("/v1/questions", params);
 };
 
+// 提交答案
+export const addAnswer = (params) => {
+	return postRequest("/answers", params);
+};
+
 //查询指定题目
 export const getDetails = (questionId,params) => {
     return getRequest("/v1/questions/"+questionId,params);
 };
+
 //查询相似题目
 export const getQuestionSimilar = (params) => {
     return getRequest("/v1/questions/similar",params);
