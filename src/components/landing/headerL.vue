@@ -50,11 +50,12 @@
                 $(".landing").slideDown("fast");
             },
             getUserInfoData() {
-                var id = this.getStore("userId");
+                var _this = this,
+                    id = _this.getStore("userId");
                 if (id) {
                     this.userInfo(id).then((res) => {
-                        this.account = res.result.account;
-                        this.avatar = res.result.avatar;
+                        _this.account = res.result.account;
+                        _this.avatar = res.result.avatar;
                     })
                 }
             },

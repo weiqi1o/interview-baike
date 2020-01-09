@@ -16,14 +16,12 @@
                    v-model="modal1"
                    title="选择标签"
                    @on-ok="ok">
+                <div>
+                    <Input v-model="labelVal" @on-change="serachLable" placeholder="搜索标签" clearable style="width: 200px"/>
+                </div>
                 <Tag v-for="item in labels" :key="item.id" :name="item.id" size="large" checkable color="primary"
                      @on-change="labChecked" :checked="item.checked">{{ item.name}}
                 </Tag>
-                <div>
-                    <Input v-model="labelVal" placeholder="自定义标签" clearable style="width: 200px"/>
-                    <Button class="but" type="primary" @click="addLabel">添加</Button>
-                </div>
-
             </Modal>
             <Divider/>
             <textarea v-if="!supplementId" v-model="description" placeholder="题目描述 支持markdown" rows="3"></textarea>
@@ -51,7 +49,7 @@
                 storageLabels: [],
                 supplementId: '',
                 supplementVal:'',
-                supplementDescription:''
+                supplementDescription:'',
 
             }
         },
@@ -68,6 +66,26 @@
             this. Labels()
         },
         methods: {
+            serachLable(value){
+                console.log(value)
+            },
+            handleSearch2 (value) {
+                var _this = this;
+                this.getQuestionSimilar({title: value}).then((res) => {
+                    if (res.code == 200 && this.val != '') {
+                        this.data2 = [];
+                        res.result.forEach((v) => {
+                            this.data2.push(v.title)
+                        })
+                    }
+
+                });
+                $('.search input').keydown(function () {
+                    if (event.keyCode == 13) {
+                        _this.serach_()
+                    }
+                })
+            },
             //获取标签
             Labels() {
                 this.getLabels().then((res) => {
@@ -76,7 +94,9 @@
                         data.forEach((v) => {
                             v.checked = false
                         });
-                        this.labels = data
+                        this.labels = data;
+
+
                     })
                 });
 

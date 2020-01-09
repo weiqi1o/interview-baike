@@ -60,6 +60,7 @@
                 this.$Message.error('你还未登录请登录！');
             }
             this.supplementId = this.$route.query.supplement;
+            this.content = this.$route.query.content
 
         },
         methods: {
@@ -135,8 +136,7 @@
                 };
                 $('.but').css({'right': '30px'});
                 $('.codemirror').css({'overflow': 'initial'})
-            }
-            ;
+            };
         },
         beforeMount() {
             var height = document.documentElement.clientHeight || document.body.clientHeight;

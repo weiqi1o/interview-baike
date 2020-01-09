@@ -11,7 +11,7 @@
                         <div>
                             <span>收藏</span>|<span>喜欢</span>
                         </div>
-                        <router-link :to="{path:'/markdown',query:{supplement:val.id}}">提交更好的答案</router-link>
+                        <router-link :to="{path:'/markdown',query:{supplement:val.id,content:val.content}}">提交更好的答案</router-link>
                     </div>
                 </Col>
                 <Col span="7">
